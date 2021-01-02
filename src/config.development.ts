@@ -10,6 +10,17 @@ class Config implements IConfig {
       env: 'development',
       isSwaggerEnabled: true,
     };
+
+    this.mysql = {
+      type: 'mysql',
+      host: 'localhost',
+      port: 3306,
+      username: 'root',
+      password: 'hell0aA@',
+      database: 'baseline_clone',
+      entities: [],
+      synchronize: true
+    };
   }
 
   app: {
@@ -18,6 +29,17 @@ class Config implements IConfig {
     domain: string,
     env: Environment;
     isSwaggerEnabled: boolean;
+  };
+
+  mysql: {
+    type: string,
+    host: string,
+    port: string | number,
+    username: string,
+    password: string,
+    database: string,
+    entities: string[],
+    synchronize: boolean,
   };
 }
 
