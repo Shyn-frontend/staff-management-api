@@ -37,18 +37,22 @@ async function bootstrap() {
         showRequestDuration: true,
       },
     });
-    logger.debug(`Swagger Docs enabled: ${config.app.domain}/docs`);
+    logger.debug(`Swagger Docs enabled: ${config.app.domain}/api`);
   }
 
   app.setGlobalPrefix('api');
   app.useGlobalPipes(
     new ValidationPipe({
-      transform: true,  
-      whitelist: true,
+      transform: true,
+      whitelist: true,  
       forbidNonWhitelisted: true,
     })
   );
 
-  await app.listen(3000);
+  // app.useGlobalFilters(new HttpException)
+
+  await app.listen(config.app.port, () => {
+    logger.debug(`Listening on port: ${config.app.port}`);
+  });
 }
 bootstrap();
