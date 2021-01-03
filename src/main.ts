@@ -8,6 +8,7 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { Logger, ValidationPipe } from '@nestjs/common';
 import { IConfig } from './config.interface';
 import { CONFIG } from './shared/config/config.module';
+import { HttpExceptionFilter } from './shared/filters/http-exception.filter';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -44,12 +45,12 @@ async function bootstrap() {
   app.useGlobalPipes(
     new ValidationPipe({
       transform: true,
-      whitelist: true,  
+      whitelist: true,
       forbidNonWhitelisted: true,
     })
   );
 
-  // app.useGlobalFilters(new HttpException)
+  app.useGlobalFilters(new HttpExceptionFilter());
 
   await app.listen(config.app.port, () => {
     logger.debug(`Listening on port: ${config.app.port}`);
