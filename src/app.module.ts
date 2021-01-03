@@ -19,8 +19,9 @@ import { UserController } from './user/user.controller';
         database: config.mysql.database,
         entities: config.mysql.entities,
         synchronize: config.mysql.synchronize,
+        autoLoadEntities: true,
       }) as TypeOrmModuleAsyncOptions
-    })
+    }),
   ],
   controllers: [UserController],
   providers: [],
