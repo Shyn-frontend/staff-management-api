@@ -1,9 +1,8 @@
-import { IsDate, IsString } from "class-validator";
-import { Column, Generated, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Generated, Index, PrimaryGeneratedColumn } from "typeorm";
 
+@Index(['id'])
 export abstract class BaseEntity {
   @PrimaryGeneratedColumn()
-  @Generated('uuid')
   id: string;
 
   @Column()
