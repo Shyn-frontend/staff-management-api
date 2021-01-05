@@ -1,9 +1,12 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule, TypeOrmModuleAsyncOptions } from '@nestjs/typeorm';
-import { config } from 'rxjs';
 import { IConfig } from './config.interface';
 import { CONFIG, ConfigModule } from './shared/config/config.module';
-import { UserController } from './user/user.controller';
+import { DepartmentModule } from './department/department.module';
+import { PositionModule } from './position/position.module';
+import { PassportGlobalModule } from './shared/passport/passport.module';
+import { UserModule } from './user/user.module';
+import { RoleModule } from './role/role.module';
 
 @Module({
   imports: [
@@ -22,8 +25,11 @@ import { UserController } from './user/user.controller';
         autoLoadEntities: true,
       }) as TypeOrmModuleAsyncOptions
     }),
+    DepartmentModule,
+    PositionModule,
+    PassportGlobalModule,
+    UserModule,
+    RoleModule,
   ],
-  controllers: [UserController],
-  providers: [],
 })
 export class AppModule { }
