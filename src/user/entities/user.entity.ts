@@ -12,10 +12,13 @@ export enum USER_TYPE {
   PLACEHOLDER = 'placeholder'
 }
 
-@Entity('users')
+@Entity('user')
 @Unique(['email'])
 @Index(['id', 'email', 'type'])
 export class User extends BaseEntity {
+  @PrimaryGeneratedColumn()
+  id: string;
+
   @Column()
   @IsEmail()
   @IsOptional()
@@ -41,15 +44,15 @@ export class User extends BaseEntity {
 
   @OneToOne(() => Position)
   @JoinColumn()
-  position: string;
+  position: Position;
 
   @OneToOne(() => Role)
   @JoinColumn()
-  role: string;
+  role: Role;
 
   @OneToOne(() => Department)
   @JoinColumn()
-  department: string;
+  department: Department;
 
   @Column()
   @IsString()
