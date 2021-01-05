@@ -1,19 +1,24 @@
 import { IsOptional, IsString, Length } from "class-validator";
-import { Position } from "src/position/entities/position.entites";
 import { User } from "src/user/entities/user.entity";
-import { BaseEntity, Column, Index, JoinColumn, OneToOne } from "typeorm";
+import { BaseEntity, Column, Entity, Generated, Index, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
+@Entity('department')
 @Index(['id'])
 export class Department extends BaseEntity {
+  @PrimaryGeneratedColumn()
+  id: string;
+
   @Column()
   @IsString()
   @Length(1, 1024)
   name: string;
 
   @OneToOne(() => User)
-  @JoinColumn()
+  @JoinColumn({
+    name: 'managerId'
+  })
   @IsOptional()
-  manager: string;
+  manager: User;
 
   @Column({
     type: 'bool',
