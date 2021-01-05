@@ -7,6 +7,9 @@ import { PositionModule } from './position/position.module';
 import { PassportGlobalModule } from './shared/passport/passport.module';
 import { UserModule } from './user/user.module';
 import { RoleModule } from './role/role.module';
+import { AuthService } from './auth/auth.service';
+import { AuthController } from './auth/auth.controller';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -30,6 +33,9 @@ import { RoleModule } from './role/role.module';
     PassportGlobalModule,
     UserModule,
     RoleModule,
+    AuthModule,
   ],
+  providers: [AuthService],
+  controllers: [AuthController],
 })
 export class AppModule { }
