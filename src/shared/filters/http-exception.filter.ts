@@ -1,13 +1,14 @@
-import { ArgumentsHost, ExceptionFilter, HttpStatus } from "@nestjs/common";
+import { ArgumentsHost, Catch, ExceptionFilter, HttpException, HttpStatus } from "@nestjs/common";
 import { ApiException } from "../api-exception.model";
 
+@Catch(HttpException)
 export class HttpExceptionFilter implements ExceptionFilter {
   catch(error: any, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
     const res = ctx.getResponse();
     const req = ctx.getRequest();
     const statusCode = error.getStatus();
-    const stacktrace = error.stack();
+    const stacktrace = error.stack;
     const errorName = error.response.name || error.response.error || error.name;
     const errors = error.response.errors || null;
     const path = req ? req.url : null;

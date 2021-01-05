@@ -21,6 +21,12 @@ class Config implements IConfig {
       entities: [],
       synchronize: true
     };
+
+    this.auth = {
+      jwtSecret: 'superSecret',
+      jwtExpired: '24h',
+      salt: 10,
+    }
   }
 
   app: {
@@ -41,6 +47,12 @@ class Config implements IConfig {
     entities: string[],
     synchronize: boolean,
   };
+
+  auth: {
+    jwtSecret: string,
+    jwtExpired: string,
+    salt: number,
+  }
 }
 
 export default new Config();

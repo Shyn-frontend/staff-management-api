@@ -19,4 +19,10 @@ export interface IConfig {
     entities: string[],
     synchronize: boolean,
   };
+
+  auth: {
+    jwtSecret: string,
+    jwtExpired: string,
+    salt: number,
+  }
 }
