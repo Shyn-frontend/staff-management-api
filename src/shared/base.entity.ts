@@ -1,9 +1,8 @@
-import { Column, Generated, Index, PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity, Column, Index, PrimaryGeneratedColumn } from "typeorm";
 
-@Index(['id'])
-export abstract class BaseEntity {
+export abstract class BaseModel extends BaseEntity {
   @PrimaryGeneratedColumn()
-  id: string;
+  id: number;
 
   @Column()
   createdAt?: Date;

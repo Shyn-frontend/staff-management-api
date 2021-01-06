@@ -1,4 +1,5 @@
-import { BaseEntity, Column, Entity, Index, PrimaryGeneratedColumn } from "typeorm";
+import { BaseModel } from "src/shared/base.entity";
+import { Column, Entity, Index } from "typeorm";
 
 export enum ROLES {
   ADMIN_ROLE = 'Admin',
@@ -11,10 +12,7 @@ export enum ROLES {
 }
 @Entity('role')
 @Index(['id'])
-export class Role extends BaseEntity {
-  @PrimaryGeneratedColumn()
-  id: string;
-
+export class Role extends BaseModel {
   @Column({
     type: 'enum',
     enum: ROLES,

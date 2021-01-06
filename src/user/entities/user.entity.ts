@@ -2,7 +2,8 @@ import { IsDate, IsEmail, IsOptional, IsString, Length } from "class-validator";
 import { Department } from "src/department/entities/department.entity";
 import { Position } from "src/position/entities/position.entites";
 import { Role } from "src/role/entities/role.entity";
-import { BaseEntity, Column, Entity, Index, JoinColumn, OneToOne, PrimaryGeneratedColumn, Unique } from "typeorm";
+import { BaseModel } from "src/shared/base.entity";
+import { Column, Entity, Index, JoinColumn, OneToOne, Unique } from "typeorm";
 
 export enum USER_TYPE {
   ADMIN = 'admin',
@@ -15,10 +16,7 @@ export enum USER_TYPE {
 @Entity('user')
 @Unique(['email'])
 @Index(['id', 'email', 'type'])
-export class User extends BaseEntity {
-  @PrimaryGeneratedColumn()
-  id: string;
-
+export class User extends BaseModel {
   @Column()
   @IsEmail()
   @IsOptional()

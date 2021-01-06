@@ -1,13 +1,11 @@
 import { IsOptional, IsString, Length } from "class-validator";
+import { BaseModel } from "src/shared/base.entity";
 import { User } from "src/user/entities/user.entity";
-import { BaseEntity, Column, Entity, Generated, Index, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, Index, JoinColumn, OneToOne } from "typeorm";
 
 @Entity('department')
 @Index(['id'])
-export class Department extends BaseEntity {
-  @PrimaryGeneratedColumn()
-  id: string;
-
+export class Department extends BaseModel {
   @Column()
   @IsString()
   @Length(1, 1024)
