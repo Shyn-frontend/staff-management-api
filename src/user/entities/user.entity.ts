@@ -1,8 +1,9 @@
+import { Expose, Type } from "class-transformer";
 import { IsDate, IsEmail, IsOptional, IsString, Length } from "class-validator";
-import { Department } from "src/department/entities/department.entity";
-import { Position } from "src/position/entities/position.entites";
-import { Role } from "src/role/entities/role.entity";
-import { BaseModel } from "src/shared/base.entity";
+import { Department, DepartmentEntity } from "src/department/entities/department.entity";
+import { Position, PositionEntity } from "src/position/entities/position.entites";
+import { Role, RoleEntity } from "src/role/entities/role.entity";
+import { BaseEntity, BaseModel } from "src/shared/base.entity";
 import { Column, Entity, Index, JoinColumn, OneToOne, Unique } from "typeorm";
 
 export enum USER_TYPE {
@@ -16,7 +17,7 @@ export enum USER_TYPE {
 @Entity('user')
 @Unique(['email'])
 @Index(['id', 'email', 'type'])
-export class User extends BaseModel {
+export class UserEntity extends BaseEntity {
   @Column()
   @IsEmail()
   @IsOptional()
@@ -40,17 +41,16 @@ export class User extends BaseModel {
   })
   type: USER_TYPE;
 
-  @OneToOne(() => Position)
+  @OneToOne(() => PositionEntity)
   @JoinColumn()
-  position: Position;
+  position: PositionEntity;
 
-  @OneToOne(() => Role)
+  @OneToOne(() => RoleEntity)
   @JoinColumn()
-  role: Role;
+  role: RoleEntity;
 
-  @OneToOne(() => Department)
-  @JoinColumn()
-  department: Department;
+  @OneToOne(() => DepartmentEntity)
+  department: DepartmentEntity;
 
   @Column()
   @IsString()
@@ -77,5 +77,46 @@ export class User extends BaseModel {
     type: 'boolean',
     default: true
   })
+  isPermanent: boolean;
+}
+
+export class User extends BaseModel {
+  @Expose()
+  email: string;
+
+  @Expose()
+  password: string;
+
+  @Expose()
+  name: string;
+
+  @Expose()
+  type: USER_TYPE;
+
+  @Expose()
+  @Type(() => Position)
+  position: Position;
+
+  @Expose()
+  @Type(() => Role)
+  role: Role;
+
+  @Expose()
+  @Type(() => Department)
+  department: Department;
+
+  @Expose()
+  avatar: string;
+
+  @Expose()
+  isArchived: boolean;
+
+  @Expose()
+  permanentLeaveAt: Date;
+
+  @Expose()
+  isComplete: boolean;
+
+  @Expose()
   isPermanent: boolean;
 }

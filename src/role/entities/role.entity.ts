@@ -1,4 +1,5 @@
-import { BaseModel } from "src/shared/base.entity";
+import { Expose } from "class-transformer";
+import { BaseEntity, BaseModel } from "src/shared/base.entity";
 import { Column, Entity, Index } from "typeorm";
 
 export enum ROLES {
@@ -12,7 +13,7 @@ export enum ROLES {
 }
 @Entity('role')
 @Index(['id'])
-export class Role extends BaseModel {
+export class RoleEntity extends BaseEntity {
   @Column({
     type: 'enum',
     enum: ROLES,
@@ -21,5 +22,13 @@ export class Role extends BaseModel {
   name: ROLES;
 
   @Column()
+  order: number;
+}
+
+export class Role extends BaseModel {
+  @Expose()
+  name: ROLES;
+
+  @Expose()
   order: number;
 }

@@ -4,7 +4,7 @@ import { ParseBoolPipe } from 'src/shared/pipes/parse-boolean.pipe';
 import { CreateUserDto } from './dto/create-user.dto';
 
 @Controller('users')
-@ApiTags('User')
+@ApiTags('UserEntity')
 export class UserController {
   // @Get(':id')
   // findOne(
