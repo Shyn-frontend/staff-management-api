@@ -5,14 +5,7 @@ import { Position, PositionEntity } from "src/position/entities/position.entites
 import { Role, RoleEntity } from "src/role/entities/role.entity";
 import { BaseEntity, BaseModel } from "src/shared/base.entity";
 import { Column, Entity, Index, JoinColumn, OneToOne, Unique } from "typeorm";
-
-export enum USER_TYPE {
-  ADMIN = 'admin',
-  CLIENT = 'client',
-  EMPLOYEE = 'employee',
-  MANAGER = 'manager',
-  PLACEHOLDER = 'placeholder'
-}
+import { USER_TYPE } from "../enum/user-type.enum";
 
 @Entity('user')
 @Unique(['email'])
