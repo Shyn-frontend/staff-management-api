@@ -1,7 +1,6 @@
 import { BadRequestException, forwardRef, HttpStatus, Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { BaseService } from 'src/shared/base.service';
-import { UserEntity } from 'src/user/entities/user.entity';
 import { UserService } from 'src/user/user.service';
 import { Repository } from 'typeorm';
 import { CreateDepartmentDto } from './dto/create-department.dto';
@@ -19,24 +18,24 @@ export class DepartmentService extends BaseService<DepartmentEntity> {
   }
 
   async createDepartment({ name, managerId, isBillable }: CreateDepartmentDto): Promise<DepartmentEntity> {
-    const isExistedDepartment = await this.findOne({ name });
-    if (isExistedDepartment) {
+    const [existedDepartment, manager] = await Promise.all([
+      this.findOne({ name }),
+      this.userService.findOne({ id: managerId }),
+    ]);
+
+    if (existedDepartment) {
       throw new BadRequestException('existed_department');
     }
+
+    if (!manager) {
+      throw new BadRequestException('not_found_ manger');
+    }
+
     const department = this.repository.create({
       name,
-      isBillable
+      isBillable,
+      manager,
     });
-    if (managerId) {
-      const manager = await this.userService.findOne({ id: managerId });
-      if (!manager) {
-        throw new BadRequestException('not_found_ manger');
-      }
-      department.manager = manager;
-    }
-    const [existedDepartment, manager] = await Promise.all[
-
-    ];
 
     const res = await this.repository.save(department);
     return res;
