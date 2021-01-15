@@ -1,3 +1,6 @@
+import ConfigService from './shared/config/config.service';
+ConfigService.init();
+
 import { NestFactory } from '@nestjs/core';
 import * as cors from 'cors';
 import * as compression from 'compression';
@@ -13,7 +16,7 @@ import { HttpExceptionFilter } from './shared/filters/http-exception.filter';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const config = app.get<IConfig>(CONFIG);
-  const logger = new Logger('Baseline-clone');
+  const logger = new Logger('Staff-Management-Nestjs');
 
   logger.debug(`Environment: ${config.app.env}`);
 

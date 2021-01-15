@@ -5,25 +5,25 @@ class Config implements IConfig {
   constructor() {
     this.app = {
       host: 'localhost',
-      port: 3001,
-      domain: 'http://localhost:3001',
+      port: process.env.PORT || 3000,
+      domain: `http://localhost:${process.env.PORT}`,
       env: 'development',
-      isSwaggerEnabled: true,
+      isSwaggerEnabled: Boolean(process.env.IS_SWAGGER_ENABLED),
     };
 
     this.mysql = {
       type: 'mysql',
-      host: 'localhost',
-      port: 3306,
-      username: 'root',
-      password: 'hell0aA@',
-      database: 'baseline_clone',
+      host: process.env.HOST,
+      port: process.env.DATABASE_PORT,
+      username: process.env.DATABASE_USERNAME,
+      password: process.env.DATABASE_PASSWORD,
+      database: process.env.DATABASE_NAME,
       entities: [],
       synchronize: true
     };
 
     this.auth = {
-      jwtSecret: 'superSecret',
+      jwtSecret: process.env.JWT_SECRET,
       jwtExpired: '24h',
       salt: 10,
     }

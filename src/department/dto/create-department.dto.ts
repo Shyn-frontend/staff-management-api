@@ -5,7 +5,6 @@ export class CreateDepartmentDto {
   name: string;
 
   @IsUUID()
-  @IsOptional()
   managerId: string;
 
   @IsBoolean()
