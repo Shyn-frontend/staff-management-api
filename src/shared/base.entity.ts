@@ -1,5 +1,6 @@
 import { Expose } from "class-transformer";
-import { Column, CreateDateColumn, DeleteDateColumn, Entity, EntityRepository, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, PrimaryGeneratedColumn } from "typeorm";
+import { ExposedApiProperty, ExposedApiPropertyOptional } from "./decorators/exposed-api-model-property.decorator";
 
 export abstract class BaseEntity {
   @PrimaryGeneratedColumn('uuid')
@@ -35,5 +36,22 @@ export class BaseModel {
   createdAt?: Date;
 
   @Expose()
-  updatedA?: Date;
+  updatedAt?: Date;
+
+  @Expose()
+  deletedAt?: Date;
+}
+
+export class BaseDto {
+  @ExposedApiProperty()
+  id: string;
+
+  @ExposedApiPropertyOptional({ type: String, format: 'date-time' })
+  createdAt?: Date;
+
+  @ExposedApiPropertyOptional({ type: String, format: 'date-time' })
+  updatedAt?: Date;
+
+  @ExposedApiPropertyOptional({ type: String, format: 'date-time' })
+  deletedAt?: Date;
 }
