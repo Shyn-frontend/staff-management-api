@@ -31,13 +31,13 @@ export class DepartmentService extends BaseService<DepartmentEntity> {
       throw new BadRequestException('not_found_ manger');
     }
 
-    const department = this.repository.create({
+    const department = this.createRepo({
       name,
       isBillable,
       manager,
     });
 
-    const res = await this.repository.save(department);
+    const res = await this.create(department);
     return res;
   }
 }
