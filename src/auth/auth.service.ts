@@ -38,6 +38,7 @@ export class AuthService {
     const result = new LoginResultDto();
     const token = this.signIn(user.id);
     result.token = { type: 'Bearer', accessToken: token };
+    result.user = user;
 
     return result;
   }

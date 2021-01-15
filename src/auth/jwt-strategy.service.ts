@@ -6,6 +6,12 @@ import { InjectConfig } from "src/shared/config/config.module";
 export interface JwtPayload {
   id: string;
 }
+
+export interface AccessToken {
+  type: string;
+  accessToken: string;
+}
+
 export class JwtStrategyService extends PassportStrategy(Strategy, 'jwt') {
   constructor(
     @InjectConfig() private readonly config: IConfig,
