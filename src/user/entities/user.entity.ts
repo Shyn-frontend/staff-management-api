@@ -99,13 +99,13 @@ export class User extends BaseModel {
   department: Department;
 
   @Expose()
-  avatar: string;
+  avatar?: string;
 
   @Expose()
   isArchived: boolean;
 
   @Expose()
-  permanentLeaveAt: Date;
+  permanentLeaveAt?: Date;
 
   @Expose()
   isComplete: boolean;

@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { weekdaysShort } from 'moment';
 import { UserEntity } from './entities/user.entity';
 import { UserController } from './user.controller';
 import { UserService } from './user.service';
@@ -13,3 +14,4 @@ import { UserService } from './user.service';
   exports: [UserService],
 })
 export class UserModule { }
+weekdaysShort
