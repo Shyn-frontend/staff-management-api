@@ -8,6 +8,7 @@ import { PassportGlobalModule } from './shared/passport/passport.module';
 import { UserModule } from './user/user.module';
 import { RoleModule } from './role/role.module';
 import { AuthModule } from './auth/auth.module';
+import { PermissionController } from './permission/permission.controller';
 
 @Module({
   imports: [

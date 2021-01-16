@@ -1,8 +1,9 @@
 import { Expose, Type } from "class-transformer";
 import { IsOptional, IsString, Length } from "class-validator";
+import { Position, PositionEntity } from "src/position/entities/position.entity";
 import { BaseEntity, BaseModel } from "src/shared/base.entity";
 import { User, UserEntity } from "src/user/entities/user.entity";
-import { Column, Entity, Index, JoinColumn, OneToOne } from "typeorm";
+import { Column, Entity, Index, JoinColumn, ManyToOne, OneToMany, OneToOne } from "typeorm";
 
 @Entity('department')
 @Index(['id'])
@@ -24,6 +25,9 @@ export class DepartmentEntity extends BaseEntity {
     default: true,
   })
   isBillable: boolean;
+
+  @OneToMany(() => PositionEntity, position => position.department)
+  positions: PositionEntity[];
 }
 
 export class Department extends BaseModel {
@@ -36,4 +40,8 @@ export class Department extends BaseModel {
 
   @Expose()
   isBillable: boolean;
+
+  @Expose()
+  @Type(() => Position)
+  positions: Position[];
 }

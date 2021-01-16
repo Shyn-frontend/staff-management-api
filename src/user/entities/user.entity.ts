@@ -4,7 +4,7 @@ import { Department, DepartmentEntity } from "src/department/entities/department
 import { Position, PositionEntity } from "src/position/entities/position.entity";
 import { Role, RoleEntity } from "src/role/entities/role.entity";
 import { BaseEntity, BaseModel } from "src/shared/base.entity";
-import { Column, Entity, Index, JoinColumn, OneToOne, Unique } from "typeorm";
+import { Column, Entity, Index, JoinColumn, ManyToOne, OneToOne, Unique } from "typeorm";
 import { USER_TYPE } from "../enum/user-type.enum";
 
 @Entity('user')
@@ -34,16 +34,13 @@ export class UserEntity extends BaseEntity {
   })
   type: USER_TYPE;
 
-  @OneToOne(() => PositionEntity)
+  @ManyToOne(() => PositionEntity, position => position.users)
   @JoinColumn()
   position: PositionEntity;
 
-  @OneToOne(() => RoleEntity)
+  @ManyToOne(() => RoleEntity, role => role.users)
   @JoinColumn()
   role: RoleEntity;
-
-  @OneToOne(() => DepartmentEntity)
-  department: DepartmentEntity;
 
   @Column()
   @IsString()

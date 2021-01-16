@@ -1,6 +1,7 @@
-import { Expose } from "class-transformer";
+import { Expose, Type } from "class-transformer";
 import { BaseEntity, BaseModel } from "src/shared/base.entity";
-import { Column, Entity, Index } from "typeorm";
+import { User, UserEntity } from "src/user/entities/user.entity";
+import { Column, Entity, Index, ManyToOne, OneToMany } from "typeorm";
 
 export enum ROLES {
   ADMIN_ROLE = 'Admin',
@@ -23,6 +24,9 @@ export class RoleEntity extends BaseEntity {
 
   @Column()
   order: number;
+
+  @OneToMany(() => UserEntity, user => user.role)
+  users: UserEntity[];
 }
 
 export class Role extends BaseModel {
@@ -31,4 +35,8 @@ export class Role extends BaseModel {
 
   @Expose()
   order: number;
+
+  @Expose()
+  @Type(() => User)
+  users: User[];
 }
