@@ -1,7 +1,7 @@
 import { Expose, Type } from "class-transformer";
 import { IsDate, IsEmail, IsOptional, IsString, Length } from "class-validator";
 import { Department, DepartmentEntity } from "src/department/entities/department.entity";
-import { Position, PositionEntity } from "src/position/entities/position.entites";
+import { Position, PositionEntity } from "src/position/entities/position.entity";
 import { Role, RoleEntity } from "src/role/entities/role.entity";
 import { BaseEntity, BaseModel } from "src/shared/base.entity";
 import { Column, Entity, Index, JoinColumn, OneToOne, Unique } from "typeorm";

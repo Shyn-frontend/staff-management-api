@@ -1,5 +1,3 @@
-import { PositionDto } from "src/position/dto/position.dto";
-import { Position } from "src/position/entities/position.entites";
 import { UserRoleDto } from "src/role/dto/user-role.dto";
 import { BaseDto } from "src/shared/base.entity";
 import { ExposedApiProperty, ExposedApiPropertyOptional } from "src/shared/decorators/exposed-api-model-property.decorator";
