@@ -1,7 +1,8 @@
 import { Expose, Type } from "class-transformer";
+import { RolePermission, RolePermissionEntity } from "src/permission/entities/role-permission.entity";
 import { BaseEntity, BaseModel } from "src/shared/base.entity";
 import { User, UserEntity } from "src/user/entities/user.entity";
-import { Column, Entity, Index, ManyToOne, OneToMany } from "typeorm";
+import { Column, Entity, Index, OneToMany } from "typeorm";
 
 export enum ROLES {
   ADMIN_ROLE = 'Admin',
@@ -27,6 +28,9 @@ export class RoleEntity extends BaseEntity {
 
   @OneToMany(() => UserEntity, user => user.role)
   users: UserEntity[];
+
+  @OneToMany(() => RolePermissionEntity, rolePermission => rolePermission.role)
+  rolePermissions: RolePermissionEntity[];
 }
 
 export class Role extends BaseModel {
@@ -39,4 +43,8 @@ export class Role extends BaseModel {
   @Expose()
   @Type(() => User)
   users: User[];
+
+  @Expose()
+  @Type(() => RolePermission)
+  rolePermissions: RolePermission[];
 }
