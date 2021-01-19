@@ -1,11 +1,17 @@
 import { Expose, Type } from "class-transformer";
 import { Role, RoleEntity } from "./role.entity";
 import { BaseEntity, BaseModel } from "../shared/base.entity";
-import { Entity, JoinColumn, ManyToOne, OneToOne } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne } from "typeorm";
 import { Permission, PermissionEntity } from "./permission.entity";
 
 @Entity('role_permission')
 export class RolePermissionEntity extends BaseEntity {
+  @Column()
+  roleId: string;
+
+  @Column()
+  permissionId: string;
+  
   @ManyToOne(() => RoleEntity, role => role.rolePermissions)
   @JoinColumn()
   role: RoleEntity;

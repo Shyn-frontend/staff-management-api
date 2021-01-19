@@ -33,7 +33,6 @@ export class CreatePermissionTable1610819363543 implements MigrationInterface {
                 {
                     name: 'deletedAt',
                     type: 'timestamp',
-                    default: 'now()',
                     isNullable: true,
                 }
             ]

@@ -1,4 +1,3 @@
-import { RoleEntity } from "../entities/role.entity";
 import { Connection } from "typeorm";
 import { Factory, Seeder } from "typeorm-seeding";
 import { PermissionEntity } from "../entities/permission.entity";

@@ -10,6 +10,7 @@ export class CreateRolePermissionTable1610819661030 implements MigrationInterfac
                     name: 'id',
                     type: 'varchar',
                     isPrimary: true,
+                    generationStrategy: 'uuid',
                 },
                 {
                     name: 'roleId',
@@ -18,6 +19,21 @@ export class CreateRolePermissionTable1610819661030 implements MigrationInterfac
                 {
                     name: 'permissionId',
                     type: 'varchar',
+                },
+                {
+                    name: 'createdAt',
+                    type: 'timestamp',
+                    default: 'now()'
+                },
+                {
+                    name: 'updatedAt',
+                    type: 'timestamp',
+                    default: 'now()'
+                },
+                {
+                    name: 'deletedAt',
+                    type: 'timestamp',
+                    isNullable: true,
                 }
             ]
         }));

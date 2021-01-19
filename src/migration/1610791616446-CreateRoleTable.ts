@@ -38,14 +38,13 @@ export class CreateRoleTable1610791616446 implements MigrationInterface {
                     default: 'now()'
                 },
                 {
-                name: 'updatedAt',
+                    name: 'updatedAt',
                     type: 'timestamp',
                     default: 'now()'
                 },
                 {
                     name: 'deletedAt',
                     type: 'timestamp',
-                    default: 'now()',
                     isNullable: true,
                 }
             ]

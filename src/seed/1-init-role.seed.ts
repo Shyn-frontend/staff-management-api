@@ -1,5 +1,5 @@
 import { RoleEntity } from "../entities/role.entity";
-import { Connection, getConnection } from "typeorm";
+import { Connection } from "typeorm";
 import { Factory, Seeder } from "typeorm-seeding";
 
 const RoleData = require('../data/Role');
