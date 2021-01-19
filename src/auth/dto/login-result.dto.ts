@@ -1,6 +1,5 @@
-import { Expose } from "class-transformer";
 import { ExposedApiProperty } from "src/shared/decorators/exposed-api-model-property.decorator";
-import { AccessToken } from "../jwt-strategy.service";
+import { AccessTokenDto } from "./access-token.dto";
 import { UserInformationDto } from "./user-information.dto";
 
 export class LoginResultDto {
@@ -9,6 +8,8 @@ export class LoginResultDto {
   })
   user: UserInformationDto;
 
-  @ExposedApiProperty()
-  token: AccessToken;
+  @ExposedApiProperty({
+    type: () => AccessTokenDto
+  })
+  token: AccessTokenDto;
 }
