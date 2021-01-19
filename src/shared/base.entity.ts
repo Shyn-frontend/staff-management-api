@@ -5,7 +5,7 @@ import { ExposedApiProperty, ExposedApiPropertyOptional } from "./decorators/exp
 @Index(['id'])
 export abstract class BaseEntity {
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  id?: string;
 
   @Column({
     type: 'timestamp',
@@ -31,7 +31,7 @@ export abstract class BaseEntity {
 
 export class BaseModel {
   @Expose()
-  id: string;
+  id?: string;
 
   @Expose()
   createdAt?: Date;
@@ -44,8 +44,8 @@ export class BaseModel {
 }
 
 export class BaseDto {
-  @ExposedApiProperty()
-  id: string;
+  @ExposedApiPropertyOptional()
+  id?: string;
 
   @ExposedApiPropertyOptional({ type: String, format: 'date-time' })
   createdAt?: Date;

@@ -26,14 +26,13 @@ async function bootstrap() {
 
   if (config.app.isSwaggerEnabled) {
     const options = new DocumentBuilder()
-      .setTitle('Baseline clone')
-      .setDescription('Baseline Nestjs clone APIs description')
+      .setTitle('Staff management')
+      .setDescription('Staff Management APIs docs')
       .setVersion('1.0')
-      .addTag('baseline-nestjs')
       .build();
 
     const document = SwaggerModule.createDocument(app, options);
-    SwaggerModule.setup('api', app, document, {
+    SwaggerModule.setup('api-docs', app, document, {
       swaggerOptions: {
         docExpansion: 'none',
         explorer: true,
@@ -41,7 +40,7 @@ async function bootstrap() {
         showRequestDuration: true,
       },
     });
-    logger.debug(`Swagger Docs enabled: ${config.app.domain}/api`);
+    logger.debug(`Swagger Docs enabled: ${config.app.domain}/api-docs`);
   }
 
   app.setGlobalPrefix('api');
