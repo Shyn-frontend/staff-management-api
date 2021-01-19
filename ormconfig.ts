@@ -11,14 +11,15 @@ const ORMConfig = {
   database: process.env.DATABASE_NAME,
   synchronize: false,
   logging: false,
-  migrations: ['src/migration/*.ts'],
+  migrations: ['src/migrations/*.ts'],
   factories: ['src/factories/*.ts'],
   entities: [
     'src/entities/*.entity.{ts,js}'
   ],
-  seeds: ['src/seed/*.ts'],
+  seeds: ['src/seeds/*.ts'],
   cli: {
-    migrationsDir: 'src/migration',
+    entitiesDir: "src/entities",
+    migrationsDir: 'src/migrations',
   },
 };
 
