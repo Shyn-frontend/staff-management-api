@@ -1,20 +1,10 @@
-import { MigrationInterface, QueryRunner, Table, TableIndex } from "typeorm";
-import getEnum from '../shared/utils/getEnum';
+import {MigrationInterface, QueryRunner, Table, TableForeignKey} from "typeorm";
 
-enum ROLES {
-    ADMIN_ROLE = 'Admin',
-    HR_ADMIN_ROLE = 'HR Admin',
-    TEAM_HEAD_ROLE = 'Team Head',
-    PROJECT_ADMIN_ROLE = 'Project Admin',
-    PROJECT_MANAGER_ROLE = 'Project Manager',
-    EMPLOYEE_ROLE = 'Employee',
-    CLIENT_ROLE = 'Client',
-}
+export class CreateDepartmentTable1611046989012 implements MigrationInterface {
 
-export class CreateRoleTable1610791616446 implements MigrationInterface {
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(new Table({
-            name: 'role',
+            name: 'department',
             columns: [
                 {
                     name: 'id',
@@ -23,14 +13,13 @@ export class CreateRoleTable1610791616446 implements MigrationInterface {
                     generationStrategy: 'uuid',
                 },
                 {
-                    name: 'name',
-                    type: 'enum',
-                    enum: getEnum(ROLES),
-                    default: `'${ROLES.EMPLOYEE_ROLE}'`
+                    name: 'managerId',
+                    type: 'varchar',
+                    isNullable: true,
                 },
                 {
-                    name: 'order',
-                    type: 'integer',
+                    name: 'isBillable',
+                    type: 'boolean',
                 },
                 {
                     name: 'createdAt',
@@ -49,15 +38,10 @@ export class CreateRoleTable1610791616446 implements MigrationInterface {
                 }
             ]
         }));
-
-        await queryRunner.createIndex("role", new TableIndex({
-            name: "IDX_Id",
-            columnNames: ["id"]
-        }));
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.dropTable('role');
+        await queryRunner.dropTable('department');
     }
 
 }

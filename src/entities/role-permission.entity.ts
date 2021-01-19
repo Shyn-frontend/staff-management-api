@@ -6,12 +6,6 @@ import { Permission, PermissionEntity } from "./permission.entity";
 
 @Entity()
 export class RolePermissionEntity extends BaseEntity {
-  @Column()
-  roleId: string;
-
-  @Column()
-  permissionId: string;
-  
   @ManyToOne(() => RoleEntity, role => role.rolePermissions)
   @JoinColumn()
   role: RoleEntity;

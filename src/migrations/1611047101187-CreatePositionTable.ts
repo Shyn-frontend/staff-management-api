@@ -1,10 +1,10 @@
 import { MigrationInterface, QueryRunner, Table, TableForeignKey } from "typeorm";
 
-export class CreateRolePermissionTable1610819661030 implements MigrationInterface {
+export class CreatePositionTable1611047101187 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(new Table({
-            name: 'role_permission',
+            name: 'position',
             columns: [
                 {
                     name: 'id',
@@ -13,11 +13,11 @@ export class CreateRolePermissionTable1610819661030 implements MigrationInterfac
                     generationStrategy: 'uuid',
                 },
                 {
-                    name: 'roleId',
+                    name: 'name',
                     type: 'varchar',
                 },
                 {
-                    name: 'permissionId',
+                    name: 'departmentId',
                     type: 'varchar',
                 },
                 {
@@ -38,30 +38,19 @@ export class CreateRolePermissionTable1610819661030 implements MigrationInterfac
             ]
         }));
 
-        await Promise.all([
-            queryRunner.createForeignKey(
-                'role_permission',
-                new TableForeignKey({
-                    columnNames: ['roleId'],
-                    referencedColumnNames: ['id'],
-                    referencedTableName: 'role',
-                    onDelete: 'CASCADE',
-                }),
-            ),
-            queryRunner.createForeignKey(
-                'role_permission',
-                new TableForeignKey({
-                    columnNames: ['permissionId'],
-                    referencedColumnNames: ['id'],
-                    referencedTableName: 'permission',
-                    onDelete: 'CASCADE',
-                }),
-            ),
-        ]);
+        await queryRunner.createForeignKey(
+            'position',
+            new TableForeignKey({
+                columnNames: ['departmentId'],
+                referencedColumnNames: ['id'],
+                referencedTableName: 'department',
+                onDelete: 'CASCADE',
+            }),
+        );
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.dropTable('role_permission');
+        await queryRunner.dropTable('position');
     }
 
 }
