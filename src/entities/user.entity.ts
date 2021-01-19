@@ -36,6 +36,7 @@ export class UserEntity extends BaseEntity {
 
   @ManyToOne(() => PositionEntity, position => position.users)
   @JoinColumn()
+  @IsOptional()
   position: PositionEntity;
 
   @ManyToOne(() => RoleEntity, role => role.users)

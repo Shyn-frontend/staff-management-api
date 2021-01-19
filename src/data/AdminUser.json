@@ -1,0 +1,47 @@
+[
+  {
+    "id": "04c2d954-0ac9-4927-9869-26714a4ca8eb",
+    "email": "admin@gmail.com",
+    "password": "$2b$08$aLQlVanfb4oEVaS2k1V1vepDpFt9KCIe29CfUd.bpwwkzej1VsUZe",
+    "name": "Admin",
+    "type": "admin",
+    "roleId": "659e0ed0-f547-4d56-b15e-a723a908c91e",
+    "avatar": "71012.jpg"
+  },
+  {
+    "id": "c0388049-959d-47c7-a3e3-388c78c4fe9e",
+    "email": "hradmin@gmail.com",
+    "password": "$2b$08$aLQlVanfb4oEVaS2k1V1vepDpFt9KCIe29CfUd.bpwwkzej1VsUZe",
+    "name": "HR Admin",
+    "type": "admin",
+    "roleId": "43484404-1239-4ede-bd3e-2a8808f5d96d",
+    "avatar": "71014.jpg"
+  },
+  {
+    "id": "e94de32b-a085-48a6-a4e0-f0c0e46ff1bd",
+    "email": "teamhead@gmail.com",
+    "password": "$2b$08$aLQlVanfb4oEVaS2k1V1vepDpFt9KCIe29CfUd.bpwwkzej1VsUZe",
+    "name": "Team Head",
+    "type": "admin",
+    "roleId": "a835d781-013e-4f8f-b1bf-e49191aaf87a",
+    "avatar": "71015.jpg"
+  },
+  {
+    "id": "c990633e-020b-48aa-b5df-f5f327f2e275",
+    "email": "projectadmin@gmail.com",
+    "password": "$2b$08$aLQlVanfb4oEVaS2k1V1vepDpFt9KCIe29CfUd.bpwwkzej1VsUZe",
+    "name": "Project Admin",
+    "type": "admin",
+    "roleId": "0dc62cd0-2539-452c-9050-0110feed9060",
+    "avatar": "71019.jpg"
+  },
+  {
+    "id": "02e1f875-932f-468b-97fa-0823f7437823",
+    "email": "projectmanager@gmail.com",
+    "password": "$2b$08$aLQlVanfb4oEVaS2k1V1vepDpFt9KCIe29CfUd.bpwwkzej1VsUZe",
+    "name": "Project Manager",
+    "type": "admin",
+    "roleId": "aae1d503-2b93-4158-82c1-01733f5e6243",
+    "avatar": "71020.jpg"
+  }
+]

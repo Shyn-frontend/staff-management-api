@@ -42,7 +42,8 @@ export class CreateUserTable1611047101188 implements MigrationInterface {
                 },
                 {
                     name: 'positionId',
-                    type: 'varchar'
+                    type: 'varchar',
+                    isNullable: true,
                 },
                 {
                     name: 'roleId',
