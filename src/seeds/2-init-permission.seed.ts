@@ -1,6 +1,5 @@
 import { Connection } from "typeorm";
 import { Factory, Seeder } from "typeorm-seeding";
-import { PermissionEntity } from "../entities/permission.entity";
 
 const PermissionData = require('../data/Permission');
 
@@ -12,12 +11,15 @@ export default class InitPermissions implements Seeder {
         id: item.id,
         name: item.name,
         action: item.action,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        deletedAt: null,
       });
     }
     await connection
       .createQueryBuilder()
       .insert()
-      .into(PermissionEntity)
+      .into('permission')
       .values(permissionPreData)
       .execute();
   }

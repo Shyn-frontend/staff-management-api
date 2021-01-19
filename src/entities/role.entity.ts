@@ -13,7 +13,7 @@ export enum ROLES {
   EMPLOYEE_ROLE = 'Employee',
   CLIENT_ROLE = 'Client',
 }
-@Entity('role')
+@Entity()
 export class RoleEntity extends BaseEntity {
   @Column({
     type: 'enum',

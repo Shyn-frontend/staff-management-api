@@ -7,7 +7,7 @@ import { BaseEntity, BaseModel } from "../shared/base.entity";
 import { Column, Entity, Index, JoinColumn, ManyToOne, OneToOne, Unique } from "typeorm";
 import { USER_TYPE } from "../user/enum/user-type.enum";
 
-@Entity('user')
+@Entity()
 @Unique(['email'])
 @Index(['email', 'type'])
 export class UserEntity extends BaseEntity {

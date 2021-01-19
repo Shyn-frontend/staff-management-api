@@ -3,7 +3,7 @@ import { BaseEntity, BaseModel } from "../shared/base.entity";
 import { Column, Entity, Index, OneToMany } from "typeorm";
 import { RolePermission, RolePermissionEntity } from "./role-permission.entity";
 
-@Entity('permission')
+@Entity()
 @Index(['name'])
 export class PermissionEntity extends BaseEntity {
   @Column()

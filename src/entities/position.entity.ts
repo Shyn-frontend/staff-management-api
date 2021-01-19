@@ -5,7 +5,7 @@ import { BaseEntity, BaseModel } from "../shared/base.entity";
 import { User, UserEntity } from "./user.entity";
 import { Column, Entity, Index, JoinColumn, ManyToOne, OneToMany, OneToOne } from "typeorm";
 
-@Entity('position')
+@Entity()
 export class PositionEntity extends BaseEntity {
   @Column()
   @IsString()

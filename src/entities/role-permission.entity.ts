@@ -4,7 +4,7 @@ import { BaseEntity, BaseModel } from "../shared/base.entity";
 import { Column, Entity, JoinColumn, ManyToOne } from "typeorm";
 import { Permission, PermissionEntity } from "./permission.entity";
 
-@Entity('role_permission')
+@Entity()
 export class RolePermissionEntity extends BaseEntity {
   @Column()
   roleId: string;

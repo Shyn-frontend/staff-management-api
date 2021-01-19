@@ -1,4 +1,3 @@
-import { RoleEntity } from "../entities/role.entity";
 import { Connection } from "typeorm";
 import { Factory, Seeder } from "typeorm-seeding";
 
@@ -12,12 +11,15 @@ export default class InitRoles implements Seeder {
         id: item.id,
         name: item.name,
         order: item.order,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        deletedAt: null,
       });
     }
     await connection
       .createQueryBuilder()
       .insert()
-      .into(RoleEntity)
+      .into('role')
       .values(rolePrepareData)
       .execute();
   }

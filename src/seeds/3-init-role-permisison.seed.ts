@@ -1,6 +1,6 @@
-import { RolePermissionEntity } from "../entities/role-permission.entity";
 import { Connection } from "typeorm";
 import { Factory, Seeder } from "typeorm-seeding";
+import { v4 as uuidv4} from 'uuid';
 
 const RolePermissionPreData = require('../data/RolePermission');
 
@@ -9,15 +9,18 @@ export default class InitRolesPermissions implements Seeder {
     const rolePermissionPreData = [];
     for (const item of RolePermissionPreData) {
       rolePermissionPreData.push({
-        id: item.id,
+        id: uuidv4(),
         roleId: item.roleId,
         permissionId: item.permissionId,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        deletedAt: null,
       });
     }
     await connection
       .createQueryBuilder()
       .insert()
-      .into(RolePermissionEntity)
+      .into('role_permission')
       .values(rolePermissionPreData)
       .execute();
   }
