@@ -2,7 +2,7 @@ import { ConnectionOptions } from "typeorm";
 import ConfigService from './src/shared/config/config.service';
 ConfigService.init();
 
-const ORMConfig: ConnectionOptions = {
+const ORMConfig = {
   type: 'mysql',
   host: process.env.DATABASE_HOST,
   port: Number(process.env.DATABASE_PORT),
@@ -12,6 +12,11 @@ const ORMConfig: ConnectionOptions = {
   synchronize: false,
   logging: false,
   migrations: ['src/migration/*.ts'],
+  factories: ['src/factories/*.ts'],
+  entities: [
+    'src/entities/*.entity.{ts,js}'
+  ],
+  seeds: ['src/seed/*.ts'],
   cli: {
     migrationsDir: 'src/migration',
   },

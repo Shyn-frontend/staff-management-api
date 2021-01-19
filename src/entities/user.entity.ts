@@ -1,15 +1,15 @@
 import { Expose, Type } from "class-transformer";
 import { IsDate, IsEmail, IsOptional, IsString, Length } from "class-validator";
-import { Department, DepartmentEntity } from "src/department/entities/department.entity";
-import { Position, PositionEntity } from "src/position/entities/position.entity";
-import { Role, RoleEntity } from "src/role/entities/role.entity";
-import { BaseEntity, BaseModel } from "src/shared/base.entity";
+import { Department, DepartmentEntity } from "./department.entity";
+import { Position, PositionEntity } from "./position.entity";
+import { Role, RoleEntity } from "./role.entity";
+import { BaseEntity, BaseModel } from "../shared/base.entity";
 import { Column, Entity, Index, JoinColumn, ManyToOne, OneToOne, Unique } from "typeorm";
-import { USER_TYPE } from "../enum/user-type.enum";
+import { USER_TYPE } from "../user/enum/user-type.enum";
 
 @Entity('user')
 @Unique(['email'])
-@Index(['id', 'email', 'type'])
+@Index(['email', 'type'])
 export class UserEntity extends BaseEntity {
   @Column()
   @IsEmail()

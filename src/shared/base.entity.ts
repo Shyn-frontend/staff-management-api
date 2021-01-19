@@ -1,7 +1,8 @@
 import { Expose } from "class-transformer";
-import { Column, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Index, PrimaryGeneratedColumn } from "typeorm";
 import { ExposedApiProperty, ExposedApiPropertyOptional } from "./decorators/exposed-api-model-property.decorator";
 
+@Index(['id'])
 export abstract class BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;

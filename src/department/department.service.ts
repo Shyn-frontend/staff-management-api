@@ -4,7 +4,7 @@ import { BaseService } from 'src/shared/base.service';
 import { UserService } from 'src/user/user.service';
 import { Repository } from 'typeorm';
 import { CreateDepartmentDto } from './dto/create-department.dto';
-import { Department, DepartmentEntity } from './entities/department.entity';
+import { Department, DepartmentEntity } from '../entities/department.entity';
 
 @Injectable()
 export class DepartmentService extends BaseService<DepartmentEntity> {

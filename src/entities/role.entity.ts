@@ -1,7 +1,7 @@
 import { Expose, Type } from "class-transformer";
-import { RolePermission, RolePermissionEntity } from "src/permission/entities/role-permission.entity";
-import { BaseEntity, BaseModel } from "src/shared/base.entity";
-import { User, UserEntity } from "src/user/entities/user.entity";
+import { RolePermission, RolePermissionEntity } from "./role-permission.entity";
+import { BaseEntity, BaseModel } from "../shared/base.entity";
+import { User, UserEntity } from "./user.entity";
 import { Column, Entity, Index, OneToMany } from "typeorm";
 
 export enum ROLES {
@@ -14,7 +14,6 @@ export enum ROLES {
   CLIENT_ROLE = 'Client',
 }
 @Entity('role')
-@Index(['id'])
 export class RoleEntity extends BaseEntity {
   @Column({
     type: 'enum',

@@ -5,7 +5,7 @@ import { ApiErrors } from 'src/shared/decorators/api-errors.decorator';
 import { ApiOperationId } from 'src/shared/decorators/api-operation.decorator';
 import { DepartmentService } from './department.service';
 import { CreateDepartmentDto } from './dto/create-department.dto';
-import { DepartmentEntity } from './entities/department.entity';
+import { DepartmentEntity } from '../entities/department.entity';
 
 @Controller('departments')
 @ApiTags('Department')

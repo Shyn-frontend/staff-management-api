@@ -1,11 +1,10 @@
 import { Expose, Type } from "class-transformer";
-import { RoleEntity } from "src/role/entities/role.entity";
-import { BaseModel } from "src/shared/base.entity";
-import { BaseEntity, Column, Entity, Index, ManyToMany, ManyToOne, OneToMany } from "typeorm";
+import { BaseEntity, BaseModel } from "../shared/base.entity";
+import { Column, Entity, Index, OneToMany } from "typeorm";
 import { RolePermission, RolePermissionEntity } from "./role-permission.entity";
 
-@Entity()
-@Index(['id', 'name'])
+@Entity('permission')
+@Index(['name'])
 export class PermissionEntity extends BaseEntity {
   @Column()
   name: string;
@@ -15,7 +14,6 @@ export class PermissionEntity extends BaseEntity {
 
   @OneToMany(() => RolePermissionEntity, rolePermission => rolePermission.permission)
   rolePermissions: RolePermissionEntity[];
-
 }
 
 export class Permission extends BaseModel {

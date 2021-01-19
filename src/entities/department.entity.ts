@@ -1,12 +1,11 @@
 import { Expose, Type } from "class-transformer";
 import { IsOptional, IsString, Length } from "class-validator";
-import { Position, PositionEntity } from "src/position/entities/position.entity";
-import { BaseEntity, BaseModel } from "src/shared/base.entity";
-import { User, UserEntity } from "src/user/entities/user.entity";
+import { Position, PositionEntity } from "./position.entity";
+import { BaseEntity, BaseModel } from "../shared/base.entity";
+import { User, UserEntity } from "./user.entity";
 import { Column, Entity, Index, JoinColumn, ManyToOne, OneToMany, OneToOne } from "typeorm";
 
 @Entity('department')
-@Index(['id'])
 export class DepartmentEntity extends BaseEntity {
   @Column()
   @IsString()
