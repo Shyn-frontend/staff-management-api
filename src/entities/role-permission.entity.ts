@@ -1,7 +1,7 @@
 import { Expose, Type } from "class-transformer";
 import { Role, RoleEntity } from "./role.entity";
 import { BaseEntity, BaseModel } from "../shared/base.entity";
-import { Column, Entity, JoinColumn, ManyToOne } from "typeorm";
+import { Entity, JoinColumn, ManyToOne } from "typeorm";
 import { Permission, PermissionEntity } from "./permission.entity";
 
 @Entity()

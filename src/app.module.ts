@@ -9,6 +9,7 @@ import { UserModule } from './user/user.module';
 import { RoleModule } from './role/role.module';
 import { AuthModule } from './auth/auth.module';
 import { PermissionController } from './permission/permission.controller';
+import { PermissionModule } from './permission/permission.module';
 
 @Module({
   imports: [
@@ -33,6 +34,7 @@ import { PermissionController } from './permission/permission.controller';
     UserModule,
     RoleModule,
     AuthModule,
+    PermissionModule,
   ],
 })
 export class AppModule { }

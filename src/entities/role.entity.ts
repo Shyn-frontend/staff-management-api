@@ -2,7 +2,7 @@ import { Expose, Type } from "class-transformer";
 import { RolePermission, RolePermissionEntity } from "./role-permission.entity";
 import { BaseEntity, BaseModel } from "../shared/base.entity";
 import { User, UserEntity } from "./user.entity";
-import { Column, Entity, Index, OneToMany } from "typeorm";
+import { Column, Entity, OneToMany } from "typeorm";
 
 export enum ROLES {
   ADMIN_ROLE = 'Admin',

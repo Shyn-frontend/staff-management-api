@@ -14,7 +14,7 @@ const ORMConfig = {
   migrations: ['src/migrations/*.ts'],
   factories: ['src/factories/*.ts'],
   entities: [
-    'src/entities/*.entity.{ts,js}'
+    'src/entities/*.entity.ts'
   ],
   seeds: ['src/seeds/*.ts'],
   cli: {
