@@ -1,4 +1,3 @@
-import { ConnectionOptions } from "typeorm";
 import ConfigService from './src/shared/config/config.service';
 ConfigService.init();
 

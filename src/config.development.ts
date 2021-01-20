@@ -26,7 +26,7 @@ class Config implements IConfig {
       jwtSecret: process.env.JWT_SECRET,
       jwtExpired: '24h',
       salt: 10,
-    }
+    };
   }
 
   app: {

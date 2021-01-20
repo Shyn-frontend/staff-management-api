@@ -1,6 +1,5 @@
 import { AutoMap } from "@automapper/classes";
 import { ApiProperty } from "@nestjs/swagger";
-import { DepartmentDto } from "src/department/dto/department.dto";
 import { PositionDto } from "src/position/dto/position.dto";
 import { RoleDto } from "src/role/dto/role.dto";
 import { BaseDto } from "src/shared/base.entity";
