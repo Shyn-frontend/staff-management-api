@@ -3,32 +3,34 @@ import { ApiException } from "../api-exception.model";
 
 @Catch(HttpException)
 export class HttpExceptionFilter implements ExceptionFilter {
-  catch(error: any, host: ArgumentsHost) {
+  catch(exception: HttpException, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
     const res = ctx.getResponse();
     const req = ctx.getRequest();
-    const statusCode = error.getStatus();
-    const stacktrace = error.stack;
-    const errorName = error.response.name || error.response.error || error.name;
-    const errors = error.response.errors || null;
-    const path = req ? req.url : null;
+    const statusCode = exception.getStatus();
+    const stacktrace = exception.stack;
+    const errorResponse = exception.getResponse();
+    let errorName = exception.name;
+    let errors = null;
 
-    if (statusCode === HttpStatus.UNAUTHORIZED) {
-      if (typeof error.response !== 'string') {
-        error.response.message =
-          error.response.message ||
-          'You do not have permission to access this resource';
+    if (typeof errorResponse === 'object') {
+      errorName = errorResponse['name'] || errorResponse['error'] || exception.name;
+      errors = errorResponse['errors'];
+
+      if (statusCode === HttpStatus.UNAUTHORIZED) {
+        errorResponse['message'] = errorResponse['message'] || 'Unauthorized';
       }
     }
 
-    const exception = new ApiException(
-      error.response.message,
+    const path = req?.url;
+    const apiException = new ApiException(
+      errorResponse['message'],
       errorName,
       stacktrace,
       errors,
       path,
       statusCode,
     );
-    res.status(statusCode).json(exception);
+    res.status(statusCode).json(apiException);
   }
 }
