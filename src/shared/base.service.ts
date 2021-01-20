@@ -1,11 +1,9 @@
-import { InternalServerErrorException } from "@nestjs/common";
-import { DeepPartial, DeleteResult, Repository, UpdateResult } from "typeorm";
-import {
-  QueryDeepPartialEntity
-} from "typeorm/query-builder/QueryPartialEntity";
-import { Base } from "./base.entity";
+import { InternalServerErrorException } from '@nestjs/common';
+import { DeepPartial, DeleteResult, Repository, UpdateResult } from 'typeorm';
+import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity';
+import { Base } from './base.entity';
 
-export abstract class BaseService<T extends Base>{
+export abstract class BaseService<T extends Base> {
   protected repository: Repository<T>;
 
   createRepo(doc?: DeepPartial<T>): T {
@@ -22,7 +20,7 @@ export abstract class BaseService<T extends Base>{
 
   async update(
     filter = {},
-    data: QueryDeepPartialEntity<T>
+    data: QueryDeepPartialEntity<T>,
   ): Promise<UpdateResult> {
     try {
       return await this.repository.update(filter, data);
@@ -36,7 +34,6 @@ export abstract class BaseService<T extends Base>{
       return await this.repository.count(filter);
     } catch (error) {
       BaseService.throwInternalErrorException(error);
-
     }
   }
 
@@ -45,7 +42,6 @@ export abstract class BaseService<T extends Base>{
       return await this.repository.findAndCount(filter);
     } catch (error) {
       BaseService.throwInternalErrorException(error);
-
     }
   }
 
@@ -54,7 +50,6 @@ export abstract class BaseService<T extends Base>{
       return await this.repository.find(filter);
     } catch (error) {
       BaseService.throwInternalErrorException(error);
-
     }
   }
 
@@ -63,7 +58,6 @@ export abstract class BaseService<T extends Base>{
       return await this.repository.findOne({ where: { id } });
     } catch (error) {
       BaseService.throwInternalErrorException(error);
-
     }
   }
 
@@ -94,5 +88,4 @@ export abstract class BaseService<T extends Base>{
   protected static throwInternalErrorException(err: Error): void {
     throw new InternalServerErrorException(err.message, err.name);
   }
-
 }

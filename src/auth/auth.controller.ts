@@ -5,17 +5,15 @@ import { AuthService } from './auth.service';
 import { LoginParamsDto } from './dto/login-params.dto';
 import { LoginResultDto } from './dto/login-result.dto';
 
-@Controller("auth")
+@Controller('auth')
 @ApiTags('Auth')
 export class AuthController {
-  constructor(
-    private readonly authService: AuthService
-  ) { }
+  constructor(private readonly authService: AuthService) {}
 
   @Post()
   @ApiOkResponse({
     type: LoginResultDto,
-    description: 'Login successfully'
+    description: 'Login successfully',
   })
   @ApiErrors()
   async login(@Body() params: LoginParamsDto): Promise<LoginResultDto> {

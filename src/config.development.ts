@@ -1,5 +1,5 @@
-import { IConfig } from "./config.interface";
-import { Environment } from "./shared/config/config.module";
+import { IConfig } from './config.interface';
+import { Environment } from './shared/config/config.module';
 
 class Config implements IConfig {
   constructor() {
@@ -19,7 +19,7 @@ class Config implements IConfig {
       password: process.env.DATABASE_PASSWORD,
       database: process.env.DATABASE_NAME,
       entities: [],
-      synchronize: false
+      synchronize: false,
     };
 
     this.auth = {
@@ -32,27 +32,27 @@ class Config implements IConfig {
   app: {
     host: string;
     port: string | number;
-    domain: string,
+    domain: string;
     env: Environment;
     isSwaggerEnabled: boolean;
   };
 
   mysql: {
-    type: string,
-    host: string,
-    port: string | number,
-    username: string,
-    password: string,
-    database: string,
-    entities: string[],
-    synchronize: boolean,
+    type: string;
+    host: string;
+    port: string | number;
+    username: string;
+    password: string;
+    database: string;
+    entities: string[];
+    synchronize: boolean;
   };
 
   auth: {
-    jwtSecret: string,
-    jwtExpired: string,
-    salt: number,
-  }
+    jwtSecret: string;
+    jwtExpired: string;
+    salt: number;
+  };
 }
 
 export default new Config();

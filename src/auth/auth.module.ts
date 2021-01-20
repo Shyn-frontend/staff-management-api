@@ -13,8 +13,8 @@ import { JwtStrategyService } from './jwt-strategy.service';
       inject: [CONFIG],
       useFactory: (config: IConfig) => ({
         privateKey: config.auth.jwtExpired,
-        signOptions: { expiresIn: config.auth.jwtExpired }
-      })
+        signOptions: { expiresIn: config.auth.jwtExpired },
+      }),
     }),
     UserModule,
   ],
@@ -22,4 +22,4 @@ import { JwtStrategyService } from './jwt-strategy.service';
   providers: [AuthService, JwtStrategyService],
   exports: [AuthService],
 })
-export class AuthModule { }
+export class AuthModule {}

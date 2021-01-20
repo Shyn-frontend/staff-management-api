@@ -1,5 +1,11 @@
-import { ArgumentsHost, Catch, ExceptionFilter, HttpException, HttpStatus } from "@nestjs/common";
-import { ApiException } from "../api-exception";
+import {
+  ArgumentsHost,
+  Catch,
+  ExceptionFilter,
+  HttpException,
+  HttpStatus,
+} from '@nestjs/common';
+import { ApiException } from '../api-exception';
 
 @Catch(HttpException)
 export class HttpExceptionFilter implements ExceptionFilter {
@@ -14,7 +20,8 @@ export class HttpExceptionFilter implements ExceptionFilter {
     let errors = null;
 
     if (typeof errorResponse === 'object') {
-      errorName = errorResponse['name'] || errorResponse['error'] || exception.name;
+      errorName =
+        errorResponse['name'] || errorResponse['error'] || exception.name;
       errors = errorResponse['errors'];
 
       if (statusCode === HttpStatus.UNAUTHORIZED) {

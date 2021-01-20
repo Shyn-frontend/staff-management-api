@@ -11,7 +11,6 @@ export class UserController {
   // ) {
   //   return 'Get single user';
   // }
-
   // @Post()
   // create(@Body() createUserDto: CreateUserParamsDto) {
   //   console.log(createUserDto);

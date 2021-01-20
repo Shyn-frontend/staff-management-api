@@ -1,28 +1,28 @@
-import { Environment } from "./shared/config/config.module";
+import { Environment } from './shared/config/config.module';
 
 export interface IConfig {
   app: {
-    host: string,
-    port: string | number,
+    host: string;
+    port: string | number;
     domain: string;
-    env: Environment,
+    env: Environment;
     isSwaggerEnabled: boolean;
   };
 
   mysql: {
-    type: string,
-    host: string,
-    port: string | number,
-    username: string,
-    password: string,
-    database: string,
-    entities: string[],
-    synchronize: boolean,
+    type: string;
+    host: string;
+    port: string | number;
+    username: string;
+    password: string;
+    database: string;
+    entities: string[];
+    synchronize: boolean;
   };
 
   auth: {
-    jwtSecret: string,
-    jwtExpired: string,
-    salt: number,
-  }
+    jwtSecret: string;
+    jwtExpired: string;
+    salt: number;
+  };
 }

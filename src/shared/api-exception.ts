@@ -1,5 +1,5 @@
-import { HttpStatus } from "@nestjs/common";
-import { ApiPropertyOptional } from "@nestjs/swagger";
+import { HttpStatus } from '@nestjs/common';
+import { ApiPropertyOptional } from '@nestjs/swagger';
 
 export class ApiException {
   @ApiPropertyOptional() statusCode?: number;
@@ -17,7 +17,7 @@ export class ApiException {
     stack: string,
     errors: any,
     path: string,
-    statusCode: number
+    statusCode: number,
   ) {
     this.message = message;
     this.error = error;

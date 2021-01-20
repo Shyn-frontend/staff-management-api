@@ -1,5 +1,11 @@
-import { DynamicModule, Global, Inject, Module, Provider } from "@nestjs/common";
-import { resolve } from "path";
+import {
+  DynamicModule,
+  Global,
+  Inject,
+  Module,
+  Provider,
+} from '@nestjs/common';
+import { resolve } from 'path';
 
 export const CONFIG = '@@appConfig';
 export const InjectConfig = () => Inject(CONFIG);

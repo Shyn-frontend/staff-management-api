@@ -1,5 +1,5 @@
-import { Connection } from "typeorm";
-import { Factory, Seeder } from "typeorm-seeding";
+import { Connection } from 'typeorm';
+import { Factory, Seeder } from 'typeorm-seeding';
 import PermissionData from '../data/Permission';
 
 export default class InitPermissions implements Seeder {

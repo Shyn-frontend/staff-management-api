@@ -12,8 +12,14 @@ export const ApiErrors = () => {
   return applyDecorators(
     ApiNotFoundResponse({ type: ApiException, description: 'Not Found' }),
     ApiBadRequestResponse({ type: ApiException, description: 'Bad Request' }),
-    ApiUnauthorizedResponse({ type: ApiException, description: 'Un Authorized' }),
-    ApiInternalServerErrorResponse({ type: ApiException, description: 'Internal Server Error' }),
-    ApiForbiddenResponse({ type: ApiException, description: 'Forbidden' })
+    ApiUnauthorizedResponse({
+      type: ApiException,
+      description: 'Un Authorized',
+    }),
+    ApiInternalServerErrorResponse({
+      type: ApiException,
+      description: 'Internal Server Error',
+    }),
+    ApiForbiddenResponse({ type: ApiException, description: 'Forbidden' }),
   );
 };

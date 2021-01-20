@@ -8,7 +8,7 @@ import { User } from '../entities/user.entity';
 export class UserService extends BaseService<User> {
   constructor(
     @InjectRepository(User)
-    private userRepository: Repository<User>
+    private userRepository: Repository<User>,
   ) {
     super();
     this.repository = userRepository;

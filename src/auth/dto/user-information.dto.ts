@@ -1,9 +1,9 @@
-import { AutoMap } from "@automapper/classes";
-import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
-import { UserRoleDto } from "src/user/dto/user-role.dto";
-import { BaseDto } from "src/shared/base.entity";
-import { UserPositionDto } from "src/user/dto/user-position.dto";
-import { USER_TYPE } from "src/user/enum/user-type.enum";
+import { AutoMap } from '@automapper/classes';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { UserRoleDto } from 'src/user/dto/user-role.dto';
+import { BaseDto } from 'src/shared/base.entity';
+import { UserPositionDto } from 'src/user/dto/user-position.dto';
+import { USER_TYPE } from 'src/user/enum/user-type.enum';
 
 export class UserInformationDto extends BaseDto {
   @ApiProperty()
@@ -16,19 +16,19 @@ export class UserInformationDto extends BaseDto {
 
   @ApiProperty({
     enum: USER_TYPE,
-    enumName: 'USER_TYPE'
+    enumName: 'USER_TYPE',
   })
   @AutoMap()
   type: USER_TYPE;
 
   @ApiProperty({
-    type: () => UserPositionDto
+    type: () => UserPositionDto,
   })
   @AutoMap(() => UserPositionDto)
   position: UserPositionDto;
 
   @ApiProperty({
-    type: () => UserRoleDto
+    type: () => UserRoleDto,
   })
   @AutoMap(() => UserRoleDto)
   role: UserRoleDto;

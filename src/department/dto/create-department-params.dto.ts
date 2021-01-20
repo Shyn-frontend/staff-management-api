@@ -1,5 +1,5 @@
-import { ApiProperty } from "@nestjs/swagger";
-import { IsBoolean, IsString, IsUUID } from "class-validator";
+import { ApiProperty } from '@nestjs/swagger';
+import { IsBoolean, IsString, IsUUID } from 'class-validator';
 export class CreateDepartmentParamsDto {
   @IsString()
   @ApiProperty()

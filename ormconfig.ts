@@ -12,12 +12,10 @@ const ORMConfig = {
   logging: false,
   migrations: ['src/migrations/*.ts'],
   factories: ['src/factories/*.ts'],
-  entities: [
-    'src/entities/*.entity.ts'
-  ],
+  entities: ['src/entities/*.entity.ts'],
   seeds: ['src/seeds/*.ts'],
   cli: {
-    entitiesDir: "src/entities",
+    entitiesDir: 'src/entities',
     migrationsDir: 'src/migrations',
   },
 };

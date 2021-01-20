@@ -3,5 +3,5 @@ export enum USER_TYPE {
   CLIENT = 'client',
   EMPLOYEE = 'employee',
   MANAGER = 'manager',
-  PLACEHOLDER = 'placeholder'
+  PLACEHOLDER = 'placeholder',
 }

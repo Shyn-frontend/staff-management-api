@@ -1,5 +1,5 @@
-import { Connection } from "typeorm";
-import { Factory, Seeder } from "typeorm-seeding";
+import { Connection } from 'typeorm';
+import { Factory, Seeder } from 'typeorm-seeding';
 import AdminData from '../data/AdminUser';
 
 export default class InitAdminUsers implements Seeder {

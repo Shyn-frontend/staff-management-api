@@ -1,5 +1,5 @@
-import { Connection } from "typeorm";
-import { Factory, Seeder } from "typeorm-seeding";
+import { Connection } from 'typeorm';
+import { Factory, Seeder } from 'typeorm-seeding';
 import RoleData from '../data/Role';
 
 export default class InitRoles implements Seeder {

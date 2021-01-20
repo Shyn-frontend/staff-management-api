@@ -1,16 +1,9 @@
-import { Position } from "./position.entity";
-import { Role } from "./role.entity";
-import { Base } from "../shared/base.entity";
-import {
-  Column,
-  Entity,
-  Index,
-  JoinColumn,
-  ManyToOne,
-  Unique
-} from "typeorm";
-import { USER_TYPE } from "../user/enum/user-type.enum";
-import { AutoMap } from "@automapper/classes";
+import { Position } from './position.entity';
+import { Role } from './role.entity';
+import { Base } from '../shared/base.entity';
+import { Column, Entity, Index, JoinColumn, ManyToOne, Unique } from 'typeorm';
+import { USER_TYPE } from '../user/enum/user-type.enum';
+import { AutoMap } from '@automapper/classes';
 
 @Entity()
 @Unique(['email'])
@@ -25,7 +18,7 @@ export class User extends Base {
 
   @Column({
     type: 'varchar',
-    length: 128
+    length: 128,
   })
   password: string;
 
@@ -37,23 +30,23 @@ export class User extends Base {
   name: string;
 
   @Column({
-    type: 'varchar'
+    type: 'varchar',
   })
   @AutoMap()
   roleId: string;
 
-  @ManyToOne(() => Role, role => role.users)
+  @ManyToOne(() => Role, (role) => role.users)
   @JoinColumn()
   @AutoMap(() => Role)
   role: Role;
 
   @Column({
-    type: 'varchar'
+    type: 'varchar',
   })
   @AutoMap()
   positionId: string;
 
-  @ManyToOne(() => Position, position => position.users)
+  @ManyToOne(() => Position, (position) => position.users)
   @JoinColumn()
   @AutoMap(() => Position)
   position: Position;
@@ -68,14 +61,14 @@ export class User extends Base {
 
   @Column({
     type: 'varchar',
-    length: 1024
+    length: 1024,
   })
   @AutoMap()
   avatar?: string;
 
   @Column({
     type: 'boolean',
-    default: false
+    default: false,
   })
   @AutoMap()
   isArchived: boolean;
@@ -88,14 +81,14 @@ export class User extends Base {
 
   @Column({
     type: 'boolean',
-    default: false
+    default: false,
   })
   @AutoMap()
   isComplete: boolean;
 
   @Column({
     type: 'boolean',
-    default: true
+    default: true,
   })
   @AutoMap()
   isPermanent: boolean;

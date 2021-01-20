@@ -9,18 +9,18 @@ import { DepartmentDto } from './dto/department.dto';
 @Controller('departments')
 @ApiTags('Department')
 export class DepartmentController {
-  constructor(private readonly departmentService: DepartmentService) { }
+  constructor(private readonly departmentService: DepartmentService) {}
 
   @Post()
   @UseGuards(AuthGuard())
   @ApiBearerAuth()
   @ApiCreatedResponse({
     type: DepartmentDto,
-    description: 'Create department successfully'
+    description: 'Create department successfully',
   })
   @ApiErrors()
   async createDepartment(
-    @Body() dto: CreateDepartmentParamsDto
+    @Body() dto: CreateDepartmentParamsDto,
   ): Promise<DepartmentDto> {
     return this.departmentService.createDepartment(dto);
   }

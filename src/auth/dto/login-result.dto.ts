@@ -1,15 +1,15 @@
-import { ApiProperty } from "@nestjs/swagger";
-import { AccessTokenDto } from "./access-token.dto";
-import { UserInformationDto } from "./user-information.dto";
+import { ApiProperty } from '@nestjs/swagger';
+import { AccessTokenDto } from './access-token.dto';
+import { UserInformationDto } from './user-information.dto';
 
 export class LoginResultDto {
   @ApiProperty({
-    type: () => UserInformationDto
+    type: () => UserInformationDto,
   })
   user: UserInformationDto;
 
   @ApiProperty({
-    type: () => AccessTokenDto
+    type: () => AccessTokenDto,
   })
   token: AccessTokenDto;
 }

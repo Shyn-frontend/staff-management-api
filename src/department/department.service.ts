@@ -20,7 +20,7 @@ export class DepartmentService extends BaseService<Department> {
   }
 
   async createDepartment(
-    dto: CreateDepartmentParamsDto
+    dto: CreateDepartmentParamsDto,
   ): Promise<DepartmentDto> {
     const { name, managerId } = dto;
     const [existedDepartment, manager] = await Promise.all([

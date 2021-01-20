@@ -7,6 +7,6 @@ import { PositionService } from './position.service';
 @Module({
   imports: [TypeOrmModule.forFeature([Position])],
   providers: [PositionService],
-  controllers: [PositionController]
+  controllers: [PositionController],
 })
-export class PositionModule { }
+export class PositionModule {}

@@ -1,8 +1,4 @@
-import {
-  BadRequestException,
-  Body,
-  Injectable
-} from '@nestjs/common';
+import { BadRequestException, Body, Injectable } from '@nestjs/common';
 import { UserService } from 'src/user/user.service';
 import { compareSync } from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
@@ -18,9 +14,9 @@ export class AuthService {
   constructor(
     private readonly userService: UserService,
     private readonly jwtService: JwtService,
-  ) { }
+  ) {}
 
-  signPayload(payload: { [key: string]: any; }): string {
+  signPayload(payload: { [key: string]: any }): string {
     return this.jwtService.sign(payload);
   }
 

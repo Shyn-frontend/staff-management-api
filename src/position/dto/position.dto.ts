@@ -1,6 +1,6 @@
-import { AutoMap } from "@automapper/classes";
-import { ApiProperty } from "@nestjs/swagger";
-import { DepartmentDto } from "src/department/dto/department.dto";
+import { AutoMap } from '@automapper/classes';
+import { ApiProperty } from '@nestjs/swagger';
+import { DepartmentDto } from 'src/department/dto/department.dto';
 
 export class PositionDto {
   @ApiProperty()
@@ -12,7 +12,7 @@ export class PositionDto {
   name: string;
 
   @ApiProperty({
-    type: () => DepartmentDto
+    type: () => DepartmentDto,
   })
   @AutoMap(() => DepartmentDto)
   department: DepartmentDto;

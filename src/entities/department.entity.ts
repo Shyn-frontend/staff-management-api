@@ -1,8 +1,8 @@
-import { Position } from "./position.entity";
-import { Base } from "../shared/base.entity";
-import { User } from "./user.entity";
-import { Column, Entity, JoinColumn, OneToMany, OneToOne } from "typeorm";
-import { AutoMap } from "@automapper/classes";
+import { Position } from './position.entity';
+import { Base } from '../shared/base.entity';
+import { User } from './user.entity';
+import { Column, Entity, JoinColumn, OneToMany, OneToOne } from 'typeorm';
+import { AutoMap } from '@automapper/classes';
 
 @Entity()
 export class Department extends Base {
@@ -15,7 +15,7 @@ export class Department extends Base {
 
   @OneToOne(() => User)
   @JoinColumn({
-    name: 'managerId'
+    name: 'managerId',
   })
   @AutoMap(() => User)
   manager: User;
@@ -27,7 +27,7 @@ export class Department extends Base {
   @AutoMap()
   isBillable: boolean;
 
-  @OneToMany(() => Position, position => position.department)
+  @OneToMany(() => Position, (position) => position.department)
   @AutoMap(() => Position)
   positions?: Position[];
 }

@@ -1,5 +1,5 @@
-import { Connection } from "typeorm";
-import { Factory, Seeder } from "typeorm-seeding";
+import { Connection } from 'typeorm';
+import { Factory, Seeder } from 'typeorm-seeding';
 import { v4 as uuidv4 } from 'uuid';
 import RolePermissionData from '../data/RolePermission';
 export default class InitRolesPermissions implements Seeder {

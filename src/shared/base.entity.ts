@@ -1,6 +1,6 @@
-import { AutoMap } from "@automapper/classes";
-import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
-import { Column, Index, PrimaryGeneratedColumn } from "typeorm";
+import { AutoMap } from '@automapper/classes';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { Column, Index, PrimaryGeneratedColumn } from 'typeorm';
 
 @Index(['id'])
 export abstract class Base {
@@ -27,7 +27,7 @@ export abstract class Base {
   @Column({
     type: 'timestamp',
     nullable: true,
-    default: null
+    default: null,
   })
   @AutoMap()
   deletedAt?: Date;

@@ -15,17 +15,18 @@ import { PermissionModule } from './permission/permission.module';
     ConfigModule.forRoot(),
     TypeOrmModule.forRootAsync({
       inject: [CONFIG],
-      useFactory: (config: IConfig) => ({
-        type: config.mysql.type,
-        host: config.mysql.host,
-        port: config.mysql.port,
-        username: config.mysql.username,
-        password: config.mysql.password,
-        database: config.mysql.database,
-        entities: config.mysql.entities,
-        synchronize: config.mysql.synchronize,
-        autoLoadEntities: true,
-      }) as TypeOrmModuleAsyncOptions
+      useFactory: (config: IConfig) =>
+        ({
+          type: config.mysql.type,
+          host: config.mysql.host,
+          port: config.mysql.port,
+          username: config.mysql.username,
+          password: config.mysql.password,
+          database: config.mysql.database,
+          entities: config.mysql.entities,
+          synchronize: config.mysql.synchronize,
+          autoLoadEntities: true,
+        } as TypeOrmModuleAsyncOptions),
     }),
     DepartmentModule,
     PositionModule,
@@ -36,4 +37,4 @@ import { PermissionModule } from './permission/permission.module';
     PermissionModule,
   ],
 })
-export class AppModule { }
+export class AppModule {}
