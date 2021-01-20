@@ -19,7 +19,9 @@ export class DepartmentController {
     description: 'Create department successfully'
   })
   @ApiErrors()
-  async createDepartment(@Body() dto: CreateDepartmentParamsDto): Promise<DepartmentDto> {
+  async createDepartment(
+    @Body() dto: CreateDepartmentParamsDto
+  ): Promise<DepartmentDto> {
     return this.departmentService.createDepartment(dto);
   }
 }

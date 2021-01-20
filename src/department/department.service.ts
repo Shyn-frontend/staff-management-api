@@ -19,7 +19,9 @@ export class DepartmentService extends BaseService<Department> {
     this.repository = departmentRepository;
   }
 
-  async createDepartment(dto: CreateDepartmentParamsDto): Promise<DepartmentDto> {
+  async createDepartment(
+    dto: CreateDepartmentParamsDto
+  ): Promise<DepartmentDto> {
     const { name, managerId } = dto;
     const [existedDepartment, manager] = await Promise.all([
       this.findOne({ name }),

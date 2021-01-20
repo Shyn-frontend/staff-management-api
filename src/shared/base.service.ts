@@ -1,6 +1,8 @@
 import { InternalServerErrorException } from "@nestjs/common";
 import { DeepPartial, DeleteResult, Repository, UpdateResult } from "typeorm";
-import { QueryDeepPartialEntity } from "typeorm/query-builder/QueryPartialEntity";
+import {
+  QueryDeepPartialEntity
+} from "typeorm/query-builder/QueryPartialEntity";
 import { Base } from "./base.entity";
 
 export abstract class BaseService<T extends Base>{
@@ -18,7 +20,10 @@ export abstract class BaseService<T extends Base>{
     }
   }
 
-  async update(filter = {}, data: QueryDeepPartialEntity<T>): Promise<UpdateResult> {
+  async update(
+    filter = {},
+    data: QueryDeepPartialEntity<T>
+  ): Promise<UpdateResult> {
     try {
       return await this.repository.update(filter, data);
     } catch (error) {
@@ -28,7 +33,7 @@ export abstract class BaseService<T extends Base>{
 
   async count(filter = {}): Promise<number> {
     try {
-      return await this.repository.count();
+      return await this.repository.count(filter);
     } catch (error) {
       BaseService.throwInternalErrorException(error);
 

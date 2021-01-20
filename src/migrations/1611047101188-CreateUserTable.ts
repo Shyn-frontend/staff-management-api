@@ -1,4 +1,10 @@
-import { MigrationInterface, QueryRunner, Table, TableForeignKey, TableIndex } from "typeorm";
+import {
+    MigrationInterface,
+    QueryRunner,
+    Table,
+    TableForeignKey,
+    TableIndex
+} from "typeorm";
 import getEnum from '../shared/utils/getEnum';
 
 enum USER_TYPE {

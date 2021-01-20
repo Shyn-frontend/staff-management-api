@@ -5,7 +5,7 @@ import { AuthService } from './auth.service';
 import { LoginParamsDto } from './dto/login-params.dto';
 import { LoginResultDto } from './dto/login-result.dto';
 
-@Controller('auth')
+@Controller("auth")
 @ApiTags('Auth')
 export class AuthController {
   constructor(

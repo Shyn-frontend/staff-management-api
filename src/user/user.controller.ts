@@ -1,7 +1,5 @@
-import { Body, Controller, Get, Param, ParseIntPipe, Post, Query } from '@nestjs/common';
+import { Controller } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { ParseBoolPipe } from 'src/shared/pipes/parse-boolean.pipe';
-import { CreateUserParamsDto } from './dto/create-user-params.dto';
 
 @Controller('users')
 @ApiTags('User')

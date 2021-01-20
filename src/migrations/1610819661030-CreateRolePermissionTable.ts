@@ -1,4 +1,9 @@
-import { MigrationInterface, QueryRunner, Table, TableForeignKey } from "typeorm";
+import {
+    MigrationInterface,
+    QueryRunner,
+    Table,
+    TableForeignKey
+} from "typeorm";
 
 export class CreateRolePermissionTable1610819661030 implements MigrationInterface {
 
