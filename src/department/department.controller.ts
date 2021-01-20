@@ -2,7 +2,6 @@ import { Body, Controller, Post, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiBearerAuth, ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
 import { ApiErrors } from 'src/shared/decorators/api-errors.decorator';
-import { ApiOperationId } from 'src/shared/decorators/api-operation.decorator';
 import { DepartmentService } from './department.service';
 import { CreateDepartmentParamsDto } from './dto/create-department-params.dto';
 import { DepartmentDto } from './dto/department.dto';
@@ -20,7 +19,6 @@ export class DepartmentController {
     description: 'Create department successfully'
   })
   @ApiErrors()
-  @ApiOperationId()
   async createDepartment(@Body() dto: CreateDepartmentParamsDto): Promise<DepartmentDto> {
     return this.departmentService.createDepartment(dto);
   }

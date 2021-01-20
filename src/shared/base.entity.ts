@@ -1,6 +1,6 @@
 import { AutoMap } from "@automapper/classes";
+import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
 import { Column, Index, PrimaryGeneratedColumn } from "typeorm";
-import { ExposedApiProperty, ExposedApiPropertyOptional } from "./decorators/exposed-api-model-property.decorator";
 
 @Index(['id'])
 export abstract class Base {
@@ -34,15 +34,19 @@ export abstract class Base {
 }
 
 export class BaseDto {
-  @ExposedApiProperty()
+  @ApiProperty()
+  @AutoMap()
   id: string;
 
-  @ExposedApiPropertyOptional({ type: String, format: 'date-time' })
+  @ApiPropertyOptional({ type: String, format: 'date-time' })
+  @AutoMap()
   createdAt?: Date;
 
-  @ExposedApiPropertyOptional({ type: String, format: 'date-time' })
+  @ApiPropertyOptional({ type: String, format: 'date-time' })
+  @AutoMap()
   updatedAt?: Date;
 
-  @ExposedApiPropertyOptional({ type: String, format: 'date-time' })
+  @ApiPropertyOptional({ type: String, format: 'date-time' })
+  @AutoMap()
   deletedAt?: Date;
 }
