@@ -1,6 +1,6 @@
 import { AutoMap } from "@automapper/classes";
 import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
-import { UserRoleDto } from "src/role/dto/user-role.dto";
+import { UserRoleDto } from "src/user/dto/user-role.dto";
 import { BaseDto } from "src/shared/base.entity";
 import { UserPositionDto } from "src/user/dto/user-position.dto";
 import { USER_TYPE } from "src/user/enum/user-type.enum";
