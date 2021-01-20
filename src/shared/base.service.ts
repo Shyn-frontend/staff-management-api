@@ -1,9 +1,9 @@
 import { InternalServerErrorException } from "@nestjs/common";
 import { DeepPartial, DeleteResult, Repository, UpdateResult } from "typeorm";
 import { QueryDeepPartialEntity } from "typeorm/query-builder/QueryPartialEntity";
-import { BaseEntity } from "./base.entity";
+import { Base } from "./base.entity";
 
-export abstract class BaseService<T extends BaseEntity>{
+export abstract class BaseService<T extends Base>{
   protected repository: Repository<T>;
 
   createRepo(doc?: DeepPartial<T>): T {

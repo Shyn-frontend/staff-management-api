@@ -1,18 +1,18 @@
-import { ExposedApiProperty } from "src/shared/decorators/exposed-api-model-property.decorator";
+import { AutoMap } from "@automapper/classes";
+import { ApiProperty } from "@nestjs/swagger";
+import { BaseDto } from "src/shared/base.entity";
 import { ManagerDto } from "src/user/dto/manager.dto";
 
-export class DepartmentDto {
-  @ExposedApiProperty()
-  id: string;
-
-  @ExposedApiProperty()
+export class DepartmentDto extends BaseDto {
+  @ApiProperty()
+  @AutoMap()
   name: string;
 
-  @ExposedApiProperty({
-    type: () => ManagerDto,
-  })
-  manager: ManagerDto;
+  @ApiProperty()
+  @AutoMap(() => ManagerDto)
+  manager?: ManagerDto;
 
-  @ExposedApiProperty()
-  isBillable: boolean
+  @ApiProperty()
+  @AutoMap()
+  isBillable: boolean;
 }

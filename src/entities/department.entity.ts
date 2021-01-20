@@ -1,46 +1,33 @@
-import { Expose, Type } from "class-transformer";
-import { IsOptional, IsString, Length } from "class-validator";
-import { Position, PositionEntity } from "./position.entity";
-import { BaseEntity, BaseModel } from "../shared/base.entity";
-import { User, UserEntity } from "./user.entity";
-import { Column, Entity, Index, JoinColumn, ManyToOne, OneToMany, OneToOne } from "typeorm";
+import { Position } from "./position.entity";
+import { Base } from "../shared/base.entity";
+import { User } from "./user.entity";
+import { Column, Entity, JoinColumn, OneToMany, OneToOne } from "typeorm";
+import { AutoMap } from "@automapper/classes";
 
 @Entity()
-export class DepartmentEntity extends BaseEntity {
-  @Column()
-  @IsString()
-  @Length(1, 1024)
+export class Department extends Base {
+  @Column({
+    type: 'varchar',
+    length: 1024,
+  })
+  @AutoMap()
   name: string;
 
-  @OneToOne(() => UserEntity)
+  @OneToOne(() => User)
   @JoinColumn({
     name: 'managerId'
   })
-  @IsOptional()
-  manager: UserEntity;
+  @AutoMap(() => User)
+  manager?: User;
 
   @Column({
-    type: 'bool',
+    type: 'boolean',
     default: true,
   })
+  @AutoMap()
   isBillable: boolean;
 
-  @OneToMany(() => PositionEntity, position => position.department)
-  positions: PositionEntity[];
-}
-
-export class Department extends BaseModel {
-  @Expose()
-  name: string;
-
-  @Expose()
-  @Type(() => User)
-  manager: User;
-
-  @Expose()
-  isBillable: boolean;
-
-  @Expose()
-  @Type(() => Position)
-  positions: Position[];
+  @OneToMany(() => Position, position => position.department)
+  @AutoMap(() => Position)
+  positions?: Position[];
 }

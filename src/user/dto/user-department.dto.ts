@@ -1,9 +1,12 @@
-import { ExposedApiProperty } from "src/shared/decorators/exposed-api-model-property.decorator";
+import { AutoMap } from "@automapper/classes";
+import { ApiProperty } from "@nestjs/swagger";
 
 export class UserDepartmentDto {
-  @ExposedApiProperty()
+  @ApiProperty()
+  @AutoMap()
   id: string;
 
-  @ExposedApiProperty()
+  @ApiProperty()
+  @AutoMap()
   name: string;
 }

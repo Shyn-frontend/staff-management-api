@@ -1,17 +1,19 @@
-import { Expose } from "class-transformer";
+import { AutoMap } from "@automapper/classes";
 import { Column, Index, PrimaryGeneratedColumn } from "typeorm";
 import { ExposedApiProperty, ExposedApiPropertyOptional } from "./decorators/exposed-api-model-property.decorator";
 
 @Index(['id'])
-export abstract class BaseEntity {
+export abstract class Base {
   @PrimaryGeneratedColumn('uuid')
-  id?: string;
+  @AutoMap()
+  id: string;
 
   @Column({
     type: 'timestamp',
     nullable: false,
     default: () => 'CURRENT_TIMESTAMP',
   })
+  @AutoMap()
   createdAt?: Date;
 
   @Column({
@@ -19,6 +21,7 @@ export abstract class BaseEntity {
     nullable: true,
     default: () => 'CURRENT_TIMESTAMP',
   })
+  @AutoMap()
   updatedAt?: Date;
 
   @Column({
@@ -26,26 +29,13 @@ export abstract class BaseEntity {
     nullable: true,
     default: null
   })
-  deletedAt?: Date;
-}
-
-export class BaseModel {
-  @Expose()
-  id?: string;
-
-  @Expose()
-  createdAt?: Date;
-
-  @Expose()
-  updatedAt?: Date;
-
-  @Expose()
+  @AutoMap()
   deletedAt?: Date;
 }
 
 export class BaseDto {
-  @ExposedApiPropertyOptional()
-  id?: string;
+  @ExposedApiProperty()
+  id: string;
 
   @ExposedApiPropertyOptional({ type: String, format: 'date-time' })
   createdAt?: Date;

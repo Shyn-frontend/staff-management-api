@@ -1,42 +1,54 @@
+import { AutoMap } from "@automapper/classes";
+import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
 import { UserRoleDto } from "src/role/dto/user-role.dto";
 import { BaseDto } from "src/shared/base.entity";
-import { ExposedApiProperty, ExposedApiPropertyOptional } from "src/shared/decorators/exposed-api-model-property.decorator";
-import getEnum from "src/shared/utils/getEnum";
 import { UserPositionDto } from "src/user/dto/user-position.dto";
 import { USER_TYPE } from "src/user/enum/user-type.enum";
 
 export class UserInformationDto extends BaseDto {
-  @ExposedApiProperty()
+  @ApiProperty()
+  @AutoMap()
   id: string;
 
-  @ExposedApiProperty()
+  @ApiProperty()
+  @AutoMap()
   email: string;
 
-  @ExposedApiProperty()
+  @ApiProperty()
+  @AutoMap()
   name: string;
 
-  @ExposedApiProperty({ enum: getEnum(USER_TYPE) })
+  @ApiProperty({
+    enum: USER_TYPE,
+    enumName: 'USER_TYPE'
+  })
+  @AutoMap()
   type: USER_TYPE;
 
-  @ExposedApiProperty({
+  @ApiProperty({
     type: () => UserPositionDto
   })
+  @AutoMap(() => UserPositionDto)
   position: UserPositionDto;
 
-  @ExposedApiProperty({
+  @ApiProperty({
     type: () => UserRoleDto
   })
+  @AutoMap(() => UserRoleDto)
   role: UserRoleDto;
 
-  @ExposedApiPropertyOptional()
+  @ApiPropertyOptional()
+  @AutoMap()
   avatar?: string;
 
-  @ExposedApiProperty()
+  @ApiProperty()
+  @AutoMap()
   isArchived: boolean;
 
-  @ExposedApiPropertyOptional()
+  @ApiPropertyOptional()
   permanentLeaveAt?: Date;
 
-  @ExposedApiProperty()
+  @ApiProperty()
+  @AutoMap()
   isComplete: boolean;
 }

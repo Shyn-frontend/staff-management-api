@@ -1,30 +1,32 @@
-import { Expose, Type } from "class-transformer";
-import { IsDate, IsEmail, IsOptional, IsString, Length } from "class-validator";
-import { Department, DepartmentEntity } from "./department.entity";
-import { Position, PositionEntity } from "./position.entity";
-import { Role, RoleEntity } from "./role.entity";
-import { BaseEntity, BaseModel } from "../shared/base.entity";
+import { Position } from "./position.entity";
+import { Role } from "./role.entity";
+import { Base } from "../shared/base.entity";
 import { Column, Entity, Index, JoinColumn, ManyToOne, OneToOne, Unique } from "typeorm";
 import { USER_TYPE } from "../user/enum/user-type.enum";
+import { AutoMap } from "@automapper/classes";
 
 @Entity()
 @Unique(['email'])
 @Index(['email', 'type'])
-export class UserEntity extends BaseEntity {
-  @Column()
-  @IsEmail()
-  @IsOptional()
-  @Length(1, 128)
-  email: string;
+export class User extends Base {
+  @Column({
+    type: 'varchar',
+    length: 128,
+  })
+  @AutoMap()
+  email?: string;
 
-  @Column()
-  @IsString()
-  @Length(1, 128)
+  @Column({
+    type: 'varchar',
+    length: 128
+  })
   password: string;
 
-  @Column()
-  @IsString()
-  @Length(1, 128)
+  @Column({
+    type: 'varchar',
+    length: 128,
+  })
+  @AutoMap()
   name: string;
 
   @Column({
@@ -32,82 +34,50 @@ export class UserEntity extends BaseEntity {
     enum: USER_TYPE,
     default: USER_TYPE.EMPLOYEE,
   })
+  @AutoMap()
   type: USER_TYPE;
 
-  @ManyToOne(() => PositionEntity, position => position.users)
+  @ManyToOne(() => Position, position => position.users)
   @JoinColumn()
-  @IsOptional()
-  position: PositionEntity;
+  @AutoMap(() => Position)
+  position: Position;
 
-  @ManyToOne(() => RoleEntity, role => role.users)
+  @ManyToOne(() => Role, role => role.users)
   @JoinColumn()
-  role: RoleEntity;
+  @AutoMap(() => Role)
+  role: Role;
 
-  @Column()
-  @IsString()
-  @Length(1, 1024)
-  avatar: string;
+  @Column({
+    type: 'varchar',
+    length: 1024
+  })
+  @AutoMap()
+  avatar?: string;
 
   @Column({
     type: 'boolean',
     default: false
   })
+  @AutoMap()
   isArchived: boolean;
 
-  @Column()
-  @IsDate()
-  permanentLeaveAt: Date;
+  @Column({
+    type: 'date',
+  })
+  @AutoMap()
+  permanentLeaveAt?: Date;
 
   @Column({
     type: 'boolean',
     default: false
   })
+  @AutoMap()
   isComplete: boolean;
 
   @Column({
     type: 'boolean',
     default: true
   })
-  isPermanent: boolean;
-}
-
-export class User extends BaseModel {
-  @Expose()
-  email: string;
-
-  @Expose()
-  password: string;
-
-  @Expose()
-  name: string;
-
-  @Expose()
-  type: USER_TYPE;
-
-  @Expose()
-  @Type(() => Position)
-  position: Position;
-
-  @Expose()
-  @Type(() => Role)
-  role: Role;
-
-  @Expose()
-  @Type(() => Department)
-  department: Department;
-
-  @Expose()
-  avatar?: string;
-
-  @Expose()
-  isArchived: boolean;
-
-  @Expose()
-  permanentLeaveAt?: Date;
-
-  @Expose()
-  isComplete: boolean;
-
-  @Expose()
+  @AutoMap()
   isPermanent: boolean;
 }

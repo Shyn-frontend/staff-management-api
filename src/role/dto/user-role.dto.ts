@@ -1,14 +1,17 @@
-import { ExposedApiProperty } from "src/shared/decorators/exposed-api-model-property.decorator";
+import { AutoMap } from "@automapper/classes";
+import { ApiProperty } from "@nestjs/swagger";
+import { RoleDto } from "./role.dto";
 
 export class UserRoleDto {
-  @ExposedApiProperty()
+  @ApiProperty()
+  @AutoMap()
   id: string;
 
-  @ExposedApiProperty()
+  @ApiProperty()
+  @AutoMap()
   name: string;
 
-  @ExposedApiProperty({
-    type: () => UserRoleDto
-  })
-  role: UserRoleDto;
+  @ApiProperty()
+  @AutoMap(() => RoleDto)
+  role: RoleDto;
 }

@@ -1,34 +1,24 @@
-import { Expose, Type } from "class-transformer";
-import { IsString, Length } from "class-validator";
-import { Department, DepartmentEntity } from "./department.entity";
-import { BaseEntity, BaseModel } from "../shared/base.entity";
-import { User, UserEntity } from "./user.entity";
-import { Column, Entity, Index, JoinColumn, ManyToOne, OneToMany, OneToOne } from "typeorm";
+import { Department } from "./department.entity";
+import { Base } from "../shared/base.entity";
+import { User } from "./user.entity";
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from "typeorm";
+import { AutoMap } from "@automapper/classes";
 
 @Entity()
-export class PositionEntity extends BaseEntity {
-  @Column()
-  @IsString()
-  @Length(1, 128)
+export class Position extends Base {
+  @Column({
+    type: 'varchar',
+    length: 128
+  })
+  @AutoMap()
   name: string;
 
-  @ManyToOne(() => DepartmentEntity, department => department.positions)
+  @ManyToOne(() => Department, department => department.positions)
   @JoinColumn()
+  @AutoMap(() => Department)
   department: string;
 
-  @OneToMany(() => UserEntity, user => user.position)
-  users: UserEntity[];
-}
-
-export class Position extends BaseModel {
-  @Expose()
-  name: string;
-
-  @Expose()
-  @Type(() => Department)
-  department: Department;
-
-  @Expose()
-  @Type(() => User)
-  users: User[];
+  @OneToMany(() => User, user => user.position)
+  @AutoMap(() => User)
+  users?: User[];
 }

@@ -1,9 +1,12 @@
-import { ExposedApiProperty } from "src/shared/decorators/exposed-api-model-property.decorator";
+import { AutoMap } from "@automapper/classes";
+import { ApiProperty } from "@nestjs/swagger";
 
 export class AccessTokenDto {
-  @ExposedApiProperty()
+  @ApiProperty()
+  @AutoMap()
   type: string;
 
-  @ExposedApiProperty()
+  @ApiProperty()
+  @AutoMap()
   accessToken: string;
 }

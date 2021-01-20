@@ -1,15 +1,16 @@
+import { AutoMap } from "@automapper/classes";
+import { ApiProperty } from "@nestjs/swagger";
 import { IsBoolean, IsString, IsUUID } from "class-validator";
-import { ExposedApiProperty, ExposedApiPropertyOptional } from "src/shared/decorators/exposed-api-model-property.decorator";
 export class CreateDepartmentDto {
   @IsString()
-  @ExposedApiProperty()
+  @ApiProperty()
   name: string;
 
   @IsUUID()
-  @ExposedApiPropertyOptional()
+  @ApiProperty()
   managerId: string;
 
   @IsBoolean()
-  @ExposedApiProperty()
+  @ApiProperty()
   isBillable: boolean;
 }

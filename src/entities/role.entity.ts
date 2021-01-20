@@ -1,8 +1,8 @@
-import { Expose, Type } from "class-transformer";
-import { RolePermission, RolePermissionEntity } from "./role-permission.entity";
-import { BaseEntity, BaseModel } from "../shared/base.entity";
-import { User, UserEntity } from "./user.entity";
+import { RolePermission } from "./role-permission.entity";
+import { Base } from "../shared/base.entity";
+import { User } from "./user.entity";
 import { Column, Entity, OneToMany } from "typeorm";
+import { AutoMap } from "@automapper/classes";
 
 export enum ROLES {
   ADMIN_ROLE = 'Admin',
@@ -14,36 +14,24 @@ export enum ROLES {
   CLIENT_ROLE = 'Client',
 }
 @Entity()
-export class RoleEntity extends BaseEntity {
+export class Role extends Base {
   @Column({
     type: 'enum',
     enum: ROLES,
     default: ROLES.EMPLOYEE_ROLE
   })
+  @AutoMap()
   name: ROLES;
 
   @Column()
+  @AutoMap()
   order: number;
 
-  @OneToMany(() => UserEntity, user => user.role)
-  users: UserEntity[];
+  @OneToMany(() => User, user => user.role)
+  @AutoMap(() => User)
+  users?: User[];
 
-  @OneToMany(() => RolePermissionEntity, rolePermission => rolePermission.role)
-  rolePermissions: RolePermissionEntity[];
-}
-
-export class Role extends BaseModel {
-  @Expose()
-  name: ROLES;
-
-  @Expose()
-  order: number;
-
-  @Expose()
-  @Type(() => User)
-  users: User[];
-
-  @Expose()
-  @Type(() => RolePermission)
-  rolePermissions: RolePermission[];
+  @OneToMany(() => RolePermission, rolePermission => rolePermission.role)
+  @AutoMap(() => RolePermission)
+  rolePermissions?: RolePermission[];
 }

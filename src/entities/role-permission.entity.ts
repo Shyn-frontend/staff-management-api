@@ -1,26 +1,18 @@
-import { Expose, Type } from "class-transformer";
-import { Role, RoleEntity } from "./role.entity";
-import { BaseEntity, BaseModel } from "../shared/base.entity";
+import { Base } from "../shared/base.entity";
 import { Entity, JoinColumn, ManyToOne } from "typeorm";
-import { Permission, PermissionEntity } from "./permission.entity";
+import { Permission } from "./permission.entity";
+import { Role } from "./role.entity";
+import { AutoMap } from "@automapper/classes";
 
 @Entity()
-export class RolePermissionEntity extends BaseEntity {
-  @ManyToOne(() => RoleEntity, role => role.rolePermissions)
+export class RolePermission extends Base {
+  @ManyToOne(() => Role, role => role.rolePermissions)
   @JoinColumn()
-  role: RoleEntity;
-
-  @ManyToOne(() => PermissionEntity, permission => permission.rolePermissions)
-  @JoinColumn()
-  permission: PermissionEntity;
-}
-
-export class RolePermission extends BaseModel {
-  @Expose()
-  @Type(() => Role)
+  @AutoMap(() => Role)
   role: Role;
 
-  @Expose()
-  @Type(() => Permission)
+  @ManyToOne(() => Permission, permission => permission.rolePermissions)
+  @JoinColumn()
+  @AutoMap(() => Permission)
   permission: Permission;
 }
