@@ -1,6 +1,5 @@
 import { AutoMap } from "@automapper/classes";
 import { ApiProperty } from "@nestjs/swagger";
-import { RoleDto } from "./role.dto";
 
 export class UserRoleDto {
   @ApiProperty()
@@ -10,8 +9,4 @@ export class UserRoleDto {
   @ApiProperty()
   @AutoMap()
   name: string;
-
-  @ApiProperty()
-  @AutoMap(() => RoleDto)
-  role: RoleDto;
 }

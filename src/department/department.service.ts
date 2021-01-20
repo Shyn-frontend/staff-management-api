@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { BaseService } from 'src/shared/base.service';
 import { UserService } from 'src/user/user.service';
 import { Repository } from 'typeorm';
-import { CreateDepartmentDto } from './dto/create-department.dto';
+import { CreateDepartmentParamsDto } from './dto/create-department-params.dto';
 import { Department } from '../entities/department.entity';
 import { mapper } from 'src/shared/mapper/mapper';
 import { DepartmentDto } from './dto/department.dto';
@@ -19,27 +19,21 @@ export class DepartmentService extends BaseService<Department> {
     this.repository = departmentRepository;
   }
 
-  async createDepartment({ name, managerId, isBillable }: CreateDepartmentDto): Promise<DepartmentDto> {
+  async createDepartment(dto: CreateDepartmentParamsDto): Promise<DepartmentDto> {
+    const { name, managerId } = dto;
     const [existedDepartment, manager] = await Promise.all([
       this.findOne({ name }),
       this.userService.findOne({ id: managerId }),
     ]);
-
     if (existedDepartment) {
       throw new BadRequestException('existed_department');
     }
-
     if (!manager) {
       throw new BadRequestException('not_found_ manger');
     }
 
-    const department = this.createRepo({
-      name,
-      isBillable,
-      manager,
-    });
-
-    const newDepartment = await this.create(department);
-    return  mapper.map(newDepartment, DepartmentDto, Department);
+    const department = this.createRepo(dto);
+    const created: Department = await this.create(department);
+    return mapper.map(created, DepartmentDto, Department);
   }
 }

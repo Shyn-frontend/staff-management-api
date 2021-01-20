@@ -1,8 +1,11 @@
 import { AutoMap } from "@automapper/classes";
 import { ApiProperty } from "@nestjs/swagger";
-import { BaseDto } from "src/shared/base.entity";
 
-export class ManagerDto extends BaseDto {
+export class ManagerDto {
+  @ApiProperty()
+  @AutoMap()
+  id: string;
+
   @ApiProperty()
   @AutoMap()
   name: string;

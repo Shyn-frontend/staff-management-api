@@ -7,12 +7,12 @@ export class DepartmentDto extends BaseDto {
   @ApiProperty()
   @AutoMap()
   name: string;
-
-  @ApiProperty()
-  @AutoMap(() => ManagerDto)
-  manager?: ManagerDto;
-
+  
   @ApiProperty()
   @AutoMap()
   isBillable: boolean;
+
+  @ApiProperty()
+  @AutoMap(() => ManagerDto)
+  manager: ManagerDto;
 }

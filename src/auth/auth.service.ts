@@ -5,6 +5,9 @@ import { JwtService } from '@nestjs/jwt';
 import { LoginResultDto } from './dto/login-result.dto';
 import { LoginParamsDto } from './dto/login-params.dto';
 import { JwtPayload } from './jwt-strategy.service';
+import { mapper } from 'src/shared/mapper/mapper';
+import { User } from 'src/entities/user.entity';
+import { UserInformationDto } from './dto/user-information.dto';
 
 @Injectable()
 export class AuthService {
@@ -37,6 +40,7 @@ export class AuthService {
     const result = new LoginResultDto();
     const token = this.signIn(user.id);
     result.token = { type: 'Bearer', accessToken: token };
+    result.user = mapper.map(user, UserInformationDto, User);
 
     return result;
   }

@@ -1,7 +1,7 @@
 import { AutoMap } from "@automapper/classes";
 import { ApiProperty } from "@nestjs/swagger";
 import { IsBoolean, IsString, IsUUID } from "class-validator";
-export class CreateDepartmentDto {
+export class CreateDepartmentParamsDto {
   @IsString()
   @ApiProperty()
   name: string;

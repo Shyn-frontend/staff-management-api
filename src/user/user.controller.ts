@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Param, ParseIntPipe, Post, Query } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { ParseBoolPipe } from 'src/shared/pipes/parse-boolean.pipe';
-import { CreateUserDto } from './dto/create-user.dto';
+import { CreateUserParamsDto } from './dto/create-user-params.dto';
 
 @Controller('users')
 @ApiTags('User')
@@ -15,7 +15,7 @@ export class UserController {
   // }
 
   // @Post()
-  // create(@Body() createUserDto: CreateUserDto) {
+  // create(@Body() createUserDto: CreateUserParamsDto) {
   //   console.log(createUserDto);
   //   return 'create user';
   // }

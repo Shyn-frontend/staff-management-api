@@ -18,7 +18,7 @@ export class Department extends Base {
     name: 'managerId'
   })
   @AutoMap(() => User)
-  manager?: User;
+  manager: User;
 
   @Column({
     type: 'boolean',
