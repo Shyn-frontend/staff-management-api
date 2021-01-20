@@ -1,4 +1,4 @@
-[
+export default [
   { "id": "659e0ed0-f547-4d56-b15e-a723a908c91e", "name": "Admin", "order": 1 },
   {
     "id": "43484404-1239-4ede-bd3e-2a8808f5d96d",
@@ -26,4 +26,4 @@
     "order": 5
   },
   { "id": "62660fc3-4b32-4e7d-b487-59b83b3ad973", "name": "Client", "order": 6 }
-]
+];

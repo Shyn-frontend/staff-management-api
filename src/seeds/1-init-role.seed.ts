@@ -1,7 +1,6 @@
 import { Connection } from "typeorm";
 import { Factory, Seeder } from "typeorm-seeding";
-
-const RoleData = require('../data/Role');
+import RoleData from '../data/Role';
 
 export default class InitRoles implements Seeder {
   public async run(factory: Factory, connection: Connection): Promise<any> {

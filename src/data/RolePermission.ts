@@ -1,4 +1,4 @@
-[
+export default [
   {
     "roleId": "659e0ed0-f547-4d56-b15e-a723a908c91e",
     "permissionId": "02ac0a88-2c03-42f0-8bb0-7ae66c541359"
@@ -643,4 +643,4 @@
     "roleId": "62660fc3-4b32-4e7d-b487-59b83b3ad973",
     "permissionId": "baecfca2-af3f-4053-bf47-4d448c8e8c97"
   }
-]
+];

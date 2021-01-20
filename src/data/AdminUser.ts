@@ -1,4 +1,4 @@
-[
+export default [
   {
     "id": "04c2d954-0ac9-4927-9869-26714a4ca8eb",
     "email": "admin@gmail.com",
@@ -44,4 +44,4 @@
     "roleId": "aae1d503-2b93-4158-82c1-01733f5e6243",
     "avatar": "71020.jpg"
   }
-]
+];

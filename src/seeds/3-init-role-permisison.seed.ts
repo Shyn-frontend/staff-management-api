@@ -1,12 +1,11 @@
 import { Connection } from "typeorm";
 import { Factory, Seeder } from "typeorm-seeding";
-import { v4 as uuidv4} from 'uuid';
-
-const RolePermissionPreData = require('../data/RolePermission');
+import { v4 as uuidv4 } from 'uuid';
+import RolePermissionData from '../data/RolePermission';
 export default class InitRolesPermissions implements Seeder {
   public async run(factory: Factory, connection: Connection): Promise<any> {
     const rolePermissionPreData = [];
-    for (const item of RolePermissionPreData) {
+    for (const item of RolePermissionData) {
       rolePermissionPreData.push({
         id: uuidv4(),
         roleId: item.roleId,

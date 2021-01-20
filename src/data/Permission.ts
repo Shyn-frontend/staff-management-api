@@ -1,4 +1,4 @@
-[
+export default [
   {
     "id": "0445349d-ec0d-4822-83b5-1d9cefd6ab02",
     "action": "project/share",
@@ -264,4 +264,4 @@
     "action": "companyNotification/update",
     "name": "[Company Notification] Update"
   }
-]
+];

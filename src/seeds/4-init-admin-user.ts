@@ -1,7 +1,6 @@
 import { Connection } from "typeorm";
 import { Factory, Seeder } from "typeorm-seeding";
-
-const AdminData = require('../data/AdminUser');
+import AdminData from '../data/AdminUser';
 
 export default class InitAdminUsers implements Seeder {
   public async run(factory: Factory, connection: Connection): Promise<any> {

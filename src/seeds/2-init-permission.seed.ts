@@ -1,7 +1,6 @@
 import { Connection } from "typeorm";
 import { Factory, Seeder } from "typeorm-seeding";
-
-const PermissionData = require('../data/Permission');
+import PermissionData from '../data/Permission';
 
 export default class InitPermissions implements Seeder {
   public async run(factory: Factory, connection: Connection): Promise<any> {

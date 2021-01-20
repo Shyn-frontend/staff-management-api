@@ -37,22 +37,34 @@ export class User extends Base {
   name: string;
 
   @Column({
-    type: 'enum',
-    enum: USER_TYPE,
-    default: USER_TYPE.EMPLOYEE,
+    type: 'varchar'
   })
   @AutoMap()
-  type: USER_TYPE;
+  roleId: string;
+
+  @ManyToOne(() => Role, role => role.users)
+  @JoinColumn()
+  @AutoMap(() => Role)
+  role: Role;
+
+  @Column({
+    type: 'varchar'
+  })
+  @AutoMap()
+  positionId: string;
 
   @ManyToOne(() => Position, position => position.users)
   @JoinColumn()
   @AutoMap(() => Position)
   position: Position;
 
-  @ManyToOne(() => Role, role => role.users)
-  @JoinColumn()
-  @AutoMap(() => Role)
-  role: Role;
+  @Column({
+    type: 'enum',
+    enum: USER_TYPE,
+    default: USER_TYPE.EMPLOYEE,
+  })
+  @AutoMap()
+  type: USER_TYPE;
 
   @Column({
     type: 'varchar',
