@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { IConfig } from 'src/config.interface';
+import { RoleModule } from 'src/role/role.module';
 import { CONFIG } from 'src/shared/config/config.module';
 import { UserModule } from 'src/user/user.module';
 import { AuthController } from './auth.controller';
@@ -17,6 +18,7 @@ import { JwtStrategyService } from './jwt-strategy.service';
       }),
     }),
     UserModule,
+    RoleModule,
   ],
   controllers: [AuthController],
   providers: [AuthService, JwtStrategyService],
