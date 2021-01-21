@@ -8,11 +8,11 @@ import { USER_TYPE } from 'src/user/enum/user-type.enum';
 export class UserInformationDto extends BaseDto {
   @ApiProperty()
   @AutoMap()
-  email: string;
+  email?: string;
 
   @ApiProperty()
   @AutoMap()
-  name: string;
+  name?: string;
 
   @ApiProperty({
     enum: USER_TYPE,

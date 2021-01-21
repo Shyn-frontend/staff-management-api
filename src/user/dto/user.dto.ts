@@ -12,7 +12,7 @@ export class UserDto extends BaseDto {
 
   @ApiProperty()
   @AutoMap()
-  name: string;
+  name?: string;
 
   @ApiProperty({
     enum: USER_TYPE,

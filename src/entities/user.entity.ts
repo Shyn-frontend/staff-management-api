@@ -27,7 +27,7 @@ export class User extends Base {
     length: 128,
   })
   @AutoMap()
-  name: string;
+  name?: string;
 
   @Column({
     type: 'varchar',
@@ -44,7 +44,7 @@ export class User extends Base {
     type: 'varchar',
   })
   @AutoMap()
-  positionId: string;
+  positionId?: string;
 
   @ManyToOne(() => Position, (position) => position.users)
   @JoinColumn()

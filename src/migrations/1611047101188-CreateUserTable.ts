@@ -39,6 +39,7 @@ export class CreateUserTable1611047101188 implements MigrationInterface {
           {
             name: 'name',
             type: 'varchar',
+            isNullable: true,
           },
           {
             name: 'type',
@@ -58,10 +59,12 @@ export class CreateUserTable1611047101188 implements MigrationInterface {
           {
             name: 'avatar',
             type: 'varchar',
+            isNullable: true,
           },
           {
             name: 'isArchived',
             type: 'boolean',
+            default: false,
           },
           {
             name: 'permanentLeaveAt',
