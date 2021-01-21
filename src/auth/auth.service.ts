@@ -39,6 +39,7 @@ export class AuthService {
       where: { email },
       relations: ['position'],
     });
+
     const isMatchedPassword = this.comparePassword(password, user.password);
 
     if (user && isMatchedPassword) {
