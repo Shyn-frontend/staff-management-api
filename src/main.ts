@@ -29,6 +29,7 @@ async function bootstrap() {
       .setTitle('Staff management')
       .setDescription('Staff Management APIs docs')
       .setVersion('1.0')
+      .addBearerAuth()
       .build();
 
     const document = SwaggerModule.createDocument(app, options);

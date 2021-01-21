@@ -1,8 +1,9 @@
 import { AutoMap } from '@automapper/classes';
 import { ApiProperty } from '@nestjs/swagger';
-import { DepartmentDto } from 'src/department/dto/department.dto';
+import { BaseDto } from 'src/shared/base.entity';
+import { UserDepartmentDto } from 'src/user/dto/user-department.dto';
 
-export class PositionDto {
+export class PositionDto extends BaseDto {
   @ApiProperty()
   @AutoMap()
   id: string;
@@ -12,8 +13,8 @@ export class PositionDto {
   name: string;
 
   @ApiProperty({
-    type: () => DepartmentDto,
+    type: () => UserDepartmentDto,
   })
-  @AutoMap(() => DepartmentDto)
-  department: DepartmentDto;
+  @AutoMap(() => UserDepartmentDto)
+  department: UserDepartmentDto;
 }
