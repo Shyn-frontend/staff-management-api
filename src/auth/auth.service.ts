@@ -35,20 +35,21 @@ export class AuthService {
     return this.signPayload(payload);
   }
 
-  async login({ email, password }: LoginParamsDto): Promise<LoginResultDto> {
+  async validateUser(email: string, password: string): Promise<User | null> {
     const user = await this.userService.findOne({
       where: { email },
       relations: ['position'],
     });
-    if (!user) {
-      throw new BadRequestException('wrong_credentials');
-    }
-
     const isMatchedPassword = this.comparePassword(password, user.password);
-    if (!isMatchedPassword) {
-      throw new BadRequestException('wrong_credentials');
+
+    if (user && isMatchedPassword) {
+      return user;
     }
 
+    return null;
+  }
+
+  async login(user: User): Promise<LoginResultDto> {
     const result = new LoginResultDto();
     const accessToken: AccessTokenDto = {
       type: 'Bearer',
