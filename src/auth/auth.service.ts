@@ -7,7 +7,6 @@ import { UserService } from 'src/user/user.service';
 import { compareSync, hashSync } from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 import { LoginResultDto } from './dto/login-result.dto';
-import { LoginParamsDto } from './dto/login-params.dto';
 import { JwtPayload } from './jwt-strategy.service';
 import { mapper } from 'src/shared/mapper/mapper';
 import { User } from 'src/entities/user.entity';
