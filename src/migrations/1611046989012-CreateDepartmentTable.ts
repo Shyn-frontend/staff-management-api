@@ -13,6 +13,10 @@ export class CreateDepartmentTable1611046989012 implements MigrationInterface {
             generationStrategy: 'uuid',
           },
           {
+            name: 'name',
+            type: 'varchar',
+          },
+          {
             name: 'managerId',
             type: 'varchar',
             isNullable: true,

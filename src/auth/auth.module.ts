@@ -14,7 +14,7 @@ import { JwtStrategy } from './jwt.strategy';
     JwtModule.registerAsync({
       inject: [CONFIG],
       useFactory: (config: IConfig) => ({
-        privateKey: config.auth.jwtExpired,
+        privateKey: config.auth.jwtSecret,
         signOptions: { expiresIn: config.auth.jwtExpired },
       }),
     }),

@@ -24,7 +24,7 @@ export class DepartmentService extends BaseService<Department> {
   ): Promise<DepartmentDto> {
     const { name, managerId } = dto;
     const [existedDepartment, manager] = await Promise.all([
-      this.findOne({ name }),
+      this.findOne({ where: { name } }),
       this.userService.findOne({ id: managerId }),
     ]);
     if (existedDepartment) {
