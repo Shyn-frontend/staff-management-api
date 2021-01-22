@@ -24,8 +24,8 @@ export class DepartmentService extends BaseService<Department> {
   ): Promise<DepartmentDto> {
     const { name, managerId } = dto;
     const [existedDepartment, manager] = await Promise.all([
-      this.findOne({ where: { name } }),
-      this.userService.findOne({ id: managerId }),
+      this.findOne({ name }),
+      this.userService.findById(managerId),
     ]);
     if (existedDepartment) {
       throw new BadRequestException('existed_department');
