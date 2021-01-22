@@ -7,8 +7,7 @@ import { CONFIG } from 'src/shared/config/config.module';
 import { UserModule } from 'src/user/user.module';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
-import { JwtStrategyService } from './jwt-strategy.service';
-import { LocalStrategy } from './local.strategy';
+import { JwtStrategy } from './jwt.strategy';
 
 @Module({
   imports: [
@@ -23,8 +22,8 @@ import { LocalStrategy } from './local.strategy';
     RoleModule,
     PassportModule,
   ],
-  controllers: [AuthController],
-  providers: [AuthService, JwtStrategyService, LocalStrategy],
+  providers: [AuthService, JwtStrategy],
   exports: [AuthService],
+  controllers: [AuthController],
 })
 export class AuthModule {}

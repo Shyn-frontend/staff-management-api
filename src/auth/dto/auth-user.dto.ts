@@ -5,7 +5,7 @@ import { BaseDto } from 'src/shared/base.entity';
 import { UserPositionDto } from 'src/user/dto/user-position.dto';
 import { USER_TYPE } from 'src/user/enum/user-type.enum';
 
-export class UserInformationDto extends BaseDto {
+export class AuthUserDto extends BaseDto {
   @ApiProperty()
   @AutoMap()
   email?: string;

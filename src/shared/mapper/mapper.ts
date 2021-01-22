@@ -3,7 +3,7 @@ import { classes } from '@automapper/classes';
 import { Department } from 'src/entities/department.entity';
 import { DepartmentDto } from 'src/department/dto/department.dto';
 import { User } from 'src/entities/user.entity';
-import { UserInformationDto } from 'src/auth/dto/user-information.dto';
+import { AuthUserDto } from 'src/auth/dto/auth-user.dto';
 
 export const mapper = createMapper({
   name: 'nartcMapper',
@@ -11,4 +11,4 @@ export const mapper = createMapper({
 });
 
 mapper.createMap(Department, DepartmentDto);
-mapper.createMap(User, UserInformationDto);
+mapper.createMap(User, AuthUserDto);

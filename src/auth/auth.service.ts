@@ -7,15 +7,15 @@ import { UserService } from 'src/user/user.service';
 import { compareSync, hashSync } from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 import { LoginResultDto } from './dto/login-result.dto';
-import { JwtPayload } from './jwt-strategy.service';
+import { JwtPayload } from './jwt.strategy';
 import { mapper } from 'src/shared/mapper/mapper';
 import { User } from 'src/entities/user.entity';
-import { UserInformationDto } from './dto/user-information.dto';
-import { AccessTokenDto } from './dto/access-token.dto';
+import { AuthUserDto } from './dto/auth-user.dto';
 import { RegisterParamsDto } from './dto/register-params.dto';
 import { RoleService } from 'src/role/role.service';
 import { Role } from 'src/entities/role.entity';
 import { USER_TYPE } from 'src/user/enum/user-type.enum';
+import { LoginParamsDto } from './dto/login-params.dto';
 
 @Injectable()
 export class AuthService {
@@ -34,37 +34,40 @@ export class AuthService {
     return this.signPayload(payload);
   }
 
-  async validateUser(email: string, password: string): Promise<User | null> {
+  async validateUser({ id }: JwtPayload): Promise<AuthUserDto> {
     const user = await this.userService.findOne({
-      where: { email },
+      where: { id },
       relations: ['position'],
     });
 
-    const isMatchedPassword = this.comparePassword(password, user.password);
-
-    if (user && isMatchedPassword) {
-      return user;
-    }
-
-    return null;
+    return mapper.map(user, AuthUserDto, User);
   }
 
-  async login(user: User): Promise<LoginResultDto> {
+  createLoginResult(user: User) {
     const result = new LoginResultDto();
-    const accessToken: AccessTokenDto = {
+
+    result.user = mapper.map(user, AuthUserDto, User);
+    result.token = {
       type: 'Bearer',
       accessToken: this.signIn(user.id),
     };
-    const userInfo: UserInformationDto = mapper.map(
-      user,
-      UserInformationDto,
-      User,
-    );
-
-    result.token = accessToken;
-    result.user = userInfo;
 
     return result;
+  }
+
+  async login({ email, password }: LoginParamsDto): Promise<LoginResultDto> {
+    const user = await this.userService.findOne({ email });
+    if (!user) {
+      throw new BadRequestException('Wrong credentials');
+    }
+
+    const isMatchedPassword = this.comparePassword(password, user.password);
+    if (!isMatchedPassword) {
+      throw new BadRequestException('Wrong credentials');
+    }
+
+    const loginResult = this.createLoginResult(user);
+    return loginResult;
   }
 
   async register({ email, password }: RegisterParamsDto) {
