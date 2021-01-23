@@ -9,4 +9,8 @@ export class UserDepartmentDto {
   @ApiProperty()
   @AutoMap()
   name: string;
+
+  @ApiProperty()
+  @AutoMap()
+  isBillable: boolean;
 }

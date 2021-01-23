@@ -21,7 +21,9 @@ export class PositionService extends BaseService<Position> {
 
   async createPosition(dto: CreatePositionParamsDto): Promise<PositionDto> {
     const { name, departmentId } = dto;
-    const department = await this.departmentService.findOne({ departmentId });
+    const department = await this.departmentService.findOne({
+      id: departmentId,
+    });
     if (!department) {
       throw new BadRequestException('not_found_department');
     }

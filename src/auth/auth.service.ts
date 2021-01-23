@@ -16,6 +16,7 @@ import { RoleService } from 'src/role/role.service';
 import { Role } from 'src/entities/role.entity';
 import { USER_TYPE } from 'src/user/enum/user-type.enum';
 import { LoginParamsDto } from './dto/login-params.dto';
+import { getManager } from 'typeorm';
 
 @Injectable()
 export class AuthService {
@@ -56,11 +57,18 @@ export class AuthService {
   }
 
   async login({ email, password }: LoginParamsDto): Promise<LoginResultDto> {
-    const user = await this.userService.findOne({ email });
+    const user = await getManager()
+      .createQueryBuilder(User, 'user')
+      .where('user.email = :email', { email })
+      .innerJoinAndSelect('user.position', 'position')
+      .innerJoinAndSelect('position.department', 'department')
+      .innerJoinAndSelect('user.role', 'role')
+      // .innerJoinAndSelect('role.rolePermissions', 'role')
+      .getOne();
+
     if (!user) {
       throw new BadRequestException('Wrong credentials');
     }
-
     const isMatchedPassword = this.comparePassword(password, user.password);
     if (!isMatchedPassword) {
       throw new BadRequestException('Wrong credentials');

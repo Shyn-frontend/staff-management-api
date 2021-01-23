@@ -13,6 +13,10 @@ export class Position extends Base {
   @AutoMap()
   name: string;
 
+  @Column()
+  @AutoMap()
+  departmentId: string;
+
   @ManyToOne(() => Department, (department) => department.positions)
   @JoinColumn()
   @AutoMap(() => Department)
