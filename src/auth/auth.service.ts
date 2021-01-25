@@ -60,10 +60,10 @@ export class AuthService {
     const user = await getManager()
       .createQueryBuilder(User, 'user')
       .where('user.email = :email', { email })
-      .innerJoinAndSelect('user.position', 'position')
-      .innerJoinAndSelect('position.department', 'department')
+      // .innerJoinAndSelect('user.position', 'position', )
+      // .innerJoinAndSelect('position.department', 'department')
       .innerJoinAndSelect('user.role', 'role')
-      // .innerJoinAndSelect('role.rolePermissions', 'role')
+      .innerJoinAndSelect('role.permissions', 'permission')
       .getOne();
 
     if (!user) {
