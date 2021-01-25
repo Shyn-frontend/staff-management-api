@@ -10,7 +10,7 @@ export class CreateRolePermissionTable1610819661030
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'role_permission',
+        name: 'role_permissions_permission',
         columns: [
           {
             name: 'id',
@@ -47,7 +47,7 @@ export class CreateRolePermissionTable1610819661030
 
     await Promise.all([
       queryRunner.createForeignKey(
-        'role_permission',
+        'role_permissions_permission',
         new TableForeignKey({
           columnNames: ['roleId'],
           referencedColumnNames: ['id'],
@@ -56,7 +56,7 @@ export class CreateRolePermissionTable1610819661030
         }),
       ),
       queryRunner.createForeignKey(
-        'role_permission',
+        'role_permissions_permission',
         new TableForeignKey({
           columnNames: ['permissionId'],
           referencedColumnNames: ['id'],
@@ -68,6 +68,6 @@ export class CreateRolePermissionTable1610819661030
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('role_permission');
+    await queryRunner.dropTable('role_permissions_permission');
   }
 }

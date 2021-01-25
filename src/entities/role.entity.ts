@@ -1,8 +1,9 @@
-import { RolePermission } from './role-permission.entity';
+// import { RolePermission } from './role-permission.entity';
 import { Base } from '../shared/base.entity';
 import { User } from './user.entity';
-import { Column, Entity, OneToMany } from 'typeorm';
+import { Column, Entity, JoinTable, ManyToMany, OneToMany } from 'typeorm';
 import { AutoMap } from '@automapper/classes';
+import { Permission } from './permission.entity';
 
 export enum ROLES {
   ADMIN_ROLE = 'Admin',
@@ -31,7 +32,8 @@ export class Role extends Base {
   @AutoMap(() => User)
   users?: User[];
 
-  @OneToMany(() => RolePermission, (rolePermission) => rolePermission.role)
-  @AutoMap(() => RolePermission)
-  rolePermissions?: RolePermission[];
+  @ManyToMany(() => Permission, (permission) => permission.roles)
+  @AutoMap(() => Permission)
+  @JoinTable()
+  permissions: Permission[];
 }

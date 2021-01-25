@@ -18,7 +18,7 @@ export default class InitRolesPermissions implements Seeder {
     await connection
       .createQueryBuilder()
       .insert()
-      .into('role_permission')
+      .into('role_permissions_permission')
       .values(rolePermissionPreData)
       .execute();
   }

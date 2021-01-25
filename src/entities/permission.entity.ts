@@ -1,7 +1,7 @@
 import { Base } from '../shared/base.entity';
-import { Column, Entity, Index, OneToMany } from 'typeorm';
-import { RolePermission } from './role-permission.entity';
+import { Column, Entity, Index, ManyToMany } from 'typeorm';
 import { AutoMap } from '@automapper/classes';
+import { Role } from './role.entity';
 
 @Entity()
 @Index(['name'])
@@ -20,9 +20,6 @@ export class Permission extends Base {
   @AutoMap()
   action: string;
 
-  @OneToMany(
-    () => RolePermission,
-    (rolePermission) => rolePermission.permission,
-  )
-  rolePermissions?: RolePermission[];
+  @ManyToMany(() => Role, (role) => role.permissions)
+  roles: Permission[];
 }
