@@ -2,7 +2,7 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { BaseService } from 'src/shared/base.service';
 import { UserService } from 'src/user/user.service';
-import { Repository } from 'typeorm';
+import { getManager, Repository } from 'typeorm';
 import { CreateDepartmentParamsDto } from './dto/create-department-params.dto';
 import { Department } from '../entities/department.entity';
 import { mapper } from 'src/shared/mapper/mapper';
@@ -37,5 +37,14 @@ export class DepartmentService extends BaseService<Department> {
     const department = this.createRepo(dto);
     const created: Department = await this.create(department);
     return mapper.map(created, DepartmentDto, Department);
+  }
+
+  async getDepartments(): Promise<DepartmentDto[]> {
+    const departments = await getManager()
+      .createQueryBuilder(Department, 'department')
+      .leftJoinAndSelect('department.manager', 'manager')
+      .getMany();
+
+    return mapper.mapArray(departments, DepartmentDto, Department);
   }
 }

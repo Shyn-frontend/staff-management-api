@@ -1,4 +1,5 @@
 import { AutoMap } from '@automapper/classes';
+import { Field, ID, ObjectType } from '@nestjs/graphql';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { Column, Index, PrimaryGeneratedColumn } from 'typeorm';
 
@@ -33,20 +34,25 @@ export abstract class Base {
   deletedAt?: Date;
 }
 
+@ObjectType()
 export class BaseDto {
   @ApiProperty()
   @AutoMap()
+  @Field(() => ID)
   id: string;
 
   @ApiPropertyOptional({ type: String, format: 'date-time' })
   @AutoMap()
+  @Field()
   createdAt?: Date;
 
   @ApiPropertyOptional({ type: String, format: 'date-time' })
   @AutoMap()
+  @Field()
   updatedAt?: Date;
 
   @ApiPropertyOptional({ type: String, format: 'date-time' })
   @AutoMap()
+  @Field()
   deletedAt?: Date;
 }

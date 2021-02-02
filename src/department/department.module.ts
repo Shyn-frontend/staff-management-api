@@ -4,10 +4,11 @@ import { Department } from '../entities/department.entity';
 import { DepartmentService } from './department.service';
 import { DepartmentController } from './department.controller';
 import { UserModule } from 'src/user/user.module';
+import DepartmentResolver from './resolvers/department.resolver';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Department]), UserModule],
-  providers: [DepartmentService],
+  providers: [DepartmentService, DepartmentResolver],
   controllers: [DepartmentController],
   exports: [DepartmentService],
 })

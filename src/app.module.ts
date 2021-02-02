@@ -9,6 +9,7 @@ import { UserModule } from './user/user.module';
 import { RoleModule } from './role/role.module';
 import { AuthModule } from './auth/auth.module';
 import { PermissionModule } from './permission/permission.module';
+import { GraphQLModule } from '@nestjs/graphql';
 
 @Module({
   imports: [
@@ -27,6 +28,10 @@ import { PermissionModule } from './permission/permission.module';
           synchronize: config.mysql.synchronize,
           autoLoadEntities: true,
         } as TypeOrmModuleAsyncOptions),
+    }),
+    GraphQLModule.forRoot({
+      autoSchemaFile: 'schema.gql',
+      playground: true,
     }),
     DepartmentModule,
     PositionModule,
