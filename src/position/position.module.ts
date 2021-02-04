@@ -4,10 +4,11 @@ import { DepartmentModule } from 'src/department/department.module';
 import { Position } from '../entities/position.entity';
 import { PositionController } from './position.controller';
 import { PositionService } from './position.service';
+import PositionResolver from './resolvers/position.resolver';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Position]), DepartmentModule],
-  providers: [PositionService],
+  providers: [PositionService, PositionResolver],
   controllers: [PositionController],
 })
 export class PositionModule {}

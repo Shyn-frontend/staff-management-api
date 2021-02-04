@@ -16,7 +16,9 @@ export class DepartmentDto extends BaseDto {
   @Field()
   isBillable: boolean;
 
-  @ApiProperty()
+  @ApiProperty({
+    type: () => ManagerDto,
+  })
   @AutoMap(() => ManagerDto)
   @Field(() => ManagerDto)
   manager: ManagerDto;
