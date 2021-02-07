@@ -1,15 +1,16 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { Field, InputType } from '@nestjs/graphql';
 import { IsEmail, IsString, MaxLength, MinLength } from 'class-validator';
 
+@InputType()
 export class RegisterParamsDto {
   @IsString()
   @IsEmail()
-  @ApiProperty()
+  @Field()
   email: string;
 
   @IsString()
   @MinLength(8)
   @MaxLength(16)
-  @ApiProperty()
+  @Field()
   password: string;
 }

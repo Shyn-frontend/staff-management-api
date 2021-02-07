@@ -1,16 +1,17 @@
 import { AutoMap } from '@automapper/classes';
-import { ApiProperty } from '@nestjs/swagger';
+import { Field, ObjectType } from '@nestjs/graphql';
 
+@ObjectType()
 export class UserDepartmentDto {
-  @ApiProperty()
+  @Field()
   @AutoMap()
   id: string;
 
-  @ApiProperty()
+  @Field()
   @AutoMap()
   name: string;
 
-  @ApiProperty()
+  @Field()
   @AutoMap()
   isBillable: boolean;
 }

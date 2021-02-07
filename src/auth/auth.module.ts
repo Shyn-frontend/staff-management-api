@@ -5,8 +5,8 @@ import { IConfig } from 'src/config.interface';
 import { RoleModule } from 'src/role/role.module';
 import { CONFIG } from 'src/shared/config/config.module';
 import { UserModule } from 'src/user/user.module';
-import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
+import AuthResolver from './resolvers/auth.resolver';
 import { JwtStrategy } from './strategies/jwt.strategy';
 
 @Module({
@@ -22,8 +22,7 @@ import { JwtStrategy } from './strategies/jwt.strategy';
     RoleModule,
     PassportModule,
   ],
-  providers: [AuthService, JwtStrategy],
+  providers: [AuthService, AuthResolver, JwtStrategy],
   exports: [AuthService],
-  controllers: [AuthController],
 })
 export class AuthModule {}

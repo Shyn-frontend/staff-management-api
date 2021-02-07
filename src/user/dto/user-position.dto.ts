@@ -1,19 +1,18 @@
 import { AutoMap } from '@automapper/classes';
-import { ApiProperty } from '@nestjs/swagger';
+import { Field, ObjectType } from '@nestjs/graphql';
 import { UserDepartmentDto } from './user-department.dto';
 
+@ObjectType()
 export class UserPositionDto {
-  @ApiProperty()
+  @Field()
   @AutoMap()
   id: string;
 
-  @ApiProperty()
+  @Field()
   @AutoMap()
   name: string;
 
-  @ApiProperty({
-    type: () => UserDepartmentDto,
-  })
+  @Field(() => UserDepartmentDto)
   @AutoMap(() => UserDepartmentDto)
   department: UserDepartmentDto;
 }

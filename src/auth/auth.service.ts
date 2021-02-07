@@ -78,7 +78,7 @@ export class AuthService {
     return loginResult;
   }
 
-  async register({ email, password }: RegisterParamsDto) {
+  async register({ email, password }: RegisterParamsDto): Promise<void> {
     const isExistedEmail = await this.userService.findOne({ email });
     if (isExistedEmail) {
       throw new BadRequestException('existed_email');

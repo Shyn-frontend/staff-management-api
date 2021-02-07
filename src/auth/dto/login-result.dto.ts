@@ -1,15 +1,12 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { Field, ObjectType } from '@nestjs/graphql';
 import { AccessTokenDto } from './access-token.dto';
 import { AuthUserDto } from './auth-user.dto';
 
+@ObjectType()
 export class LoginResultDto {
-  @ApiProperty({
-    type: () => AuthUserDto,
-  })
+  @Field(() => AuthUserDto)
   user: AuthUserDto;
 
-  @ApiProperty({
-    type: () => AccessTokenDto,
-  })
+  @Field(() => AccessTokenDto)
   token: AccessTokenDto;
 }

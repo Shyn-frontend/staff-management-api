@@ -1,12 +1,13 @@
 import { AutoMap } from '@automapper/classes';
-import { ApiProperty } from '@nestjs/swagger';
+import { Field, ObjectType } from '@nestjs/graphql';
 
+@ObjectType()
 export class UserPermissionDto {
-  @ApiProperty()
+  @Field()
   @AutoMap()
   name: string;
 
-  @ApiProperty()
+  @Field()
   @AutoMap()
   action: string;
 }

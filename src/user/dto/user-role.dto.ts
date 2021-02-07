@@ -1,20 +1,18 @@
 import { AutoMap } from '@automapper/classes';
-import { ApiProperty } from '@nestjs/swagger';
+import { Field, ObjectType } from '@nestjs/graphql';
 import { UserPermissionDto } from 'src/permission/dto/user-permission.dto';
 
+@ObjectType()
 export class UserRoleDto {
-  @ApiProperty()
+  @Field()
   @AutoMap()
   id: string;
 
-  @ApiProperty()
+  @Field()
   @AutoMap()
   name: string;
 
-  @ApiProperty({
-    type: () => UserPermissionDto,
-    isArray: true,
-  })
+  @Field(() => UserPermissionDto)
   @AutoMap(() => UserPermissionDto)
   permissions: UserPermissionDto[];
 }

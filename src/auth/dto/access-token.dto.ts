@@ -1,9 +1,10 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { Field, ObjectType } from '@nestjs/graphql';
 
+@ObjectType()
 export class AccessTokenDto {
-  @ApiProperty()
+  @Field()
   type: string;
 
-  @ApiProperty()
+  @Field()
   accessToken: string;
 }

@@ -1,13 +1,14 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { Field, InputType } from '@nestjs/graphql';
 import { IsEmail, IsString } from 'class-validator';
 
+@InputType()
 export class LoginParamsDto {
   @IsEmail()
   @IsString()
-  @ApiProperty()
+  @Field()
   email: string;
 
   @IsString()
-  @ApiProperty()
+  @Field()
   password: string;
 }

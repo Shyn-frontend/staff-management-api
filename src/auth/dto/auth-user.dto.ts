@@ -1,50 +1,44 @@
 import { AutoMap } from '@automapper/classes';
-import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { UserRoleDto } from 'src/user/dto/user-role.dto';
 import { BaseDto } from 'src/shared/base.entity';
 import { UserPositionDto } from 'src/user/dto/user-position.dto';
 import { USER_TYPE } from 'src/user/enum/user-type.enum';
+import { Field, ObjectType } from '@nestjs/graphql';
 
+@ObjectType()
 export class AuthUserDto extends BaseDto {
-  @ApiProperty()
+  @Field({ nullable: true })
   @AutoMap()
   email?: string;
 
-  @ApiProperty()
+  @Field({ nullable: true })
   @AutoMap()
   name?: string;
 
-  @ApiProperty({
-    enum: USER_TYPE,
-    enumName: 'USER_TYPE',
-  })
+  @Field()
   @AutoMap()
   type: USER_TYPE;
 
-  @ApiProperty({
-    type: () => UserPositionDto,
-  })
+  @Field(() => UserPositionDto)
   @AutoMap(() => UserPositionDto)
   position: UserPositionDto;
 
-  @ApiProperty({
-    type: () => UserRoleDto,
-  })
+  @Field(() => UserRoleDto)
   @AutoMap(() => UserRoleDto)
   role: UserRoleDto;
 
-  @ApiPropertyOptional()
+  @Field({ nullable: true })
   @AutoMap()
   avatar?: string;
 
-  @ApiProperty()
+  @Field()
   @AutoMap()
   isArchived: boolean;
 
-  @ApiPropertyOptional()
+  @Field({ nullable: true })
   permanentLeaveAt?: Date;
 
-  @ApiProperty()
+  @Field()
   @AutoMap()
   isComplete: boolean;
 }
