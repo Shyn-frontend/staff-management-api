@@ -8,7 +8,7 @@ class AuthResolver {
   constructor(private readonly authService: AuthService) {}
 
   @Mutation(() => LoginResultDto)
-  async login(@Args('loginData') dto: LoginParamsDto): Promise<LoginResultDto> {
+  async login(@Args('login') dto: LoginParamsDto): Promise<LoginResultDto> {
     return this.authService.login(dto);
   }
 

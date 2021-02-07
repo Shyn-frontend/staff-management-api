@@ -88,7 +88,7 @@ type Query {
 type Mutation {
   createDepartment(department: CreateDepartmentParamsDto!): DepartmentDto!
   createPosition(position: CreatePositionParamsDto!): PositionDto!
-  login(loginData: LoginParamsDto!): LoginResultDto!
+  login(login: LoginParamsDto!): LoginResultDto!
   register(register: RegisterParamsDto!): String!
 }
 
