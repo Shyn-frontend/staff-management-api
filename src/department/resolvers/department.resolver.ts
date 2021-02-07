@@ -8,7 +8,7 @@ import { DepartmentDto } from '../dto/department.dto';
 @Resolver()
 @UseGuards(JwtAuthGuard)
 class DepartmentResolver {
-  constructor(private departmentService: DepartmentService) {}
+  constructor(private readonly departmentService: DepartmentService) {}
 
   @Mutation(() => DepartmentDto)
   async createDepartment(

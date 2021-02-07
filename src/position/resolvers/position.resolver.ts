@@ -8,7 +8,7 @@ import { PositionService } from '../position.service';
 @Resolver()
 @UseGuards(JwtAuthGuard)
 class PositionResolver {
-  constructor(private positionService: PositionService) {}
+  constructor(private readonly positionService: PositionService) {}
 
   @Mutation(() => PositionDto)
   async createPosition(
