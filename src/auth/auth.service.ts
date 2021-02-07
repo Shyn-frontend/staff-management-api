@@ -78,7 +78,7 @@ export class AuthService {
     return loginResult;
   }
 
-  async register({ email, password }: RegisterParamsDto): Promise<void> {
+  async register({ email, password }: RegisterParamsDto): Promise<string> {
     const isExistedEmail = await this.userService.findOne({ email });
     if (isExistedEmail) {
       throw new BadRequestException('existed_email');
@@ -100,6 +100,7 @@ export class AuthService {
     });
 
     await this.userService.create(employee);
+    return 'Register successfully!';
   }
 
   private comparePassword(password: string, encrypted: string): boolean {

@@ -17,4 +17,5 @@ const Void = new GraphQLScalarType({
     return null;
   },
 });
-exports.Void = Void;
+
+export default Void;
