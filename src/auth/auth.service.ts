@@ -18,16 +18,22 @@ import { USER_TYPE } from 'src/user/enum/user-type.enum';
 import { LoginParamsDto } from './dto/login-params.dto';
 import { getManager } from 'typeorm';
 import { ChangePasswordParamsDto } from './dto/change-password-params.dto';
+import { CompleteProfileParamsDto } from './dto/complete-profile-params.dto';
 
+interface ICompleteProfile {
+  password: string;
+  isComplete: true;
+  name?: string;
+}
 @Injectable()
 export class AuthService {
   constructor(
     private readonly userService: UserService,
     private readonly roleService: RoleService,
     private readonly jwtService: JwtService,
-  ) { }
+  ) {}
 
-  signPayload(payload: { [key: string]: any; }): string {
+  signPayload(payload: { [key: string]: any }): string {
     return this.jwtService.sign(payload);
   }
 
@@ -124,13 +130,36 @@ export class AuthService {
 
     const hashedNewPassword = this.hashPassword(newPassword);
     await this.userService.update(
-      { where: { id: user.id } },
+      { id: user.id },
       { password: hashedNewPassword },
     );
 
     return 'Change password successfully!';
   }
 
+  async completeProfile(
+    dto: CompleteProfileParamsDto,
+  ): Promise<LoginResultDto> {
+    const { email, name, password } = dto;
+    const user = await this.userService.findOne({ email });
+    if (!user) {
+      throw new BadRequestException('not_found_user');
+    }
+
+    const data: ICompleteProfile = {
+      password: this.hashPassword(password),
+      isComplete: true,
+    };
+
+    if (name) {
+      data.name = name;
+    }
+
+    await this.userService.update({ email }, data);
+    if (name) user.name = name;
+
+    return this.createLoginResult(user);
+  }
   private comparePassword(password: string, encrypted: string): boolean {
     return compareSync(password, encrypted);
   }

@@ -91,6 +91,7 @@ type Mutation {
   login(login: LoginParamsDto!): LoginResultDto!
   register(register: RegisterParamsDto!): String!
   changePassword(changePassword: ChangePasswordParamsDto!): String!
+  completeProfile(completeProfile: CompleteProfileParamsDto!): LoginResultDto!
 }
 
 input CreateDepartmentParamsDto {
@@ -118,4 +119,10 @@ input ChangePasswordParamsDto {
   oldPassword: String!
   newPassword: String!
   confirmPassword: String!
+}
+
+input CompleteProfileParamsDto {
+  name: String!
+  password: String!
+  email: String!
 }
