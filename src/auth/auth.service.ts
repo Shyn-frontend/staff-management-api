@@ -17,6 +17,7 @@ import { Role } from 'src/entities/role.entity';
 import { USER_TYPE } from 'src/user/enum/user-type.enum';
 import { LoginParamsDto } from './dto/login-params.dto';
 import { getManager } from 'typeorm';
+import { ChangePasswordParamsDto } from './dto/change-password-params.dto';
 
 @Injectable()
 export class AuthService {
@@ -24,9 +25,9 @@ export class AuthService {
     private readonly userService: UserService,
     private readonly roleService: RoleService,
     private readonly jwtService: JwtService,
-  ) {}
+  ) { }
 
-  signPayload(payload: { [key: string]: any }): string {
+  signPayload(payload: { [key: string]: any; }): string {
     return this.jwtService.sign(payload);
   }
 
@@ -101,6 +102,33 @@ export class AuthService {
 
     await this.userService.create(employee);
     return 'Register successfully!';
+  }
+
+  async changePassword(
+    dto: ChangePasswordParamsDto,
+    reqUser: AuthUserDto,
+  ): Promise<string> {
+    const { oldPassword, newPassword, confirmPassword } = dto;
+    if (newPassword !== confirmPassword) {
+      throw new BadRequestException('confirm_password_is_not_matched');
+    }
+
+    const user = await this.userService.findById(reqUser.id);
+    const isMatchedOldPassword = await this.comparePassword(
+      oldPassword,
+      user.password,
+    );
+    if (!isMatchedOldPassword) {
+      throw new BadRequestException('password_is_not_matched');
+    }
+
+    const hashedNewPassword = this.hashPassword(newPassword);
+    await this.userService.update(
+      { where: { id: user.id } },
+      { password: hashedNewPassword },
+    );
+
+    return 'Change password successfully!';
   }
 
   private comparePassword(password: string, encrypted: string): boolean {

@@ -90,6 +90,7 @@ type Mutation {
   createPosition(position: CreatePositionParamsDto!): PositionDto!
   login(login: LoginParamsDto!): LoginResultDto!
   register(register: RegisterParamsDto!): String!
+  changePassword(changePassword: ChangePasswordParamsDto!): String!
 }
 
 input CreateDepartmentParamsDto {
@@ -111,4 +112,10 @@ input LoginParamsDto {
 input RegisterParamsDto {
   email: String!
   password: String!
+}
+
+input ChangePasswordParamsDto {
+  oldPassword: String!
+  newPassword: String!
+  confirmPassword: String!
 }
