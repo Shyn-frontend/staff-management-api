@@ -34,7 +34,7 @@ export class DepartmentService extends BaseService<Department> {
       throw new BadRequestException('not_found_ manger');
     }
 
-    const department = this.createRepo(dto);
+    const department = this.createRepo({ ...dto, manager });
     const created: Department = await this.create(department);
     return mapper.map(created, DepartmentDto, Department);
   }
