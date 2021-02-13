@@ -1,4 +1,4 @@
-import { Args, Mutation } from '@nestjs/graphql';
+import { Args, Mutation, Resolver } from '@nestjs/graphql';
 import { CurrentUser } from 'src/shared/decorators/current-user.decorator';
 import { AuthService } from '../auth.service';
 import { AuthUserDto } from '../dto/auth-user.dto';
@@ -8,8 +8,9 @@ import { LoginParamsDto } from '../dto/login-params.dto';
 import { LoginResultDto } from '../dto/login-result.dto';
 import { RegisterParamsDto } from '../dto/register-params.dto';
 
+@Resolver()
 class AuthResolver {
-  constructor(private readonly authService: AuthService) {}
+  constructor(private authService: AuthService) {}
 
   @Mutation(() => LoginResultDto)
   async login(@Args('login') dto: LoginParamsDto): Promise<LoginResultDto> {

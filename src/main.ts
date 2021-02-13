@@ -7,7 +7,6 @@ import * as compression from 'compression';
 import * as helmet from 'helmet';
 
 import { AppModule } from './app.module';
-import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { Logger, ValidationPipe } from '@nestjs/common';
 import { IConfig } from './config.interface';
 import { CONFIG } from './shared/config/config.module';
@@ -29,26 +28,6 @@ async function bootstrap() {
     }),
   );
 
-  if (config.app.isSwaggerEnabled) {
-    const options = new DocumentBuilder()
-      .setTitle('Staff management')
-      .setDescription('Staff Management APIs docs')
-      .setVersion('1.0')
-      .addBearerAuth()
-      .build();
-
-    const document = SwaggerModule.createDocument(app, options);
-    SwaggerModule.setup('api-docs', app, document, {
-      swaggerOptions: {
-        docExpansion: 'none',
-        explorer: true,
-        filter: true,
-        showRequestDuration: true,
-      },
-    });
-    logger.debug(`Swagger Docs enabled: ${config.app.domain}/api-docs`);
-  }
-
   app.useGlobalPipes(
     new ValidationPipe({
       transform: true,
@@ -57,7 +36,7 @@ async function bootstrap() {
     }),
   );
 
-  app.useGlobalFilters(new HttpExceptionFilter());
+  // app.useGlobalFilters(new HttpExceptionFilter());
 
   await app.listen(config.app.port, () => {
     logger.debug(`Listening on port: ${config.app.port}`);
