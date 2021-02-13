@@ -7,6 +7,7 @@ import {
 } from '@nestjs/common';
 import { ApiException } from '../api-exception';
 
+// ExceptionFilter is not compatible with GraphQL yet :)
 @Catch(HttpException)
 export class HttpExceptionFilter implements ExceptionFilter {
   catch(exception: HttpException, host: ArgumentsHost) {
