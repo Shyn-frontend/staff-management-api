@@ -12,7 +12,7 @@ class DepartmentResolver {
 
   @Mutation(() => DepartmentDto)
   async createDepartment(
-    @Args('department') dto: CreateDepartmentParamsDto,
+    @Args('data') dto: CreateDepartmentParamsDto,
   ): Promise<DepartmentDto> {
     return this.departmentService.createDepartment(dto);
   }

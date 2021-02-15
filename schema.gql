@@ -86,12 +86,12 @@ type Query {
 }
 
 type Mutation {
-  createDepartment(department: CreateDepartmentParamsDto!): DepartmentDto!
+  createDepartment(data: CreateDepartmentParamsDto!): DepartmentDto!
   createPosition(position: CreatePositionParamsDto!): PositionDto!
-  login(login: LoginParamsDto!): LoginResultDto!
-  register(register: RegisterParamsDto!): String!
-  changePassword(changePassword: ChangePasswordParamsDto!): String!
-  completeProfile(completeProfile: CompleteProfileParamsDto!): LoginResultDto!
+  login(data: LoginParamsDto!): LoginResultDto!
+  register(data: RegisterParamsDto!): String!
+  changePassword(data: ChangePasswordParamsDto!): String!
+  completeProfile(data: CompleteProfileParamsDto!): LoginResultDto!
 }
 
 input CreateDepartmentParamsDto {

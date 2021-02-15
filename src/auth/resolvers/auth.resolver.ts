@@ -13,18 +13,18 @@ class AuthResolver {
   constructor(private authService: AuthService) {}
 
   @Mutation(() => LoginResultDto)
-  async login(@Args('login') dto: LoginParamsDto): Promise<LoginResultDto> {
+  async login(@Args('data') dto: LoginParamsDto): Promise<LoginResultDto> {
     return this.authService.login(dto);
   }
 
   @Mutation(() => String)
-  async register(@Args('register') dto: RegisterParamsDto): Promise<string> {
+  async register(@Args('data') dto: RegisterParamsDto): Promise<string> {
     return this.authService.register(dto);
   }
 
   @Mutation(() => String)
   async changePassword(
-    @Args('changePassword') dto: ChangePasswordParamsDto,
+    @Args('data') dto: ChangePasswordParamsDto,
     @CurrentUser() user: AuthUserDto,
   ): Promise<string> {
     return this.authService.changePassword(dto, user);
@@ -32,7 +32,7 @@ class AuthResolver {
 
   @Mutation(() => LoginResultDto)
   async completeProfile(
-    @Args('completeProfile') dto: CompleteProfileParamsDto,
+    @Args('data') dto: CompleteProfileParamsDto,
   ): Promise<LoginResultDto> {
     return this.authService.completeProfile(dto);
   }
