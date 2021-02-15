@@ -92,4 +92,11 @@ export class User extends Base {
   })
   @AutoMap()
   isPermanent: boolean;
+
+  public removeFields(fields: string[]): Partial<User> {
+    for (const field of fields) {
+      delete this[field];
+    }
+    return this;
+  }
 }
