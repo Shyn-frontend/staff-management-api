@@ -10,7 +10,6 @@ import { AppModule } from './app.module';
 import { Logger, ValidationPipe } from '@nestjs/common';
 import { IConfig } from './config.interface';
 import { CONFIG } from './shared/config/config.module';
-import { HttpExceptionFilter } from './shared/filters/http-exception.filter';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -35,8 +34,6 @@ async function bootstrap() {
       forbidNonWhitelisted: true,
     }),
   );
-
-  // app.useGlobalFilters(new HttpExceptionFilter());
 
   await app.listen(config.app.port, () => {
     logger.debug(`Listening on port: ${config.app.port}`);
