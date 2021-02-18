@@ -70,7 +70,7 @@ export class AuthService {
       .leftJoinAndSelect('user.position', 'position')
       .leftJoinAndSelect('position.department', 'department')
       .leftJoinAndSelect('user.role', 'role')
-      .leftJoinAndSelect('role.permissions', 'permission')
+      .leftJoinAndSelect('role.permissions', 'permissions')
       .getOne();
 
     if (!user) {
