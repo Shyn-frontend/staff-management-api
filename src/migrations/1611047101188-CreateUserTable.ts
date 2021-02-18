@@ -42,6 +42,10 @@ export class CreateUserTable1611047101188 implements MigrationInterface {
             isNullable: true,
           },
           {
+            name: 'metas',
+            type: 'varchar',
+          },
+          {
             name: 'type',
             type: 'enum',
             enum: getEnum(USER_TYPE),

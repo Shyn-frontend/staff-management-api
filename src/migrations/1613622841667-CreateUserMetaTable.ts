@@ -7,24 +7,21 @@ import {
 } from 'typeorm';
 import getEnum from '../shared/utils/getEnum';
 
-const CLIENT_META_FIELDS = [
-  'targetSales',
-  'preferredMarginPercent',
-  'ownerId',
-  'code',
-  'totalProjects',
-  'onGoingProjects',
-  'currentSales',
-  'upComingProjects',
-];
-const USER_META_FIELDS = [
-  'employeeNo',
-  'hourlyRate',
-  'weeklyHours',
-  'contractStart',
-  'contractEnd',
-  ...CLIENT_META_FIELDS,
-];
+export enum USER_META_FIELDS {
+  TARGET_SALES = 'targetSales',
+  PREFERRED_MARGIN_PERCENT = 'preferredMarginPercent',
+  OWNER_ID = 'ownerId',
+  CODE = 'code',
+  TOTAL_PROJECTS = 'totalProjects',
+  ONGOING_PROJECTS = 'onGoingProjects',
+  UPCOMING_PROJECTS = 'upComingProjects',
+  CURRENT_SALES = 'currentSales',
+  EMPLOYEE_NO = 'employeeNo',
+  HOURLY_RATE = 'hourlyRate',
+  WEEKLY_HOURS = 'weeklyHours',
+  CONTRACT_START = 'contractStart',
+  CONTRACT_END = 'contractEnd',
+}
 
 export class CreateUserTable1611047101188 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
