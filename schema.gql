@@ -10,7 +10,7 @@ type UserPermissionDto {
 type UserRoleDto {
   id: String!
   name: String!
-  permissions: UserPermissionDto!
+  permissions: [UserPermissionDto!]!
 }
 
 type UserDepartmentDto {
@@ -71,6 +71,48 @@ type PositionDto {
   department: DepartmentDto!
 }
 
+type PermissionDto {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deletedAt: DateTime!
+  name: String!
+  action: String!
+}
+
+type RoleDto {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deletedAt: DateTime!
+  name: String!
+  order: Float!
+  permissions: [PermissionDto!]!
+}
+
+type UserMetaDto {
+  key: String!
+  value: String!
+}
+
+type UserDto {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deletedAt: DateTime!
+  email: String
+  name: String
+  metas: [UserMetaDto!]!
+  type: String!
+  position: PositionDto!
+  role: RoleDto!
+  avatar: String
+  isArchived: Boolean!
+  permanentLeaveAt: DateTime!
+  isComplete: Boolean!
+  isPermanent: Boolean!
+}
+
 type AccessTokenDto {
   type: String!
   accessToken: String!
@@ -83,6 +125,7 @@ type LoginResultDto {
 
 type Query {
   departments: [DepartmentDto!]!
+  getUser(id: String!): UserDto!
 }
 
 type Mutation {
