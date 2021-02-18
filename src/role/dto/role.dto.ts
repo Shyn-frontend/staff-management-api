@@ -1,21 +1,20 @@
 import { AutoMap } from '@automapper/classes';
-import { ApiProperty } from '@nestjs/swagger';
+import { Field, ObjectType } from '@nestjs/graphql';
 import { ROLES } from 'src/entities/role.entity';
 import { PermissionDto } from 'src/permission/dto/permission.dto';
 import { BaseDto } from 'src/shared/base.entity';
 
+@ObjectType()
 export class RoleDto extends BaseDto {
-  @ApiProperty()
+  @Field()
   @AutoMap()
   name: ROLES;
 
-  @ApiProperty()
+  @Field()
   @AutoMap()
   order: number;
 
-  @ApiProperty({
-    type: () => PermissionDto,
-  })
+  @Field(() => [PermissionDto])
   @AutoMap(() => PermissionDto)
   permissions: PermissionDto[];
 }

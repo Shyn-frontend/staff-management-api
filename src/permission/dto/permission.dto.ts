@@ -1,13 +1,14 @@
 import { AutoMap } from '@automapper/classes';
-import { ApiProperty } from '@nestjs/swagger';
+import { Field, ObjectType } from '@nestjs/graphql';
 import { BaseDto } from 'src/shared/base.entity';
 
+@ObjectType()
 export class PermissionDto extends BaseDto {
-  @ApiProperty()
+  @Field()
   @AutoMap()
   name: string;
 
-  @ApiProperty()
+  @Field()
   @AutoMap()
   action: string;
 }

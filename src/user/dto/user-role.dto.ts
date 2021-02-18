@@ -12,7 +12,7 @@ export class UserRoleDto {
   @AutoMap()
   name: string;
 
-  @Field(() => UserPermissionDto)
+  @Field(() => [UserPermissionDto])
   @AutoMap(() => UserPermissionDto)
   permissions: UserPermissionDto[];
 }
