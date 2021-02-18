@@ -1,9 +1,17 @@
 import { Position } from './position.entity';
 import { Role } from './role.entity';
 import { Base } from '../shared/base.entity';
-import { Column, Entity, Index, JoinColumn, ManyToOne, Unique } from 'typeorm';
+import {
+  Column,
+  Entity,
+  Index,
+  JoinColumn,
+  ManyToOne,
+  Unique,
+} from 'typeorm';
 import { USER_TYPE } from '../user/enum/user-type.enum';
 import { AutoMap } from '@automapper/classes';
+import { UserMeta } from './user-meta.entity';
 
 @Entity()
 @Unique(['email'])
@@ -28,6 +36,9 @@ export class User extends Base {
   })
   @AutoMap()
   name?: string;
+
+  @AutoMap(() => UserMeta)
+  metas: UserMeta[];
 
   @Column({
     type: 'varchar',
