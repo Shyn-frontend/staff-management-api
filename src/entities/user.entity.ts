@@ -42,6 +42,7 @@ export class User extends Base {
 
   @Column({
     type: 'varchar',
+    nullable: true,
   })
   @AutoMap()
   positionId?: string;
@@ -62,6 +63,7 @@ export class User extends Base {
   @Column({
     type: 'varchar',
     length: 1024,
+    nullable: true,
   })
   @AutoMap()
   avatar?: string;
@@ -75,6 +77,7 @@ export class User extends Base {
 
   @Column({
     type: 'date',
+    nullable: true,
   })
   @AutoMap()
   permanentLeaveAt?: Date;
