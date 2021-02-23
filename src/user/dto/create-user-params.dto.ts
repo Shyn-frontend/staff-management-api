@@ -3,10 +3,8 @@ import { IsEmail, IsNotEmpty } from 'class-validator';
 
 export class CreateUserParamsDto {
   @IsEmail()
-  @ApiProperty()
   email: string;
 
   @IsNotEmpty()
-  @ApiProperty()
   password: string;
 }

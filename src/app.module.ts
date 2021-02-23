@@ -9,6 +9,7 @@ import { UserModule } from './user/user.module';
 import { RoleModule } from './role/role.module';
 import { AuthModule } from './auth/auth.module';
 import { PermissionModule } from './permission/permission.module';
+import { UserMetaModule } from './user-meta/user-meta.module';
 import { GraphQLModule } from '@nestjs/graphql';
 import { GraphQLError, GraphQLFormattedError } from 'graphql';
 
@@ -48,6 +49,7 @@ import { GraphQLError, GraphQLFormattedError } from 'graphql';
     RoleModule,
     AuthModule,
     PermissionModule,
+    UserMetaModule,
   ],
 })
 export class AppModule {}

@@ -4,8 +4,8 @@ import { UserProfile } from 'src/user/profile/user.profile';
 import { DepartmentProfile } from 'src/department/profile/department.profile';
 import { PositionProfile } from 'src/position/profile/position.profile';
 import { RoleProfile } from 'src/role/profile/role.profile';
-import { PermissionProfile } from 'src/permission/profile/permisison.profile';
-import { UserMetaProfile } from 'src/user/profile/user-meta.profile';
+import { PermissionProfile } from 'src/permission/profile/permission.profile';
+import { UserMetaProfile } from 'src/user-meta/profile/user-meta.profile';
 
 export const mapper = createMapper({
   name: 'nartcMapper',
