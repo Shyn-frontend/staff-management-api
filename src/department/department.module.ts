@@ -8,6 +8,6 @@ import DepartmentResolver from './resolvers/department.resolver';
 @Module({
   imports: [TypeOrmModule.forFeature([Department]), UserModule],
   providers: [DepartmentService, DepartmentResolver],
-  exports: [DepartmentService],
+  exports: [],
 })
 export class DepartmentModule {}
