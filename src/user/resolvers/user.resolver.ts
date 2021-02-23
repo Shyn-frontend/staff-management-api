@@ -13,12 +13,12 @@ class UserResolver {
   constructor(private readonly userService: UserService) {}
 
   @Query(() => UserDto)
-  getUser(@Args('id') id: string): Promise<UserDto> {
+  async getUser(@Args('id') id: string): Promise<UserDto> {
     return this.userService.getUser(id);
   }
 
   @Mutation(() => UserDto)
-  updateUserLogged(
+  async updateUserLogged(
     @Args('data') dto: UpdateUserParamsDto,
     @CurrentUser() user: AuthUserDto,
   ): Promise<UserDto> {

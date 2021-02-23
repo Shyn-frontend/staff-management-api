@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, forwardRef, Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DepartmentService } from 'src/department/department.service';
 import { Position } from 'src/entities/position.entity';
@@ -13,6 +13,7 @@ export class PositionService extends BaseService<Position> {
   constructor(
     @InjectRepository(Position)
     private positionRepository: Repository<Position>,
+    @Inject(forwardRef(() => DepartmentService))
     private departmentService: DepartmentService,
   ) {
     super();

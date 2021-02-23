@@ -7,7 +7,7 @@ import { Repository } from 'typeorm';
 @Injectable()
 export class UserMetaService extends BaseService<UserMeta> {
   constructor(
-    @InjectRepository(UserMetaService)
+    @InjectRepository(UserMeta)
     private userMetaRepository: Repository<UserMeta>,
   ) {
     super();

@@ -130,6 +130,7 @@ type Query {
 
 type Mutation {
   createDepartment(data: CreateDepartmentParamsDto!): DepartmentDto!
+  updateUserLogged(data: UpdateUserParamsDto!): UserDto!
   createPosition(position: CreatePositionParamsDto!): PositionDto!
   login(data: LoginParamsDto!): LoginResultDto!
   register(data: RegisterParamsDto!): String!
@@ -141,6 +142,18 @@ input CreateDepartmentParamsDto {
   name: String!
   managerId: String!
   isBillable: Boolean!
+}
+
+input UpdateUserParamsDto {
+  name: String!
+  email: String!
+  avatar: String!
+  positionId: String!
+  roleId: String!
+  isPermanent: Boolean!
+  employeeNo: String!
+  contractStart: String!
+  contractEnd: String!
 }
 
 input CreatePositionParamsDto {
