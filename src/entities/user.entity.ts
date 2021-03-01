@@ -1,3 +1,4 @@
+import * as moment from 'moment';
 import { Position } from './position.entity';
 import { Role } from './role.entity';
 import { Base } from '../shared/base.entity';
@@ -106,4 +107,42 @@ export class User extends Base {
     }
     return this;
   }
+
+  public normalizeEmployee(user: User) {
+    const normalizedUser = { ...user };
+    for (const meta of user.metas) {
+      const { key, value } = meta;
+      let newValue;
+      switch (key) {
+        case 'hourlyRate':
+        case 'weeklyHours':
+          newValue = Number(value);
+          break;
+        case 'contractStart':
+        case 'contractEnd':
+          newValue = moment(value).toDate();
+          break;
+        default:
+          newValue = value;
+          break;
+      }
+      normalizedUser[key] = newValue;
+    }
+    delete normalizedUser.metas;
+    return normalizedUser;
+  }
+}
+
+export class NormalizeUser extends User {
+  @AutoMap()
+  preferredMarginPercent?: number;
+
+  @AutoMap()
+  hourlyRate?: number;
+
+  @AutoMap()
+  contractStart?: string;
+
+  @AutoMap()
+  contractEnd?: string;
 }
