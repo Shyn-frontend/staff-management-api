@@ -145,15 +145,15 @@ input CreateDepartmentParamsDto {
 }
 
 input UpdateUserParamsDto {
-  name: String!
-  email: String!
-  avatar: String!
-  positionId: String!
-  roleId: String!
-  isPermanent: Boolean!
-  employeeNo: String!
-  contractStart: String!
-  contractEnd: String!
+  name: String
+  email: String
+  avatar: String
+  positionId: String
+  roleId: String
+  isPermanent: Boolean
+  employeeNo: String
+  contractStart: String
+  contractEnd: String
 }
 
 input CreatePositionParamsDto {

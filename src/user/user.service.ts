@@ -1,6 +1,6 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import moment from 'moment';
+import * as moment from 'moment';
 import { pick, omit } from 'lodash';
 import { AuthUserDto } from 'src/auth/dto/auth-user.dto';
 import { UserMeta, USER_META_FIELDS } from 'src/entities/user-meta.entity';
@@ -9,7 +9,7 @@ import { RoleService } from 'src/role/role.service';
 import { BaseService } from 'src/shared/base.service';
 import { mapper } from 'src/shared/mapper/mapper';
 import { getManager, Repository } from 'typeorm';
-import { User } from '../entities/user.entity';
+import { NormalizeUser, User } from '../entities/user.entity';
 import { NormalizeUserDto } from './dto/normalize-user-dto';
 import { UpdateUserParamsDto } from './dto/update-user-params.dto';
 import { UserDto } from './dto/user.dto';
@@ -38,11 +38,9 @@ export class UserService extends BaseService<User> {
       throw new BadRequestException('invalid_contract_time');
     }
 
-    const contractStart = moment(start)
-      .startOf('day')
-      .format('YYYY-MM-DD HH:mm:ss');
+    const contractStart = moment(start).startOf('day').format('YYYY-MM-DD');
 
-    const contractEnd = moment(end).endOf('day').format('YYYY-MM-DD HH:mm:ss');
+    const contractEnd = moment(end).endOf('day').format('YYYY-MM-DD');
 
     if (!moment(contractStart).isValid() || !moment(contractEnd).isValid()) {
       throw new BadRequestException('invalid_date');
@@ -125,71 +123,63 @@ export class UserService extends BaseService<User> {
     }
 
     if (dto.isPermanent === false || contractStart || contractEnd) {
-      const employeeNormalize = mapper.map(user, NormalizeUserDto, User);
+      const metas = await getManager()
+        .createQueryBuilder(UserMeta, 'user_meta')
+        .where('user_meta.userId = :id', { id: userLogged.id })
+        .getMany();
 
-      if (employeeNormalize.contractStart && employeeNormalize.contractEnd) {
-        contractStart = contractStart || employeeNormalize.contractStart;
-        contractEnd = contractEnd || employeeNormalize.contractEnd;
-        const contractTime = this.standardContractTime({
-          start: contractStart,
-          end: contractEnd,
-        });
+      user.metas = metas;
+      const normalized = User.prototype.normalizeEmployee(user);
+      const employeeNormalize = mapper.map(
+        normalized,
+        NormalizeUserDto,
+        NormalizeUser,
+      );
 
-        dto.contractStart = contractTime.start;
-        dto.contractEnd = contractTime.end;
+      contractStart = contractStart || employeeNormalize.contractStart;
+      contractEnd = contractEnd || employeeNormalize.contractEnd;
+      if (!contractStart || !contractEnd) {
+        throw new BadRequestException('invalid_contract_time');
+      }
+      const contractTime = this.standardContractTime({
+        start: contractStart,
+        end: contractEnd,
+      });
 
-        EMPLOYEE_META_FIELDS.push(
-          USER_META_FIELDS.CONTRACT_START,
-          USER_META_FIELDS.CONTRACT_END,
+      dto.contractStart = contractTime.start;
+      dto.contractEnd = contractTime.end;
+
+      EMPLOYEE_META_FIELDS.push(
+        USER_META_FIELDS.CONTRACT_START,
+        USER_META_FIELDS.CONTRACT_END,
+      );
+
+      const userMetasMap = pick(dto, EMPLOYEE_META_FIELDS);
+      const userMetasKey: Partial<USER_META_FIELDS[]> = Object.keys(
+        userMetasMap,
+      ) as USER_META_FIELDS[];
+
+      if (userMetasKey.length) {
+        await Promise.all(
+          userMetasKey.map((item) =>
+            this.userMetaService.upsert(
+              {
+                userId: userLogged.id,
+                key: item,
+              },
+              {
+                userId: userLogged.id,
+                key: item,
+                value: userMetasMap[item],
+              },
+            ),
+          ),
         );
       }
 
-      if (!employeeNormalize.contractStart && !employeeNormalize.contractEnd) {
-        if (!contractStart || !contractEnd) {
-          throw new BadRequestException('invalid_contract_time');
-        }
-        const contractTime = this.standardContractTime({
-          start: contractStart,
-          end: contractEnd,
-        });
-        const newContractStart = this.userMetaService.createRepo({
-          userId: userLogged.id,
-          key: USER_META_FIELDS.CONTRACT_START,
-          value: contractTime.start,
-        });
-        const newContractEnd = this.userMetaService.createRepo({
-          userId: userLogged.id,
-          key: USER_META_FIELDS.CONTRACT_START,
-          value: contractTime.start,
-        });
-        await Promise.all([
-          this.userMetaService.create(newContractStart),
-          this.userMetaService.create(newContractEnd),
-        ]);
-      }
+      await this.update({ id: user.id }, omit(dto, EMPLOYEE_META_FIELDS));
+      const updatedUser = await this.getUser(userLogged.id);
+      return updatedUser;
     }
-
-    const userMetasMap: Partial<UpdateUserParamsDto> = pick(
-      dto,
-      EMPLOYEE_META_FIELDS,
-    );
-    const useMetasKey: Partial<USER_META_FIELDS[]> = Object.keys(
-      userMetasMap,
-    ) as USER_META_FIELDS[];
-    const newMetasRepo = useMetasKey.map((item) =>
-      this.userMetaService.createRepo({
-        userId: userLogged.id,
-        key: item,
-        value: userMetasMap[item],
-      }),
-    );
-    await Promise.all(
-      newMetasRepo.map((meta) => this.userMetaService.create(meta)),
-    );
-
-    await this.update({ id: user.id }, omit(dto, EMPLOYEE_META_FIELDS));
-
-    const updatedUser = await this.getUser(userLogged.id);
-    return updatedUser;
   }
 }
