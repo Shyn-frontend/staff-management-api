@@ -3,7 +3,6 @@ import { Field, ObjectType } from '@nestjs/graphql';
 import { PositionDto } from 'src/position/dto/position.dto';
 import { RoleDto } from 'src/role/dto/role.dto';
 import { USER_TYPE } from '../enum/user-type.enum';
-import { UserMetaDto } from '../../user-meta/dto/user-meta.dto';
 
 @ObjectType()
 export class NormalizeUserDto {

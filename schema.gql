@@ -126,6 +126,7 @@ type LoginResultDto {
 type Query {
   departments: [DepartmentDto!]!
   getUser(id: String!): UserDto!
+  getEmployees: [UserDto!]!
 }
 
 type Mutation {

@@ -1,5 +1,4 @@
 import { InternalServerErrorException } from '@nestjs/common';
-import { valueFromAST } from 'graphql';
 import { DeepPartial, DeleteResult, Repository, UpdateResult } from 'typeorm';
 import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity';
 import { Base } from './base.entity';
