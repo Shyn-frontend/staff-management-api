@@ -15,10 +15,6 @@ export class NormalizeUserDto {
   @AutoMap()
   name?: string;
 
-  @Field(() => [UserMetaDto])
-  @AutoMap(() => UserMetaDto)
-  metas: UserMetaDto[];
-
   @Field()
   @AutoMap()
   type: USER_TYPE;

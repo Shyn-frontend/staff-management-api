@@ -12,47 +12,47 @@ export class UpdateUserParamsDto {
   @IsString()
   @IsOptional()
   @MaxLength(128)
-  @Field()
+  @Field({ nullable: true })
   name?: string;
 
   @IsEmail()
   @IsOptional()
-  @Field()
+  @Field({ nullable: true })
   email?: string;
 
   @IsString()
   @IsOptional()
   @MaxLength(1024)
-  @Field()
+  @Field({ nullable: true })
   avatar?: string;
 
   @IsUUID()
   @IsOptional()
-  @Field()
+  @Field({ nullable: true })
   positionId?: string;
 
   @IsUUID()
   @IsOptional()
-  @Field()
+  @Field({ nullable: true })
   roleId?: string;
 
   @IsBoolean()
   @IsOptional()
-  @Field()
+  @Field({ nullable: true })
   isPermanent?: boolean;
 
   @IsString()
   @IsOptional()
-  @Field()
+  @Field({ nullable: true })
   employeeNo?: string;
 
   @IsString()
   @IsOptional()
-  @Field()
+  @Field({ nullable: true })
   contractStart?: string;
 
   @IsString()
   @IsOptional()
-  @Field()
+  @Field({ nullable: true })
   contractEnd?: string;
 }
