@@ -112,7 +112,7 @@ export class User extends Base {
     const normalizedUser = { ...user };
     for (const meta of user.metas) {
       const { key, value } = meta;
-      let newValue;
+      let newValue: string | number | Date;
       switch (key) {
         case 'hourlyRate':
         case 'weeklyHours':
