@@ -1,4 +1,5 @@
 import { InternalServerErrorException } from '@nestjs/common';
+import { valueFromAST } from 'graphql';
 import { DeepPartial, DeleteResult, Repository, UpdateResult } from 'typeorm';
 import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity';
 import { Base } from './base.entity';
@@ -10,7 +11,7 @@ export abstract class BaseService<T extends Base> {
     return this.repository.create(doc);
   }
 
-  async create(item: DeepPartial<T>): Promise<T> {
+  async create(item: any): Promise<T> {
     try {
       return await this.repository.save(item);
     } catch (error) {
@@ -27,6 +28,17 @@ export abstract class BaseService<T extends Base> {
     } catch (error) {
       BaseService.throwInternalErrorException(error);
     }
+  }
+
+  async upsert(filter = {}, data: DeepPartial<T>): Promise<any> {
+    const isExisted = await this.findOne(filter);
+    if (isExisted) {
+      return await this.repository.update(filter, data);
+    }
+
+    const repo = this.createRepo(data);
+    const created = await this.create(repo);
+    return created;
   }
 
   async count(filter = {}): Promise<number> {
