@@ -2,7 +2,15 @@ import * as moment from 'moment';
 import { Position } from './position.entity';
 import { Role } from './role.entity';
 import { Base } from '../shared/base.entity';
-import { Column, Entity, Index, JoinColumn, ManyToOne, OneToMany, Unique } from 'typeorm';
+import {
+  Column,
+  Entity,
+  Index,
+  JoinColumn,
+  ManyToOne,
+  OneToMany,
+  Unique,
+} from 'typeorm';
 import { USER_TYPE } from '../user/enum/user-type.enum';
 import { AutoMap } from '@automapper/classes';
 import { UserMeta } from './user-meta.entity';

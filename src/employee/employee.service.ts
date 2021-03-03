@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { UserMeta } from 'src/entities/user-meta.entity';
 import { User } from 'src/entities/user.entity';
 import { BaseService } from 'src/shared/base.service';
 import { USER_TYPE } from 'src/user/enum/user-type.enum';
