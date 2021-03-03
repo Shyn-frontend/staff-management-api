@@ -28,22 +28,8 @@ export class EmployeeService extends BaseService<User> {
       .leftJoinAndSelect('position.department', 'department')
       .leftJoinAndSelect('user.role', 'role')
       .leftJoinAndSelect('role.permissions', 'permission')
+      .leftJoinAndSelect('user.metas', 'meta')
       .getMany();
-
-    const metas = getManager();
-    const promises = {};
-    employees.forEach((e) => {
-      promises[e.id] = metas
-        .createQueryBuilder(UserMeta, 'user_meta')
-        .where('user_meta.userId = :id', { id: e.id })
-        .getMany();
-      return;
-    });
-    const metasByEmployeeId = await Promise.props(promises);
-    const employeesMapMetas = employees.map((e) => {
-      e.metas = metasByEmployeeId[e.id];
-      return e;
-    });
-    return mapper.mapArray(employeesMapMetas, UserDto, User);
+    return mapper.mapArray(employees, UserDto, User);
   }
 }

@@ -56,17 +56,11 @@ export class UserService extends BaseService<User> {
       .leftJoinAndSelect('position.department', 'department')
       .leftJoinAndSelect('user.role', 'role')
       .leftJoinAndSelect('role.permissions', 'permission')
+      .leftJoinAndSelect('user.metas', 'meta')
       .getOne();
     if (!user) {
       throw new BadRequestException('not_found_user');
     }
-
-    const metas = await getManager()
-      .createQueryBuilder(UserMeta, 'user_meta')
-      .where('user_meta.userId = :id', { id })
-      .getMany();
-
-    user.metas = metas;
     return mapper.map(user, UserDto, User);
   }
 
