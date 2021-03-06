@@ -12,7 +12,7 @@ class PositionResolver {
 
   @Mutation(() => PositionDto)
   async createPosition(
-    @Args('position') dto: CreatePositionParamsDto,
+    @Args('data') dto: CreatePositionParamsDto,
   ): Promise<PositionDto> {
     return this.positionService.createPosition(dto);
   }

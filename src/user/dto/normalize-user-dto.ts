@@ -2,10 +2,11 @@ import { AutoMap } from '@automapper/classes';
 import { Field, ObjectType } from '@nestjs/graphql';
 import { PositionDto } from 'src/position/dto/position.dto';
 import { RoleDto } from 'src/role/dto/role.dto';
+import { BaseDto } from 'src/shared/base.entity';
 import { USER_TYPE } from '../enum/user-type.enum';
 
 @ObjectType()
-export class NormalizeUserDto {
+export class NormalizeUserDto extends BaseDto {
   @Field({ nullable: true })
   @AutoMap()
   email?: string;

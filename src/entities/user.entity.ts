@@ -29,8 +29,9 @@ export class User extends Base {
   @Column({
     type: 'varchar',
     length: 128,
+    nullable: true,
   })
-  password: string;
+  password?: string;
 
   @Column({
     type: 'varchar',
