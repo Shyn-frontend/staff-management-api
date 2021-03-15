@@ -124,6 +124,11 @@ type QueryPositionResults {
   metadata: Pagination!
 }
 
+type QueryDepartmentResults {
+  data: [DepartmentDto!]!
+  metadata: Pagination!
+}
+
 type AccessTokenDto {
   type: String!
   accessToken: String!
@@ -140,10 +145,15 @@ type QueryEmployeeResults {
 }
 
 type Query {
-  departments: [DepartmentDto!]!
+  departments(conditions: QueryParamsBaseDto): QueryDepartmentResults!
   getUser(id: String!): UserDto!
   getPositions(conditions: QueryPositionParamsDto): QueryPositionResults!
-  getEmployees(conditions: SearchParamsDto): QueryEmployeeResults!
+  getEmployees(conditions: QueryParamsBaseDto): QueryEmployeeResults!
+}
+
+input QueryParamsBaseDto {
+  limit: Float
+  page: Float
 }
 
 input QueryPositionParamsDto {
@@ -151,11 +161,6 @@ input QueryPositionParamsDto {
   page: Float
   name: String
   departmentId: String
-}
-
-input SearchParamsDto {
-  limit: Float
-  page: Float
 }
 
 type Mutation {

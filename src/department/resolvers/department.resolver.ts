@@ -1,10 +1,23 @@
+import { AutoMap } from '@automapper/classes';
 import { UseGuards } from '@nestjs/common';
-import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { Args, Field, Mutation, ObjectType, Query, Resolver } from '@nestjs/graphql';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
+import { Pagination } from 'src/shared/base.entity';
+import { QueryParamsBaseDto } from 'src/shared/dtos/query-params-base.dto';
 import { DepartmentService } from '../department.service';
 import { CreateDepartmentParamsDto } from '../dto/create-department-params.dto';
 import { DepartmentDto } from '../dto/department.dto';
 
+@ObjectType()
+export class QueryDepartmentResults {
+  @Field(() => [DepartmentDto])
+  @AutoMap(() => DepartmentDto)
+  data: DepartmentDto[];
+
+  @Field(() => Pagination)
+  @AutoMap(() => Pagination)
+  metadata: Pagination;
+}
 @Resolver()
 @UseGuards(JwtAuthGuard)
 class DepartmentResolver {
@@ -17,9 +30,11 @@ class DepartmentResolver {
     return this.departmentService.createDepartment(dto);
   }
 
-  @Query(() => [DepartmentDto])
-  async departments(): Promise<DepartmentDto[]> {
-    return this.departmentService.getDepartments();
+  @Query(() => QueryDepartmentResults)
+  async departments(
+    @Args('conditions', { nullable: true }) conditions?: QueryParamsBaseDto,
+  ): Promise<QueryDepartmentResults> {
+    return this.departmentService.getDepartments(conditions);
   }
 }
 

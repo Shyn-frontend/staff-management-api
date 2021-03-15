@@ -1,9 +1,9 @@
 import { Field, InputType } from '@nestjs/graphql';
 import { IsOptional, IsString, IsUUID } from 'class-validator';
-import { SearchParamsDto } from 'src/shared/dtos/search-params.dto';
+import { QueryParamsBaseDto } from 'src/shared/dtos/query-params-base.dto';
 
 @InputType()
-export class QueryPositionParamsDto extends SearchParamsDto {
+export class QueryPositionParamsDto extends QueryParamsBaseDto {
   @IsString()
   @IsOptional()
   @Field({ nullable: true })

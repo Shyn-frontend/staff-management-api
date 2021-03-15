@@ -18,7 +18,7 @@ import { DepartmentService } from 'src/department/department.service';
 import { USER_META_FIELDS } from 'src/entities/user-meta.entity';
 import { pick } from 'lodash';
 import getLimitPage from 'src/shared/utils/getLimitPage';
-import { SearchParamsDto } from 'src/shared/dtos/search-params.dto';
+import { QueryParamsBaseDto } from 'src/shared/dtos/query-params-base.dto';
 import getMetadata from 'src/shared/utils/getMetadata';
 import { QueryEmployeeResults } from './employee.resolver';
 
@@ -38,7 +38,7 @@ export class EmployeeService extends BaseService<User> {
   }
 
   async getEmployees(
-    conditions: SearchParamsDto,
+    conditions: QueryParamsBaseDto,
   ): Promise<QueryEmployeeResults> {
     const { limit, page } = conditions;
     const { _limit, _page } = getLimitPage(limit, page);

@@ -10,7 +10,7 @@ import {
 } from '@nestjs/graphql';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { Pagination } from 'src/shared/base.entity';
-import { SearchParamsDto } from 'src/shared/dtos/search-params.dto';
+import { QueryParamsBaseDto } from 'src/shared/dtos/query-params-base.dto';
 import { UserDto } from 'src/user/dto/user.dto';
 import { CreateEmployeeParamsDto } from './dto/create-employee-params.dto';
 import { EmployeeService } from './employee.service';
@@ -33,7 +33,7 @@ class EmployeeResolver {
 
   @Query(() => QueryEmployeeResults)
   async getEmployees(
-    @Args('conditions', { nullable: true }) conditions?: SearchParamsDto,
+    @Args('conditions', { nullable: true }) conditions?: QueryParamsBaseDto,
   ): Promise<QueryEmployeeResults> {
     return this.employeeService.getEmployees(conditions);
   }

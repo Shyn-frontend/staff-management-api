@@ -2,7 +2,7 @@ import { Field, InputType } from '@nestjs/graphql';
 import { IsNumber, IsOptional } from 'class-validator';
 
 @InputType()
-export class SearchParamsDto {
+export class QueryParamsBaseDto {
   @IsNumber()
   @IsOptional()
   @Field({ nullable: true })
