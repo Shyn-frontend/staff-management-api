@@ -134,11 +134,16 @@ type LoginResultDto {
   token: AccessTokenDto!
 }
 
+type QueryEmployeeResults {
+  data: [UserDto!]!
+  metadata: Pagination!
+}
+
 type Query {
   departments: [DepartmentDto!]!
   getUser(id: String!): UserDto!
   getPositions(conditions: QueryPositionParamsDto): QueryPositionResults!
-  getEmployees: [UserDto!]!
+  getEmployees(conditions: SearchParamsDto): QueryEmployeeResults!
 }
 
 input QueryPositionParamsDto {
@@ -146,6 +151,11 @@ input QueryPositionParamsDto {
   page: Float
   name: String
   departmentId: String
+}
+
+input SearchParamsDto {
+  limit: Float
+  page: Float
 }
 
 type Mutation {

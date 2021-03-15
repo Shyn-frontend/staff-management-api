@@ -5,7 +5,7 @@ import moment from 'moment';
 import { User } from 'src/entities/user.entity';
 import { BaseService } from 'src/shared/base.service';
 import { USER_TYPE } from 'src/user/enum/user-type.enum';
-import { getManager, Repository } from 'typeorm';
+import { getManager, getRepository, Repository } from 'typeorm';
 
 import { mapper } from 'src/shared/mapper/mapper';
 import { UserDto } from 'src/user/dto/user.dto';
@@ -17,6 +17,10 @@ import { PositionService } from 'src/position/position.service';
 import { DepartmentService } from 'src/department/department.service';
 import { USER_META_FIELDS } from 'src/entities/user-meta.entity';
 import { pick } from 'lodash';
+import getLimitPage from 'src/shared/utils/getLimitPage';
+import { SearchParamsDto } from 'src/shared/dtos/search-params.dto';
+import getMetadata from 'src/shared/utils/getMetadata';
+import { QueryEmployeeResults } from './employee.resolver';
 
 @Injectable()
 export class EmployeeService extends BaseService<User> {
@@ -33,7 +37,12 @@ export class EmployeeService extends BaseService<User> {
     this.repository = this.userRepository;
   }
 
-  async getEmployees(): Promise<UserDto[]> {
+  async getEmployees(
+    conditions: SearchParamsDto,
+  ): Promise<QueryEmployeeResults> {
+    const { limit, page } = conditions;
+    const { _limit, _page } = getLimitPage(limit, page);
+
     const employees = await getManager()
       .createQueryBuilder(User, 'user')
       .where('user.type = :type', { type: USER_TYPE.EMPLOYEE })
@@ -42,8 +51,15 @@ export class EmployeeService extends BaseService<User> {
       .leftJoinAndSelect('user.role', 'role')
       .leftJoinAndSelect('role.permissions', 'permission')
       .leftJoinAndSelect('user.metas', 'meta')
+      .take(_limit)
+      .skip((_page - 1) * _limit)
       .getMany();
-    return mapper.mapArray(employees, UserDto, User);
+
+    const _count = await getRepository('user').count();
+    return {
+      data: mapper.mapArray(employees, UserDto, User),
+      metadata: getMetadata(_page, _limit, _count),
+    };
   }
 
   async createEmployee(dto: CreateEmployeeParamsDto): Promise<UserDto> {

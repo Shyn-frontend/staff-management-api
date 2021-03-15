@@ -15,6 +15,8 @@ import { PositionDto } from './dto/position.dto';
 import { QueryPositionParamsDto } from './dto/query-position-params.dto';
 import { QueryPositionResults } from './resolvers/position.resolver';
 import { IQueryConditions } from '../shared/dtos/query-conditions.dto';
+import getMetadata from 'src/shared/utils/getMetadata';
+import getLimitPage from 'src/shared/utils/getLimitPage';
 
 @Injectable()
 export class PositionService extends BaseService<Position> {
@@ -52,8 +54,7 @@ export class PositionService extends BaseService<Position> {
     queries: QueryPositionParamsDto,
   ): Promise<QueryPositionResults> {
     const { name, departmentId, limit, page } = queries;
-    const _limit = Math.min(limit || 10, 100);
-    const _page = Math.max(0, page || 1);
+    const { _limit, _page } = getLimitPage(limit, page);
 
     const query = getManager()
       .createQueryBuilder(Position, 'position')
@@ -83,11 +84,7 @@ export class PositionService extends BaseService<Position> {
     ]);
 
     const data = mapper.mapArray(positions, PositionDto, Position);
-    const metadata = {
-      page: _page,
-      pageSize: _limit,
-      totalPages: Math.ceil(_count / _limit),
-    };
+    const metadata = getMetadata(_page, _limit, _count);
 
     return {
       data,
