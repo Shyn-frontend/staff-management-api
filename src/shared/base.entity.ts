@@ -1,6 +1,5 @@
 import { AutoMap } from '@automapper/classes';
 import { Field, ID, ObjectType } from '@nestjs/graphql';
-import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { Column, Index, PrimaryGeneratedColumn } from 'typeorm';
 
 @Index(['id'])

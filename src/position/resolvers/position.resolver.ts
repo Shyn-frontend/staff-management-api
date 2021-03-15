@@ -1,6 +1,13 @@
 import { AutoMap } from '@automapper/classes';
 import { UseGuards } from '@nestjs/common';
-import { Args, Mutation, Resolver, Query, ObjectType, Field } from '@nestjs/graphql';
+import {
+  Args,
+  Mutation,
+  Resolver,
+  Query,
+  ObjectType,
+  Field,
+} from '@nestjs/graphql';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { Pagination } from 'src/shared/base.entity';
 import { CreatePositionParamsDto } from '../dto/create-position-params';
@@ -35,7 +42,7 @@ class PositionResolver {
     @Args('conditions', { nullable: true }) conditions?: QueryPositionParamsDto,
   ): Promise<QueryPositionResults> {
     const result = await this.positionService.getPositions(conditions);
-    return result
+    return result;
   }
 }
 

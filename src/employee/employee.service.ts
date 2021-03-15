@@ -10,7 +10,6 @@ import { getManager, Repository } from 'typeorm';
 import { mapper } from 'src/shared/mapper/mapper';
 import { UserDto } from 'src/user/dto/user.dto';
 import { CreateEmployeeParamsDto } from './dto/create-employee-params.dto';
-import { NormalizeUserDto } from 'src/user/dto/normalize-user-dto';
 import { UserMetaService } from 'src/user-meta/user-meta.service';
 import { UserService } from 'src/user/user.service';
 import { RoleService } from 'src/role/role.service';
