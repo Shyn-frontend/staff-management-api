@@ -14,6 +14,6 @@ export class DepartmentDto extends BaseDto {
   isBillable: boolean;
 
   @AutoMap(() => ManagerDto)
-  @Field(() => ManagerDto)
-  manager: ManagerDto;
+  @Field(() => ManagerDto, { nullable: true })
+  manager?: ManagerDto;
 }

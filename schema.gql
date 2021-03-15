@@ -2,6 +2,12 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Pagination {
+  page: Float!
+  pageSize: Float!
+  totalPages: Float!
+}
+
 type UserPermissionDto {
   name: String!
   action: String!
@@ -59,7 +65,7 @@ type DepartmentDto {
   deletedAt: DateTime!
   name: String!
   isBillable: Boolean!
-  manager: ManagerDto!
+  manager: ManagerDto
 }
 
 type PositionDto {
@@ -113,6 +119,11 @@ type UserDto {
   isPermanent: Boolean!
 }
 
+type QueryPositionResults {
+  data: [PositionDto!]!
+  metadata: Pagination!
+}
+
 type AccessTokenDto {
   type: String!
   accessToken: String!
@@ -126,7 +137,15 @@ type LoginResultDto {
 type Query {
   departments: [DepartmentDto!]!
   getUser(id: String!): UserDto!
+  getPositions(conditions: QueryPositionParamsDto): QueryPositionResults!
   getEmployees: [UserDto!]!
+}
+
+input QueryPositionParamsDto {
+  limit: Float
+  page: Float
+  name: String
+  departmentId: String
 }
 
 type Mutation {

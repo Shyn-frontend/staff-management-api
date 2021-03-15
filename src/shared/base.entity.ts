@@ -35,23 +35,30 @@ export abstract class Base {
 }
 
 @ObjectType()
+export class Pagination {
+  @Field()
+  page: number;
+
+  @Field()
+  pageSize: number;
+
+  @Field()
+  totalPages: number;
+}
+@ObjectType()
 export class BaseDto {
-  @ApiProperty()
   @AutoMap()
   @Field(() => ID)
   id: string;
 
-  @ApiPropertyOptional({ type: String, format: 'date-time' })
   @AutoMap()
   @Field()
   createdAt?: Date;
 
-  @ApiPropertyOptional({ type: String, format: 'date-time' })
   @AutoMap()
   @Field()
   updatedAt?: Date;
 
-  @ApiPropertyOptional({ type: String, format: 'date-time' })
   @AutoMap()
   @Field()
   deletedAt?: Date;

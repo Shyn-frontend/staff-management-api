@@ -9,9 +9,12 @@ import { DepartmentService } from 'src/department/department.service';
 import { Position } from 'src/entities/position.entity';
 import { BaseService } from 'src/shared/base.service';
 import { mapper } from 'src/shared/mapper/mapper';
-import { Repository } from 'typeorm';
+import { getManager, getRepository, Like, Repository } from 'typeorm';
 import { CreatePositionParamsDto } from './dto/create-position-params';
 import { PositionDto } from './dto/position.dto';
+import { QueryPositionParamsDto } from './dto/query-position-params.dto';
+import { QueryPositionResults } from './resolvers/position.resolver';
+import { IQueryConditions } from '../shared/dtos/query-conditions.dto';
 
 @Injectable()
 export class PositionService extends BaseService<Position> {
@@ -43,5 +46,52 @@ export class PositionService extends BaseService<Position> {
     const created: Position = await this.create(position);
 
     return mapper.map(created, PositionDto, Position);
+  }
+
+  async getPositions(
+    queries: QueryPositionParamsDto,
+  ): Promise<QueryPositionResults> {
+    const { name, departmentId, limit, page } = queries;
+    const _limit = Math.min(limit || 10, 100);
+    const _page = Math.max(0, page || 1);
+
+    const query = getManager()
+      .createQueryBuilder(Position, 'position')
+      .take(_limit)
+      .skip((_page - 1) * _limit)
+      .leftJoinAndSelect('position.department', 'department')
+      .leftJoinAndSelect('department.manager', 'manager');
+
+    if (name) {
+      query.where('position.name like :name', { name: `%${name}%` });
+    }
+
+    if (departmentId) {
+      query.where('position.departmentId = :departmentId', { departmentId });
+    }
+
+    const queriesObject: IQueryConditions = {};
+    if (name) {
+      queriesObject.name = Like(`%${name}%`);
+    }
+    if (departmentId) {
+      queriesObject.departmentId = departmentId;
+    }
+    const [positions, _count] = await Promise.all([
+      query.getMany(),
+      getRepository(Position).count(queriesObject),
+    ]);
+
+    const data = mapper.mapArray(positions, PositionDto, Position);
+    const metadata = {
+      page: _page,
+      pageSize: _limit,
+      totalPages: Math.ceil(_count / _limit),
+    };
+
+    return {
+      data,
+      metadata,
+    };
   }
 }
