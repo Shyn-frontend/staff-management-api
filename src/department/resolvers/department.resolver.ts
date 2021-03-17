@@ -1,6 +1,13 @@
 import { AutoMap } from '@automapper/classes';
 import { UseGuards } from '@nestjs/common';
-import { Args, Field, Mutation, ObjectType, Query, Resolver } from '@nestjs/graphql';
+import {
+  Args,
+  Field,
+  Mutation,
+  ObjectType,
+  Query,
+  Resolver,
+} from '@nestjs/graphql';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { Pagination } from 'src/shared/base.entity';
 import { QueryParamsBaseDto } from 'src/shared/dtos/query-params-base.dto';
