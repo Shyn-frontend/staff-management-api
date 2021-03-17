@@ -37,7 +37,7 @@ class PositionResolver {
     return this.positionService.createPosition(dto);
   }
 
-  @Query(() => QueryPositionResults)
+  @Query(() => QueryPositionResults, { name: 'positions' })
   async getPositions(
     @Args('conditions', { nullable: true }) conditions?: QueryPositionParamsDto,
   ): Promise<QueryPositionResults> {

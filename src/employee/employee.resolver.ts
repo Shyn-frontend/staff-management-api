@@ -31,7 +31,7 @@ export class QueryEmployeeResults {
 class EmployeeResolver {
   constructor(private readonly employeeService: EmployeeService) {}
 
-  @Query(() => QueryEmployeeResults)
+  @Query(() => QueryEmployeeResults, { name: 'employees' })
   async getEmployees(
     @Args('conditions', { nullable: true }) conditions?: QueryParamsBaseDto,
   ): Promise<QueryEmployeeResults> {

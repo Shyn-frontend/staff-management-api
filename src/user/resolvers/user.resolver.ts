@@ -12,7 +12,7 @@ import { UserService } from '../user.service';
 class UserResolver {
   constructor(private readonly userService: UserService) {}
 
-  @Query(() => UserDto)
+  @Query(() => UserDto, { name: 'user' })
   async getUser(@Args('id') id: string): Promise<UserDto> {
     return this.userService.getUser(id);
   }

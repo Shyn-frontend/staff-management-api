@@ -37,8 +37,8 @@ class DepartmentResolver {
     return this.departmentService.createDepartment(dto);
   }
 
-  @Query(() => QueryDepartmentResults)
-  async departments(
+  @Query(() => QueryDepartmentResults, { name: 'departments' })
+  async getDepartments(
     @Args('conditions', { nullable: true }) conditions?: QueryParamsBaseDto,
   ): Promise<QueryDepartmentResults> {
     return this.departmentService.getDepartments(conditions);

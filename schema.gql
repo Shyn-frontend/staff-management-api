@@ -146,9 +146,9 @@ type QueryEmployeeResults {
 
 type Query {
   departments(conditions: QueryParamsBaseDto): QueryDepartmentResults!
-  getUser(id: String!): UserDto!
-  getPositions(conditions: QueryPositionParamsDto): QueryPositionResults!
-  getEmployees(conditions: QueryParamsBaseDto): QueryEmployeeResults!
+  user(id: String!): UserDto!
+  positions(conditions: QueryPositionParamsDto): QueryPositionResults!
+  employees(conditions: QueryParamsBaseDto): QueryEmployeeResults!
 }
 
 input QueryParamsBaseDto {
@@ -164,7 +164,7 @@ input QueryPositionParamsDto {
 }
 
 type Mutation {
-  createDepartment(data: CreateDepartmentParamsDto!): DepartmentDto!
+  department(data: CreateDepartmentParamsDto!): DepartmentDto!
   updateUserLogged(data: UpdateUserParamsDto!): UserDto!
   createPosition(data: CreatePositionParamsDto!): PositionDto!
   login(data: LoginParamsDto!): LoginResultDto!

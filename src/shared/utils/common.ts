@@ -1,7 +1,7 @@
 import moment from 'moment';
 
 interface IEffortInDate {
-  [key: moment.Moment]: { date: moment.Moment; effort: number };
+  [key: string]: { date: moment.Moment; effort: number };
 }
 
 export default class CommonUtil {
