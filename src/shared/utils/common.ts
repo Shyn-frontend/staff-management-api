@@ -22,25 +22,26 @@ export default class CommonUtil {
     return dates;
   }
 
-  static countWorkdays(startAt: moment.Moment, endAt: moment.Moment): Number {
+  static countWorkdays(startAt: moment.Moment, endAt: moment.Moment): number {
     const start = moment(startAt);
-    const end  = moment(endAt);
-    let dayCount = 1 + (end.diff(start, 'days') * 5 - (start.day() - end.day()) * 2) / 7;
+    const end = moment(endAt);
+    let dayCount =
+      1 + (end.diff(start, 'days') * 5 - (start.day() - end.day()) * 2) / 7;
     if (end.day() === 6) dayCount--;
     if (start.day() === 0) dayCount--;
     return dayCount;
   }
 
-  static randomNumber(length: number): Number {
+  static randomNumber(length: number): number {
     let random = '';
-    const numbers  = '0123456789';
+    const numbers = '0123456789';
     for (let i = 0; i < length; i++) {
-      random += numbers.charAt(Math.floor(Math.random() * numbers.length))
+      random += numbers.charAt(Math.floor(Math.random() * numbers.length));
     }
     return Number(random);
   }
 
-  static formatNumber(num: number): String {
+  static formatNumber(num: number): string {
     return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
   }
 }
